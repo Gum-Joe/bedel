@@ -31,3 +31,9 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# NTVS
+.ntvs_analysis.dat
+
+# Visual studio
+.vs
