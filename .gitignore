@@ -34,6 +34,7 @@ node_modules
 
 # NTVS
 .ntvs_analysis.dat
+.ntvs_analysis.dat.tmp
 
 # Visual studio
 .vs
