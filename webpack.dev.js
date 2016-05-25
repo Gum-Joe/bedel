@@ -10,7 +10,11 @@ module.exports = {
   entry: [
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors (https://gaearon.github.io/react-hot-loader/getstarted/)
     'webpack-hot-middleware/client',
-    "./index"],
+    "./index.js"],
+  // Resolve
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   // Output to /build
   output: {
     path: '/',
@@ -18,9 +22,8 @@ module.exports = {
     chunkFilename: '[name].chunk.js'
     },
   loaders: [
-    { test: /\.js$/, exclude: /node_modules/, loader: [ "react-hot", "babel-loader" ] },
-    { test: /\.jsx$/, exclude: /node_modules/, loader: [ "react-hot", "babel-loader" ] },
-    { test: /\.scss$/, loaders: ["style", "css", "sass"] }
+    { test: /\.jsx$/, exclude: /node_modules/, loader: [ "react-hot", "babel-loader" ] }
+    //{ test: /\.scss$/, loaders: ["style", "css", "sass"] }
   ],
   // Plugins
   plugins: [
@@ -29,8 +32,9 @@ module.exports = {
     // HTML
     new HtmlWebpackPlugin({
       title: 'Bedel',
-      filename: path.join(__dirname, 'views', 'index.html'),
-      inject: true
+      filename: path.join(__dirname, 'views', 'index.ejs'),
+      template: path.join(__dirname, 'client', 'templates', 'index.ejs'),
+      inject: false
     })
   ]
 };

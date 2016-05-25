@@ -42,9 +42,25 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(1);
+
+
+/***/ },
+/* 1 */
 /***/ function(module, exports) {
 
-	// Entry file for bedel
+	import React from 'react';
+	import ReactDOM from 'react-dom';
+
+	class App extends React.Component {
+	  render () {
+	    //return <p> Hello React</p>;
+	  }
+	}
+
+	//ReactDOM.render(<App/>, document.getElementById('app'));
 
 
 /***/ }
