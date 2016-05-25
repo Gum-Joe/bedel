@@ -7,7 +7,7 @@ module.exports = {
   // Use client as our root
   context: __dirname + "/client",
   // Entry file
-  entry: "./index.js",
+  entry: "./index.jsx",
   // Resolve
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -17,9 +17,11 @@ module.exports = {
         path: path.join(__dirname, "build", "js"),
         filename: "bundle.js"
     },
-  loaders: [
-    { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
-  ],
+  module: {
+    loaders: [
+      { test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader" }
+    ]
+  },
   // Plugins
   plugins: [
     // HTML

@@ -10,7 +10,7 @@ module.exports = {
   entry: [
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors (https://gaearon.github.io/react-hot-loader/getstarted/)
     'webpack-hot-middleware/client',
-    "./index.js"],
+    "./index.jsx"],
   // Resolve
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -21,10 +21,11 @@ module.exports = {
     publicPath: 'http://localhost:3000/js/',
     chunkFilename: '[name].chunk.js'
     },
-  loaders: [
-    { test: /\.jsx$/, exclude: /node_modules/, loader: [ "react-hot", "babel-loader" ] }
-    //{ test: /\.scss$/, loaders: ["style", "css", "sass"] }
-  ],
+  module: {
+      loaders: [
+        { test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader" }
+      ]
+    },
   // Plugins
   plugins: [
     // Hot reload
