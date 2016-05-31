@@ -41,3 +41,7 @@ node_modules
 
 # Private files
 private
+
+# Secrets
+# For now we will checkout them into git
+# config/secrets.yml

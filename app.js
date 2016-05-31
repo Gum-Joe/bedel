@@ -12,6 +12,7 @@ const parser = require('./lib/parser');
 const path = require('path');
 const webpack = require('webpack');
 const favicon = require('serve-favicon');
+const vars = require('./lib/vars');
 // Webpack development
 const webpackConfig = require('./webpack.dev.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -25,11 +26,13 @@ module.exports = (options) => {
   /**
    * Vars
   */
-  const config = parser.loadConfig();
+  const config = parser.loadConfig(vars.CONFIG_FILE);
   const PORT = options.port || process.env.PORT || config.port || 8080;
   const logger = new Logger(options);
   // Webpack compiler
   const compiler = webpack(webpackConfig);
+  // Secrets
+  const secrets = parser.loadConfig(config.secrets);
 
   // Init app
   const app = express();

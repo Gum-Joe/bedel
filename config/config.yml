@@ -1,5 +1,4 @@
 # Config for bedel
-
 # Name of the server
 # Defaults to "bedel"
 name: bedel
@@ -7,3 +6,18 @@ name: bedel
 # Port that retis runs on
 # Defaults to 8080
 port: 8080
+
+# Mongodb config
+# Put in the format mongo://<url>:<port>/<name>
+db:
+  # Url the database runs on
+  # Default: 127.0.0.1
+  url: 127.0.0.1
+  # Port the db runs on
+  # Default: 27017
+  port: 27017
+
+# Secrets file
+# Changes from secrets.example.yml -> secrets.yml
+# on setup
+secrets: config/secrets.yml
