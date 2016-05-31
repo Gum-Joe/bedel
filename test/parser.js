@@ -12,7 +12,7 @@ let old = console.log;
 // Tests
 describe('parser.js tests', () => {
 
-  it('should check if parser con parse a given file', (done) => {
+  it('should check if parser can parse a given file', (done) => {
     // Parse
     const data = parser.loadConfig('config/config.yml');
     // Check
