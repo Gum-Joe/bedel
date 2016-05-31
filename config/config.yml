@@ -1,4 +1,9 @@
-# Config
+# Config for bedel
+
+# Name of the server
+# Defaults to "bedel"
+name: bedel
 
 # Port that retis runs on
+# Defaults to 8080
 port: 8080
