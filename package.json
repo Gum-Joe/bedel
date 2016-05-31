@@ -4,8 +4,9 @@
   "description": "The ci service for everything: projects, app metrics and more! Based on retis.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js --color",
-    "test": "mocha"
+    "start": "node bin/bedel --color",
+    "test": "mocha",
+    "coveralls": "istanbul cover -x lib/logger.js ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "morgan": "^1.7.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "request": "^2.72.0",
     "serve-favicon": "^2.3.0",
     "yamljs": "^0.2.7"
   },
@@ -44,7 +46,17 @@
     "babel-polyfill": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "eslint": "^2.11.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.2.2",
+    "eslint-plugin-react": "^5.1.1",
     "html-webpack-plugin": "^2.17.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3",
+    "mocha-lcov-reporter": "^1.2.0",
     "react-hot-loader": "^1.3.0",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
