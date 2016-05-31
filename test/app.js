@@ -1,3 +1,4 @@
+'use strict';
 // App.js tests
 const chai = require('chai');
 const fs = require('fs');
