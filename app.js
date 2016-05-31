@@ -43,7 +43,7 @@ module.exports = (options, callback) => {
 
   // Debug logging
   logger.debug('Starting server...');
-  logger.debug(`Options: ${chalk.magenta('[')}`);
+  logger.debug(`Args: ${chalk.magenta('[')}`);
   // Interator vars
   let opt;
   /* istanbul ignore next */
