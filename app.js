@@ -45,7 +45,7 @@ module.exports = (options) => {
   if (!options.silent) {
     app.use(morgan('dev'));
   }
-  if (process.env.NODE_ENV !== 'production') {
+  if (!options.env || options.env !== 'production' || process.env.NODE_ENV !== 'production') {
     // Webpack server -  helped by (http://madole.github.io/blog/2015/08/26/setting-up-webpack-dev-middleware-in-your-express-application/)
     app.use(webpackDevMiddleware(compiler, {
         publicPath: webpackConfig.output.publicPath,
@@ -61,6 +61,7 @@ module.exports = (options) => {
     }));
   } else {
     // serve static files
+    console.log("h");
     app.use(express.static(path.join(__dirname, 'build')));
   }
 
