@@ -1,11 +1,11 @@
 {
-  "name": "retis-ci",
+  "name": "bedel",
   "version": "0.1.0",
-  "description": "The ci service for everything: projects, app metrics and more! Based on retis.",
+  "description": "Build, ship and manage apps with the ci service for everything.",
   "main": "app.js",
   "scripts": {
     "start": "node bin/bedel --color",
-    "nodemon": "nodemon --ignore client bin/bedel --color",
+    "nodemon": "nodemon --ignore client bin/bedel --color --debug",
     "test": "mocha",
     "coveralls": "istanbul cover -x lib/logger.js ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },

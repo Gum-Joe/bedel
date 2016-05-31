@@ -8,7 +8,7 @@ name: bedel
 port: 8080
 
 # Mongodb config
-# Put in the format mongo://<url>:<port>/<name>
+# Put in the format mongodb://<url>:<port>/<name>
 db:
   # Url the database runs on
   # Default: 127.0.0.1
@@ -16,6 +16,9 @@ db:
   # Port the db runs on
   # Default: 27017
   port: 27017
+  # Max. connection retries
+  # Default: 3
+  max_retries: 3
 
 # Secrets file
 # Changes from secrets.example.yml -> secrets.yml

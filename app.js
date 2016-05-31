@@ -4,6 +4,8 @@
  * Module depedencies
 */
 const bodyParser = require('body-parser');
+const chalk = require('chalk');
+const db = require('./lib/database');
 const express = require('express');
 const http = require('http');
 const Logger  = require('./lib/logger');
@@ -21,8 +23,9 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 /**
  * Server function
  * @param options {Object} Options
+ * @param callback {Function} Callback (for tests)
 */
-module.exports = (options) => {
+module.exports = (options, callback) => {
   /**
    * Vars
   */
@@ -37,6 +40,18 @@ module.exports = (options) => {
   // Init app
   const app = express();
 
+  // Debug logging
+  logger.debug('Starting server...');
+  logger.debug(`Options: ${chalk.magenta('[')}`);
+  // Interator vars
+  let opt;
+  /* istanbul ignore next */
+  for (opt of process.argv) {
+    logger.debug(`  ${chalk.cyan('\"')}${chalk.cyan(opt)}${chalk.cyan('\"')}`);
+  }
+  logger.debug(`${chalk.magenta(']')}`);
+  logger.debug('Configuring express...');
+
   // Configure express
   // View engine
   app.set('views', path.join(__dirname, 'views'));
@@ -45,10 +60,13 @@ module.exports = (options) => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(favicon(__dirname + '/img/favicon.ico'));
+  /* istanbul ignore if */
   if (!options.silent) {
     app.use(morgan('dev'));
   }
+  /* istanbul ignore else */
   if (!options.env || options.env !== 'production' || process.env.NODE_ENV !== 'production') {
+    logger.debug('Using: webpack hot reload');
     // Webpack server -  helped by (http://madole.github.io/blog/2015/08/26/setting-up-webpack-dev-middleware-in-your-express-application/)
     app.use(webpackDevMiddleware(compiler, {
         publicPath: webpackConfig.output.publicPath,
@@ -63,19 +81,20 @@ module.exports = (options) => {
       log: logger.info
     }));
   } else {
+    logger.debug('Serving compiled javascript as static files.');
     // serve static files
-    console.log("h");
     app.use(express.static(path.join(__dirname, 'build')));
   }
 
   // Connect to DB
-  // TODO
+  db.connect(options);
   // Routes
   app.get('/', (req, res, next) => res.render('index.ejs'));
   // Create server and listen
+  logger.debug('Creating server...');
   const server = http.createServer(app);
   server.listen(PORT, () => {
-    logger.info(`Listenning on port ${PORT}...`);
+    logger.info(`Listenning on port ${PORT}.`);
   });
 
 };

@@ -5,6 +5,9 @@ const request = require('request');
 const app = require('../app');
 const expect = chai.expect;
 
+// Console.log patch
+let old = console.log;
+
 // Tests
 describe('app.js tests', () => {
 
@@ -38,5 +41,4 @@ describe('app.js tests', () => {
       done();
     });
   });
-
 });
