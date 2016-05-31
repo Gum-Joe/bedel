@@ -21,8 +21,8 @@ describe('logger.js tests', () => {
   it('should check if logger.info() works', (done) => {
     // Date to help with checking
     const date = new Date();
-    // Pipe console.log
-    old = console.log;
+    // Patch console.log
+    const old = console.log;
     console.log = (txt) => {
       const str = chalk.green.bold('INFO');
       expect(txt).to.equal(`[ ${logger._getdate()} ${str} ] test`);
