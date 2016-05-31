@@ -12,6 +12,7 @@ const Logger  = require('./lib/logger');
 const morgan = require('morgan');
 const parser = require('./lib/parser');
 const path = require('path');
+const routes = require('./routes');
 const webpack = require('webpack');
 const favicon = require('serve-favicon');
 const vars = require('./lib/vars');
@@ -61,6 +62,7 @@ module.exports = (options, callback) => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(favicon(__dirname + '/img/favicon.ico'));
   /* istanbul ignore if */
+  // Logger for requests
   if (!options.silent) {
     app.use(morgan('dev'));
   }
@@ -86,10 +88,12 @@ module.exports = (options, callback) => {
     app.use(express.static(path.join(__dirname, 'build')));
   }
 
+  // Routes
+  app.use('/', routes.index)
+
   // Connect to DB
   db.connect(options);
-  // Routes
-  app.get('/', (req, res, next) => res.render('index.ejs'));
+
   // Create server and listen
   logger.debug('Creating server...');
   const server = http.createServer(app);
