@@ -3,7 +3,7 @@
 # Defaults to "bedel"
 name: bedel
 
-# Port that retis runs on
+# Port that bedel runs on
 # Defaults to 8080
 port: 8080
 

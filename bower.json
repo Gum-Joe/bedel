@@ -1,0 +1,23 @@
+{
+  "name": "bedel",
+  "description": "Build, ship and manage apps, all from one dashboard.",
+  "main": "app.js",
+  "authors": [
+    "Gum-Joe"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "retis",
+    "ci",
+    "projects"
+  ],
+  "homepage": "https://github.com/Gum-Joe/bedel",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -5,16 +5,19 @@
 */
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
+const cookieParser = require('cookie-parser');
 const db = require('./lib/database');
 const express = require('express');
+const express_session = require('express-session');
+const favicon = require('serve-favicon');
 const http = require('http');
 const Logger  = require('./lib/logger');
 const morgan = require('morgan');
 const parser = require('./lib/parser');
 const path = require('path');
 const routes = require('./routes');
+const sass = require('node-sass-middleware');
 const webpack = require('webpack');
-const favicon = require('serve-favicon');
 const vars = require('./lib/vars');
 // Webpack development
 const webpackConfig = require('./webpack.dev.js');
@@ -37,6 +40,16 @@ module.exports = (options, callback) => {
   const compiler = webpack(webpackConfig);
   // Secrets
   const secrets = parser.loadConfig(config.secrets);
+  // Sass options
+  const sassOptions = {
+    src: path.join(__dirname, 'client', 'sass'),
+    dest: path.join(__dirname, 'views', 'css'),
+    debug: false,
+    prefix:  '/css'
+  };
+  if (process.argv.includes('--debug')) {
+    sassOptions.debug = true;
+  }
 
   // Init app
   const app = express();
@@ -56,11 +69,19 @@ module.exports = (options, callback) => {
   // Configure express
   // View engine
   app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'jade');
   app.set('view engine', 'ejs');
   // Register middlewares
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(favicon(__dirname + '/img/favicon.ico'));
+  app.use(favicon(__dirname + '/client/assets/img/favicon.ico'));
+  app.use(cookieParser());
+  app.use(express_session({
+    resave: false,
+    secret: secrets.session_secret,
+    saveUninitialized: false
+  }));
+  app.use(sass(sassOptions));
   /* istanbul ignore if */
   // Logger for requests
   if (!options.silent) {
@@ -88,8 +109,12 @@ module.exports = (options, callback) => {
     app.use(express.static(path.join(__dirname, 'build')));
   }
 
+  // Static files
+  app.use(express.static(path.join(__dirname, 'views')));
+  app.use(express.static(path.join(__dirname, 'client', 'assets')));
+
   // Routes
-  app.use('/', routes.index)
+  app.use('/', routes.index);
 
   // Connect to DB
   db.connect(options);
@@ -99,6 +124,33 @@ module.exports = (options, callback) => {
   const server = http.createServer(app);
   server.listen(PORT, () => {
     logger.info(`Listenning on port ${PORT}.`);
+  });
+
+  // catch 404 and forward to error handler
+  app.use(function(req, res, next) {
+    const err = new Error('404: Not Found');
+    err.status = 404;
+    next(err);
+  });
+
+  // Error handler
+  app.use(function(err, req, res, next) {
+    logger.throw_noexit(err);
+    // Fix error formatting
+    let a;
+    let split = err.stack.split('\n');
+    for (a = 0; a < split.length; a++) {
+      if (split[a].includes('at ')) {
+        split[a] = "\t" + split[a];
+      }
+    }
+    err.stack = split.join('\n');
+    // Send
+    res.status(err.status || 500);
+    res.render('error.ejs', {
+      message: err.message,
+      err: err
+    });
   });
 
 };

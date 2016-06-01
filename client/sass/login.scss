@@ -1,0 +1,81 @@
+// Sass for login
+@import 'util/mixins';
+@import 'util/colours';
+@import 'util/fonts';
+// THEME ENTRY
+@import '../themes/default/login';
+
+// Vars
+$login-box-width: 300px;
+
+// Body props
+body {
+  background-color: $background-colour;
+  color: $text-color;
+  font-family: Open-Sans-Light;
+}
+
+// Logo + login box
+.container {
+  text-align: center;
+  .logo {
+    @include auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    border-bottom-style: dashed;
+    border-bottom-color: $seperater-color;
+    img {
+      @include auto;
+      width: 250px;
+    }
+  }
+  // Login box
+  .login-box {
+    @include auto;
+    height: 400px;
+    width: 300px;
+    border-color: $login-box-border;
+    border-width: 1px;
+    //border-style: solid;
+    border-radius: 5px;
+    background-color: $background-colour;
+    padding-top: 5px;
+    text-align: left;
+    form {
+      div {
+        margin-bottom: 13px;
+        #username {
+          border-bottom-width: 0;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        #password {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+        button {
+          margin-top: 13px;
+        }
+      }
+    }
+    .oauth-box {
+      text-decoration: none;
+      color: black !important;
+      .oauth-box-body {
+        text-align: left;
+        width: $login-box-width;
+        height: 55px;
+        padding-top: 9px;
+        font-size: 20px;
+        i {
+          margin-right: 5px;
+        }
+        .fa-chevron-right {
+          float: right;
+          margin-top: 7.7px;
+        }
+      }
+    }
+  }
+}

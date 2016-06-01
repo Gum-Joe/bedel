@@ -1,0 +1,9 @@
+body {
+  background-color: #ea6153;
+  color: white;
+  font-family: Open-Sans-Light;
+}
+@font-face {
+  font-family: Open-Sans-Light;
+  src: url(/fonts/open-sans/OpenSans-Light.ttf);
+}

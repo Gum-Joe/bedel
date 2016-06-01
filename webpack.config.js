@@ -25,10 +25,11 @@ module.exports = {
   // Plugins
   plugins: [
     // HTML
+    /*
     new HtmlWebpackPlugin({
       title: 'Bedel',
       filename: path.join(__dirname, 'views', 'index.ejs'),
       template: path.join(__dirname, 'client', 'templates', 'index.ejs')
-    })
+    })*/
   ]
 };
