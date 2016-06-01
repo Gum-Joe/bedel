@@ -10,6 +10,7 @@ const db = require('./lib/database');
 const express = require('express');
 const express_session = require('express-session');
 const favicon = require('serve-favicon');
+const flash = require('connect-flash');
 const http = require('http');
 const Logger  = require('./lib/logger');
 const morgan = require('morgan');
@@ -84,6 +85,7 @@ module.exports = (options, callback) => {
     saveUninitialized: false
   }));
   app.use(sass(sassOptions));
+  app.use(flash());
   usePassportMiddleware(app);
   /* istanbul ignore if */
   // Logger for requests
