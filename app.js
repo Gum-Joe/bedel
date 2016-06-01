@@ -17,6 +17,7 @@ const parser = require('./lib/parser');
 const path = require('path');
 const routes = require('./routes');
 const sass = require('node-sass-middleware');
+const usePassportMiddleware = require('./lib/passport');
 const webpack = require('webpack');
 const vars = require('./lib/vars');
 // Webpack development
@@ -83,6 +84,7 @@ module.exports = (options, callback) => {
     saveUninitialized: false
   }));
   app.use(sass(sassOptions));
+  usePassportMiddleware(app);
   /* istanbul ignore if */
   // Logger for requests
   if (!options.silent) {

@@ -4,6 +4,7 @@
  */
 const express = require('express');
 const npm = require('../package');
+const passport = require('passport');
 
 // Init router
 const app = express();
@@ -18,11 +19,14 @@ app.get('/', (req, res) => {
 });
 
 /* GET /login */
-app.get('/login', function(req, res) {
+app.get('/login', (req, res) => {
   res.render('login.ejs', {
     npm: npm
   });
 });
+
+/* POST /login */
+app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login'}));
 
 // Export
 module.exports = app;
