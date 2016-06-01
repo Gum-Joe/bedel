@@ -47,6 +47,7 @@ module.exports = (options, callback) => {
     debug: false,
     prefix:  '/css'
   };
+  /* istanbul ignore if */
   if (process.argv.includes('--debug')) {
     sassOptions.debug = true;
   }
