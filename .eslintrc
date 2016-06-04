@@ -1,6 +1,5 @@
-ecmaFeatures:
-  modules: true
-  jsx: true
+plugins:
+  - react
 
 env:
   amd: true
@@ -11,6 +10,9 @@ env:
 
 parserOptions:
   sourceType: module
+  ecmaFeatures:
+    modules: true
+    jsx: true
 
 # http://eslint.org/docs/rules/
 rules:

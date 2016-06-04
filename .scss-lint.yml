@@ -1,0 +1,27 @@
+scss_files: 'client/sass/**/*.scss'
+
+linters:
+  EmptyLineBetweenBlocks:
+    enabled: false
+  PropertySortOrder:
+    enabled: false
+  SelectorDepth:
+    enabled: true
+    max_depth: 6
+  IdSelector:
+    enabled: false
+  NestingDepth:
+    enabled: true
+    max_depth: 6
+  ColorKeyword:
+    enabled: false
+  SingleLinePerSelector:
+    enabled: false
+  ColorVariable:
+    enabled: false
+  PseudoElement:
+    enabled: false
+  VendorPrefix:
+    enabled: false
+  ImportantRule:
+    enabled: false

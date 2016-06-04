@@ -40,6 +40,17 @@ body {
       margin-bottom: 13px; }
       .container .login-box form div input, .container .login-box form div button {
         border-radius: 2px; }
+        .container .login-box form div input ::-webkit-input-placeholder, .container .login-box form div button ::-webkit-input-placeholder {
+          color: #7f8c8d;
+          opacity: 1; }
+        .container .login-box form div input :-moz-placeholder, .container .login-box form div button :-moz-placeholder {
+          color: #7f8c8d;
+          opacity: 1; }
+        .container .login-box form div input ::-moz-placeholder, .container .login-box form div button ::-moz-placeholder {
+          color: #7f8c8d;
+          opacity: 1; }
+        .container .login-box form div input :-ms-input-placeholder, .container .login-box form div button :-ms-input-placeholder {
+          color: #7f8c8d; }
       .container .login-box form div #username {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0; }
@@ -50,7 +61,7 @@ body {
         margin-top: 13px; }
     .container .login-box .oauth-box {
       text-decoration: none;
-      color: black !important; }
+      color: black; }
       .container .login-box .oauth-box .oauth-box-body {
         text-align: left;
         width: 300px;

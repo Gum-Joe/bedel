@@ -1,6 +1,27 @@
 // Mixins
 
+// Center elements
 @mixin auto {
   margin-left: auto;
   margin-right: auto;
 };
+
+// Change placeholder colour
+// From: http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css
+@mixin placeholder ($colour) {
+  ::-webkit-input-placeholder { // WebKit, Blink, Edge, Chrome
+    color: $colour;
+    opacity: 1;
+  }
+  :-moz-placeholder { // Mozilla Firefox 4 to 18
+    color: $colour;
+    opacity: 1;
+  }
+  ::-moz-placeholder { // Mozilla Firefox 19+
+    color: $colour;
+    opacity: 1;
+  }
+  :-ms-input-placeholder { // Internet Explorer 10-11
+    color: $colour;
+  }
+}

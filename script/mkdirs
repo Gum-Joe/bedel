@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+# Script to mkdirs for bedel
+echo Making dirs for bedel...
+mkdir tmp
+mkdir tmp/cache
+exit 0

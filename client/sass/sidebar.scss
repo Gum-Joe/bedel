@@ -1,0 +1,51 @@
+// Sidebar stuff
+@import 'dashboard';
+
+// Sidebar basic styles
+.sidebar {
+  background-color: $sidebar-background;
+  height: 100%;
+  width: 250px;
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 17px;
+  position: absolute;
+}
+
+// Sidebar item
+.sidebar-item {
+  text-decoration: none;
+  color: $dash-text-color;
+  // <li> inside
+  li {
+    height: 50px;
+    padding-left: 20px;
+    padding-top: 14px;
+    span {
+      padding-right: 30px;
+    }
+  }
+  // Hover
+  li:hover {
+    background-color: $sidebar-background-hover;
+  }
+}
+
+// Fix hover to not turn blue
+.sidebar-item:hover {
+  color: $dash-text-color;
+  text-decoration: none;
+}
+
+// Hero image
+.sidebar-hero {
+  height: 150px;
+}
+.sidebar-hero-container {
+  height: 200px !important;
+  padding-left: 0 !important;
+  text-align: center;
+  h3 {
+    margin-top: 0;
+  }
+}

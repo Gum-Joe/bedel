@@ -1,0 +1,23 @@
+// Dashboard
+@import 'util/base';
+@import 'theme.dashboard';
+
+// Color + body styles
+body {
+  color: $dash-text-color;
+  height: 100%;
+  font-family: Open-Sans-Light;
+}
+
+// Main container
+#main {
+  height: 100%;
+}
+
+// HTML
+// Fix issue where body is not really 100%
+html {
+  height: 100%;
+}
+
+// Page body
