@@ -7,11 +7,10 @@
 
 // Vars
 $login-box-width: 300px;
+$border-radius: 2px;
 
 // Body props
 body {
-  background-color: $background-colour;
-  color: $text-color;
   font-family: Open-Sans-Light;
 }
 
@@ -38,15 +37,18 @@ body {
     border-color: $login-box-border;
     border-width: 1px;
     //border-style: solid;
-    border-radius: 5px;
-    background-color: $background-colour;
+    border-radius: $border-radius;
+    //background-color: $background-colour;
     padding-top: 5px;
     text-align: left;
     form {
       div {
         margin-bottom: 13px;
+        input, button {
+          border-radius: $border-radius;
+        }
         #username {
-          border-bottom-width: 0;
+          //border-bottom-width: 0;
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
         }

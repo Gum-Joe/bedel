@@ -14,3 +14,5 @@ rules:
   single-line-per-selector: 0
   no-color-literals: 0
   placeholder-in-extend: 0
+  quotes: 0
+  no-url-protocols: 0

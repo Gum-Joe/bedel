@@ -5,6 +5,7 @@
 */
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const db = require('./lib/database');
 const express = require('express');
@@ -13,6 +14,8 @@ const favicon = require('serve-favicon');
 const flash = require('connect-flash');
 const http = require('http');
 const Logger  = require('./lib/logger');
+const minify = require('express-minify');
+const minifyHTML = require('express-minify-html');
 const morgan = require('morgan');
 const parser = require('./lib/parser');
 const path = require('path');
@@ -36,7 +39,7 @@ module.exports = (options, callback) => {
    * Vars
   */
   const config = parser.loadConfig(vars.CONFIG_FILE);
-  const PORT = options.port || process.env.PORT || config.port || 8080;
+  const PORT = options.port || process.env.PORT || config.port || vars.DEFAULT_PORT;
   const logger = new Logger(options);
   // Webpack compiler
   const compiler = webpack(webpackConfig);
@@ -87,6 +90,23 @@ module.exports = (options, callback) => {
   app.use(sass(sassOptions));
   app.use(flash());
   usePassportMiddleware(app);
+  app.use(compression());
+  app.use(minify({
+    js_match: /js/,
+    cache: vars.CACHE_DIR
+  }));
+  app.use(minifyHTML({
+    override:      true,
+    htmlMinifier: {
+        removeComments:            true,
+        collapseWhitespace:        true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes:     true,
+        removeEmptyAttributes:     true,
+        minifyJS:                  true
+    }
+  }));
+
   /* istanbul ignore if */
   // Logger for requests
   if (!options.silent) {
