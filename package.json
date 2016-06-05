@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node bin/bedel --color",
     "install": "npm run mkdirs",
-    "mkdirs": "script\\mkdirs",
+    "mkdirs": "cd script && mkdirs",
     "nodemon": "nodemon --ignore client bin/bedel --color --debug",
     "test": "mocha",
     "coveralls": "istanbul cover -x lib/logger.js ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
