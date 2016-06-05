@@ -20,6 +20,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader" },
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
       { test: /\.scss$/, exclude: /node_modules/, loaders: ["style", "css", "sass"] },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

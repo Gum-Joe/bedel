@@ -1,7 +1,21 @@
-#!/usr/bin/bash
+#!/usr/bin/env node
+// Script to make dirs for bedel
+const mkdirp = require('mkdirp');
+// Dirs
+const dirs = [
+  'tmp',
+  'tmp/cache'
+];
 
-# Script to mkdirs for bedel
-echo Making dirs for bedel...
-mkdir tmp
-mkdir tmp/cache
-exit 0
+console.log(`==> Creating directories for bedel...`);
+
+// Make each one
+dirs.forEach((item) => {
+  mkdirp(item, (err) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(`==> Created dir ${item}`);
+    }
+  });
+});

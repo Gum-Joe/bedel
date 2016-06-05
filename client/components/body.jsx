@@ -1,7 +1,7 @@
 // Page body
 import React, { Component } from 'react';
 // Css
-import './sass/dashboard.scss';
+import '../sass/dashboard.scss';
 
 export class PageBody extends Component {
   render() {
