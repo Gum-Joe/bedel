@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node bin/bedel --color",
     "install": "npm run mkdirs",
+    "build": "webpack --config ./webpack.config.js",
     "mkdirs": "node script/mkdirs",
     "nodemon": "nodemon --ignore client bin/bedel --color --debug",
     "test": "mocha",
