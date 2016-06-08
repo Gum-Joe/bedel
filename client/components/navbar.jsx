@@ -9,7 +9,7 @@ export class Nav extends Component {
     return (
       <Sidebar>
         <Hero />
-        <SidebarItem><FontAwesome name="home" /> Home</SidebarItem>
+        <SidebarItem><FontAwesome name="dashboard" /> Dashboard</SidebarItem>
       </Sidebar>
     );
   }

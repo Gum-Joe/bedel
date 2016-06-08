@@ -16,6 +16,7 @@ const http = require('http');
 const Logger  = require('./lib/logger');
 const minify = require('express-minify');
 const minifyHTML = require('express-minify-html');
+//const MongoStore = require('connect-mongo')(express_session);
 const morgan = require('morgan');
 const parser = require('./lib/parser');
 const path = require('path');
@@ -86,6 +87,7 @@ module.exports = (options, callback) => {
     resave: false,
     secret: secrets.session_secret,
     saveUninitialized: false
+    //store: new MongoStore(options)
   }));
   app.use(sass(sassOptions));
   app.use(flash());
@@ -113,7 +115,7 @@ module.exports = (options, callback) => {
     app.use(morgan('dev'));
   }
   /* istanbul ignore else */
-  if (!options.env || options.env !== 'production' || process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     logger.debug('Using: webpack hot reload');
     // Webpack server -  helped by (http://madole.github.io/blog/2015/08/26/setting-up-webpack-dev-middleware-in-your-express-application/)
     app.use(webpackDevMiddleware(compiler, {
@@ -132,6 +134,7 @@ module.exports = (options, callback) => {
     logger.debug('Serving compiled javascript as static files.');
     // serve static files
     app.use(express.static(path.join(__dirname, 'build')));
+    app.use(express.static(path.join(__dirname, 'build/js')));
   }
 
   // Static files
@@ -140,9 +143,6 @@ module.exports = (options, callback) => {
 
   // Routes
   app.use('/', routes.index);
-
-  // Connect to DB
-  db.connect(options);
 
   // Create server and listen
   logger.debug('Creating server...');
