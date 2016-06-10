@@ -151,6 +151,9 @@ module.exports = (options, callback) => {
     logger.info(`Listenning on port ${PORT}.`);
   });
 
+  // Connect to db
+  db.connect(options);
+
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
     const err = new Error('404: Not Found');
