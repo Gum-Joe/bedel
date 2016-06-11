@@ -12,6 +12,9 @@ body {
 // Main container
 #main {
   height: 100%;
+  main {
+    height: 100%;
+  }
 }
 
 // HTML
@@ -21,3 +24,16 @@ html {
 }
 
 // Page body
+.page-body {
+  position: relative;
+  height: 100%;
+  background-color: $background-colour;
+  margin-left: $sidebar-collapse-width;
+  // Helped by http://stackoverflow.com/questions/21016951/jquery-css-animate-div-width-from-left-to-right
+  right: 0;
+}
+
+// Base for headers
+h1, h1, h3, h4, h5, h6 {
+  margin-top: 0;
+}

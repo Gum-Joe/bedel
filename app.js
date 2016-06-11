@@ -138,8 +138,9 @@ module.exports = (options, callback) => {
   }
 
   // Static files
-  app.use(express.static(path.join(__dirname, 'views')));
+  app.use(express.static(path.join(__dirname, 'node_modules')));
   app.use(express.static(path.join(__dirname, 'client', 'assets')));
+  app.use(express.static(path.join(__dirname, 'views')));
 
   // Routes
   app.use('/', routes.index);

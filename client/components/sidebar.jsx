@@ -1,16 +1,25 @@
 // JSX for sidebar
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 // CSS
 import '../sass/sidebar.scss';
 
 // Sidebar item
 export class SidebarItem extends Component {
   render() {
-    return (
-      <a href={this.props.url} className="sidebar-item">
-        <li>{this.props.children}</li>
-      </a>
-    );
+    if (this.props.normal) {
+      return (
+        <a href={this.props.url || '#'} className={"sidebar-item "+this.props.appendClass}>
+          <li>{this.props.children}</li>
+        </a>
+      );
+    } else {
+      return (
+        <Link to={this.props.url || '#'} className={"sidebar-item "+this.props.appendClass}>
+          <li>{this.props.children}</li>
+        </Link>
+      );
+    }
   }
 }
 
@@ -18,9 +27,9 @@ export class SidebarItem extends Component {
 export class SidebarItemHero extends Component {
   render() {
     return (
-      <a href={this.props.url} className="sidebar-item">
+      <Link to={this.props.url || '#'} className="sidebar-item">
         <li className="sidebar-hero-container">{this.props.children}</li>
-      </a>
+      </Link>
     );
   }
 }

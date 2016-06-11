@@ -6,10 +6,12 @@
   background-color: $sidebar-background;
   height: 100%;
   width: 250px;
+  //width: 60px;
   list-style-type: none;
   padding-left: 0;
   font-size: 17px;
   position: absolute;
+  overflow: hidden;
 }
 
 // Sidebar item
@@ -18,7 +20,7 @@
   color: $dash-text-color;
   // <li> inside
   li {
-    height: 50px;
+    height: $nav-item-height;
     padding-left: 20px;
     padding-top: 14px;
     span {

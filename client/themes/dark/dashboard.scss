@@ -1,3 +1,18 @@
 // Dashboard theme
 $sidebar-background: #1d1d1d;
 $sidebar-background-hover: #262626;
+$background-colour: #212121;
+$navbar-background: #1d1d1d;
+
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+  background-color: white;
+}
+
+.hamburger-li {
+  li {
+    background-color: #c62828;
+  }
+  li:hover {
+    background-color: #b71c1c;
+  }
+}

@@ -26,11 +26,6 @@ app.get('/login', (req, res) => {
 });
 
 /* POST /login */
-/*
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/', failureRedirect: '/login', failureFlash: true
-}));*/
-
 app.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
@@ -50,6 +45,12 @@ app.post('/login', (req, res, next) => {
       return res.redirect('/');
     });
   })(req, res, next);
+});
+
+/* GET /signout */
+app.get('/signout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 // Export

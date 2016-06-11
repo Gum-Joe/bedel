@@ -22,6 +22,7 @@ module.exports = {
         { test: /\.jsx$/, exclude: /node_modules/, loaders: [ "react-hot", "babel-loader"] },
         { test: /\.js$/, exclude: /node_modules/, loaders: [ "react-hot", "babel-loader"] },
         { test: /\.scss$/, exclude: /node_modules/, loaders: ["style", "css", "sass"] },
+        { test: /\.css$/, exclude: /node_modules/, loaders: ["style", "css"] },
         {
           test: /\.(jpe?g|png|gif|svg)$/i,
           loaders: [ 'file?hash=sha512&digest=hex&name=[hash].[ext]',
