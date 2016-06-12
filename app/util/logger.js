@@ -61,23 +61,8 @@ class Logger {
      */
      /* istanbul ignore err */
      throw(err) {
-       if (!that.options.silent) {
-         const colour = "red";
-         const str = chalk[colour].bold('ERR!');
-         console.log(`[ ${Logger.prototype._getdate()} ${str} ]`);
-         console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${err.stack.split('\n')[0]}`);
-         console.log(`[ ${Logger.prototype._getdate()} ${str} ]`);
-         if (that.options.debug || process.env.NODE_ENV !== 'production') {
-           console.log(`[ ${Logger.prototype._getdate()} ${str} ] Full error:`);
-           console.log(`[ ${Logger.prototype._getdate()} ${str} ]`);
-           let e = 0;
-           for (e of err.stack.split('\n')) {
-             console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${e}`);
-           }
-         }
-         console.log(`[ ${Logger.prototype._getdate()} ${str} ]`);
-         process.exit(1);
-       }
+       this.throw_noexit(err);
+       process.exit(1);
      }
 
      /**

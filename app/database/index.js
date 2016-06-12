@@ -3,29 +3,17 @@
 /**
  * Module depedencies
 */
+const _connect = require('./connecter');
 const chalk = require('chalk');
-const Logger  = require('./logger');
+const Logger  = require('../util/logger');
 const mongoose = require('mongoose');
-const parser = require('./parser');
-const vars = require('./vars');
+const parser = require('../util/parser');
+const vars = require('../util/vars');
 
 /**
  * Vars
 */
 const config = parser.loadConfig(vars.CONFIG_FILE);
-
-/**
- * Initial connection
- * @param logger {Logger} Logger
- */
-const _connect = (logger) => {
-  logger.prefix = chalk.magenta.bold('DBASE');
-  logger.debug(`Connecting to database...`);
-  const dbc = config.db;
-  const url = process.env.MONGODB_URL || `mongodb://${dbc.url}:${dbc.port}/${config.name}`;
-  logger.debug(`Url: ${chalk.green.bold(url)}`);
-  mongoose.connect(url);
-};
 
 /**
  * Exported method
@@ -34,7 +22,7 @@ const _connect = (logger) => {
 const connect = (options) => {
   const logger = new Logger(options);
   let retries = 0;
-  _connect(logger);
+  _connect(logger, config);
   // Handle errors
   // From: http://mongoosejs.com/docs/index.html
   // Modified to use ES6

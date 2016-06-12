@@ -1,0 +1,7 @@
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+  background-color: white; }
+
+.hamburger-li li {
+  background-color: #c62828; }
+.hamburger-li li:hover {
+  background-color: #b71c1c; }

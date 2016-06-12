@@ -49,3 +49,6 @@ private
 
 # Tmp
 tmp
+
+# Cache
+.sass-cache

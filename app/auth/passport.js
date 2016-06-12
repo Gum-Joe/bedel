@@ -3,7 +3,7 @@
  * Module depedencies
 */
 const local = require('./passport/local');
-const models = require('./models');
+const models = require('../models');
 const passport = require('passport');
 
 /**

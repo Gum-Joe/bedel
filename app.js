@@ -7,24 +7,24 @@ const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
-const db = require('./lib/database');
+const db = require('./app/database');
 const express = require('express');
 const express_session = require('express-session');
 const favicon = require('serve-favicon');
 const flash = require('connect-flash');
 const http = require('http');
-const Logger  = require('./lib/logger');
+const Logger  = require('./app/util/logger');
 const minify = require('express-minify');
 const minifyHTML = require('express-minify-html');
 //const MongoStore = require('connect-mongo')(express_session);
 const morgan = require('morgan');
-const parser = require('./lib/parser');
+const parser = require('./app/util/parser');
 const path = require('path');
-const routes = require('./routes');
-const sass = require('node-sass-middleware');
-const usePassportMiddleware = require('./lib/passport');
+const routes = require('./app/routes');
+//const sass = require('node-sass-middleware');
+const usePassportMiddleware = require('./app/auth/passport');
 const webpack = require('webpack');
-const vars = require('./lib/vars');
+const vars = require('./app/util/vars');
 // Webpack development
 const webpackConfig = require('./webpack.dev.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -68,7 +68,7 @@ module.exports = (options, callback) => {
   let opt;
   /* istanbul ignore next */
   for (opt of process.argv) {
-    logger.debug(`  ${chalk.cyan('\"')}${chalk.cyan(opt)}${chalk.cyan('\"')}`);
+    logger.debug(`  ${chalk.cyan('"')}${chalk.cyan(opt)}${chalk.cyan('"')}`);
   }
   logger.debug(`${chalk.magenta(']')}`);
   logger.debug('Configuring express...');
@@ -81,7 +81,7 @@ module.exports = (options, callback) => {
   // Register middlewares
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(favicon(__dirname + '/client/assets/img/favicon.ico'));
+  app.use(favicon(path.join(__dirname, '/client/assets/img/favicon.ico')));
   app.use(cookieParser());
   app.use(express_session({
     resave: false,
@@ -89,7 +89,7 @@ module.exports = (options, callback) => {
     saveUninitialized: false
     //store: new MongoStore(options)
   }));
-  app.use(sass(sassOptions));
+  //app.use(sass(sassOptions));
   app.use(flash());
   usePassportMiddleware(app);
   app.use(compression());
@@ -163,7 +163,9 @@ module.exports = (options, callback) => {
   });
 
   // Error handler
-  app.use(function(err, req, res, next) {
+  app.use(function(error, req, res, next) {
+    // Reassign
+    let err = error;
     logger.throw_noexit(err);
     // Fix error formatting
     let a;

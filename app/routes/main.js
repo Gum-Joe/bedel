@@ -3,7 +3,7 @@
  * Module dependencies
  */
 const express = require('express');
-const npm = require('../package');
+const npm = require('../../package');
 const passport = require('passport');
 
 // Init router

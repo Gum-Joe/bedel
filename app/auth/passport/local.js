@@ -4,7 +4,7 @@
  * Module depedencies
 */
 const bcrypt = require('bcryptjs');
-const models = require('../models');
+const models = require('../../models');
 const Stratergy = require('passport-local');
 
 /**
