@@ -2,19 +2,16 @@
 import 'babel-polyfill';
 // Entry file for react
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { render } from 'react-dom';
-import { Dashboard } from './dashboard.jsx';
-import { DashboardApp } from './components/app';
-// Default app to launch
-const DefaultApp = DashboardApp;
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { routes } from './routes';
+import reducers from './redux/reducers';
 
-$(document).ready(function() {
-  render((
-    <Router history={browserHistory}>
-      <Route path="/" component={Dashboard}>
-        <IndexRoute component={DashboardApp}/>
-      </Route>
-    </Router>
-  ), document.getElementById('main'));
-});
+const store = createStore(reducers);
+
+render((
+  <Provider store={store}>
+    {routes}
+  </Provider>
+), document.getElementById('main'));

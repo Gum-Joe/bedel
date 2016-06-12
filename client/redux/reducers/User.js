@@ -1,5 +1,5 @@
 // User reducer
-import { LOG_IN, LOG_Out } from '../constants/redux';
+import { LOG_IN, LOG_OUT } from '../../util/constants';
 
 // Intial state for redux
 const intial = {
@@ -9,7 +9,7 @@ const intial = {
 };
 
 // Reducer
-export default function user(state = intial, action) {
+export const user = (state = intial, action) => {
   switch (action.type) {
     case LOG_IN:
       return {
@@ -23,4 +23,4 @@ export default function user(state = intial, action) {
       return state;
 
   }
-}
+};

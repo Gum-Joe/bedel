@@ -6,6 +6,10 @@
   border-radius: 0;
   background-color: $navbar-background;
   border: 0;
+  width: 100%;
+  .container {
+    width: 100%;
+  }
 }
 
 .hamburger-nav {
@@ -19,6 +23,19 @@
     .hamburger {
       margin-top: 13px;
       padding: 0;
+      // Push over header
+      margin-right: 25px;
     }
+  }
+}
+
+// Nav text
+.nav-text {
+  font-size: 19px;
+  a {
+    color: $navbar-text !important;
+  }
+  a:hover {
+    color: $navbar-text-hover !important;
   }
 }
