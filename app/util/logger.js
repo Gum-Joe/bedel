@@ -106,7 +106,7 @@ class Logger {
 
     // Make a method
     make(method, options) {
-      return this.info.bind(options);
+      return this[method].bind(options);
     }
 }
 
