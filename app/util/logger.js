@@ -48,9 +48,9 @@ class Logger {
     /* istanbul ignore info */
     err(txt) {
       if (!that.options.silent) {
-        const colour = "red";
+        const colour = "bgRed";
         const str = chalk[colour].bold('ERR!');
-        console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${txt}`);
+        console.error(`[ ${Logger.prototype._getdate()} ${str} ] ${txt}`);
       }
     }
 
@@ -73,20 +73,20 @@ class Logger {
       /* istanbul ignore err */
       throw_noexit(err) {
         if (!that.options.silent) {
-          const colour = "red";
+          const colour = "bgRed";
           const str = chalk[colour].bold('ERR!');
-          console.log(`[ ${Logger.prototype._getdate()} ${str} ]`);
-          console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${err.stack.split('\n')[0]}`);
-          console.log(`[ ${Logger.prototype._getdate()} ${str} ]`);
+          console.error(`[ ${Logger.prototype._getdate()} ${str} ]`);
+          console.error(`[ ${Logger.prototype._getdate()} ${str} ] ${err.stack.split('\n')[0]}`);
+          console.error(`[ ${Logger.prototype._getdate()} ${str} ]`);
           if (that.options.debug || process.env.NODE_ENV !== 'production') {
-            console.log(`[ ${Logger.prototype._getdate()} ${str} ] Full error:`);
-            console.log(`[ ${Logger.prototype._getdate()} ${str} ]`);
+            console.error(`[ ${Logger.prototype._getdate()} ${str} ] Full error:`);
+            console.error(`[ ${Logger.prototype._getdate()} ${str} ]`);
             let e = 0;
             for (e of err.stack.split('\n')) {
-              console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${e}`);
+              console.error(`[ ${Logger.prototype._getdate()} ${str} ] ${e}`);
             }
           }
-          console.log(`[ ${Logger.prototype._getdate()} ${str} ]`);
+          console.error(`[ ${Logger.prototype._getdate()} ${str} ]`);
         }
       }
 

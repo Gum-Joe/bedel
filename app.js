@@ -25,27 +25,20 @@ const path = require('path');
 const routes = require('./app/routes');
 const usePassportMiddleware = require('./app/auth/passport');
 const helpers = require('./app/helpers');
-const webpack = require('webpack');
 const vars = require('./app/util/vars');
-// Webpack development
-const webpackConfig = require('./webpack.dev.js');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
 
 /**
  * Server function
  * @param options {Object} Options
  * @param callback {Function} Callback (for tests)
 */
-module.exports = (options, callback) => {
+module.exports = (options) => {
   /**
    * Vars
   */
   const config = parser.loadConfig(vars.CONFIG_FILE);
   const PORT = options.port || process.env.PORT || config.port || vars.DEFAULT_PORT;
   const logger = new Logger(options);
-  // Webpack compiler
-  const compiler = webpack(webpackConfig);
   // Secrets
   const secrets = parser.loadConfig(config.secrets);
   // Sass options
@@ -94,11 +87,11 @@ module.exports = (options, callback) => {
       ttl: 10 * 60 * 60
     })
   }));
-  //app.use(sass(sassOptions));
   app.use(flash());
   usePassportMiddleware(app);
   app.use(compression());
   app.use(minify({
+    js_match: /js/,
     cache: vars.CACHE_DIR
   }));
   app.use(minifyHTML({
@@ -109,7 +102,7 @@ module.exports = (options, callback) => {
         collapseBooleanAttributes: true,
         removeAttributeQuotes:     true,
         removeEmptyAttributes:     true,
-        minifyJS:                  true
+        minifyJS:                  false
     }
   }));
 
@@ -150,8 +143,13 @@ module.exports = (options, callback) => {
   // Init the api
   const api = new API(server, options);
   // Add socket.io listenner
-  api.sockets.addListenner();
-
+  /** Example
+  api.sockets.use('event', (socket, logger) => {
+    return () => {
+      logger.info('t');
+    };
+  }); */
+  api.sockets.start();
   // Use our error handler
   helpers.useErrorHandler(app, logger);
 

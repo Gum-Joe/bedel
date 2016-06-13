@@ -9,7 +9,6 @@ import { routes } from './routes';
 import reducers from './redux/reducers';
 
 const store = createStore(reducers);
-
 render((
   <Provider store={store}>
     {routes}
