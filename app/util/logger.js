@@ -103,6 +103,11 @@ class Logger {
         console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${txt}`);
       }
     }
+
+    // Make a method
+    make(method, options) {
+      return this.info.bind(options);
+    }
 }
 
 // Export

@@ -3,6 +3,7 @@
 /**
  * Module depedencies
 */
+const { API } = require('./app/api');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const compression = require('compression');
@@ -16,13 +17,14 @@ const http = require('http');
 const Logger  = require('./app/util/logger');
 const minify = require('express-minify');
 const minifyHTML = require('express-minify-html');
-//const MongoStore = require('connect-mongo')(express_session);
+const MongoStore = require('connect-mongo')(express_session);
+const mongoose = require('mongoose');
 const morgan = require('morgan');
 const parser = require('./app/util/parser');
 const path = require('path');
 const routes = require('./app/routes');
-//const sass = require('node-sass-middleware');
 const usePassportMiddleware = require('./app/auth/passport');
+const helpers = require('./app/helpers');
 const webpack = require('webpack');
 const vars = require('./app/util/vars');
 // Webpack development
@@ -84,17 +86,19 @@ module.exports = (options, callback) => {
   app.use(favicon(path.join(__dirname, '/client/assets/img/favicon.ico')));
   app.use(cookieParser());
   app.use(express_session({
-    resave: false,
+    resave: true,
     secret: secrets.session_secret,
-    saveUninitialized: false
-    //store: new MongoStore(options)
+    saveUninitialized: true,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 10 * 60 * 60
+    })
   }));
   //app.use(sass(sassOptions));
   app.use(flash());
   usePassportMiddleware(app);
   app.use(compression());
   app.use(minify({
-    js_match: /js/,
     cache: vars.CACHE_DIR
   }));
   app.use(minifyHTML({
@@ -116,20 +120,8 @@ module.exports = (options, callback) => {
   }
   /* istanbul ignore else */
   if (process.env.NODE_ENV !== 'production') {
-    logger.debug('Using: webpack hot reload');
-    // Webpack server -  helped by (http://madole.github.io/blog/2015/08/26/setting-up-webpack-dev-middleware-in-your-express-application/)
-    app.use(webpackDevMiddleware(compiler, {
-        publicPath: webpackConfig.output.publicPath,
-        noInfo: true,
-        stats: {
-          colors: true
-        }
-    }));
-
-    app.use(webpackHotMiddleware(compiler, {
-      // Use our logger
-      log: logger.info
-    }));
+    // Use hot reload
+    helpers.useWebpackHot(app, options);
   } else {
     logger.debug('Serving compiled javascript as static files.');
     // serve static files
@@ -155,33 +147,12 @@ module.exports = (options, callback) => {
   // Connect to db
   db.connect(options);
 
-  // catch 404 and forward to error handler
-  app.use(function(req, res, next) {
-    const err = new Error('404: Not Found');
-    err.status = 404;
-    next(err);
-  });
+  // Init the api
+  const api = new API(server, options);
+  // Add socket.io listenner
+  api.sockets.addListenner();
 
-  // Error handler
-  app.use(function(error, req, res, next) {
-    // Reassign
-    let err = error;
-    logger.throw_noexit(err);
-    // Fix error formatting
-    let a;
-    let split = err.stack.split('\n');
-    for (a = 0; a < split.length; a++) {
-      if (split[a].includes('at ')) {
-        split[a] = "\t" + split[a];
-      }
-    }
-    err.stack = split.join('\n');
-    // Send
-    res.status(err.status || 500);
-    res.render('error.ejs', {
-      message: err.message,
-      err: err
-    });
-  });
+  // Use our error handler
+  helpers.useErrorHandler(app, logger);
 
 };
