@@ -129,6 +129,7 @@ module.exports = (options) => {
 
   // Routes
   app.use('/', routes.index);
+  app.use('/api', routes.api);
 
   // Create server and listen
   logger.debug('Creating server...');

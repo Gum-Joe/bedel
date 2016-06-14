@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 // CSS
-import '../sass/sidebar.scss';
+import '../../sass/sidebar.scss';
 
 // Sidebar item
 export class SidebarItem extends Component {
