@@ -20,6 +20,8 @@ const userToAdd = {
 };
 // Fake 'this'
 let that = {};
+// Timeout
+const timeout = 6000;
 
 describe('Authentication tests', () => {
   before((done) => {
@@ -35,7 +37,7 @@ describe('Authentication tests', () => {
   });
 
   it('should see if we can authenticate successfully by being redirecting to / (code: 302)', function (done) {
-    this.timeout(6000);
+    this.timeout(timeout);
     request(that.app)
       .post('/login')
       .send(userToSend)
@@ -46,7 +48,7 @@ describe('Authentication tests', () => {
   });
 
   it('should see if we get rendered the login screen if we send an invalid username (code: 200)', function (done) {
-    this.timeout(6000);
+    this.timeout(timeout);
     request(that.app)
       .post('/login')
       .send({
@@ -57,7 +59,7 @@ describe('Authentication tests', () => {
   });
 
   it('should see if we get rendered the login screen if we send an invalid password (code: 200)', function (done) {
-    this.timeout(6000);
+    this.timeout(timeout);
     request(that.app)
       .post('/login')
       .send({
@@ -68,10 +70,49 @@ describe('Authentication tests', () => {
   });
 
   it('should see if we get serialized and deserialized into and out of a session', function (done) {
-    this.timeout(6000);
+    this.timeout(timeout);
     request(that.app)
       .post('/login')
       .send(userToSend)
       .expect('set-cookie', /connect.sid=(.*)/, done);
+  });
+
+  it('should logout when we GET /signout', function (done) {
+    this.timeout(timeout);
+    // Login
+    request(that.app)
+      .post('/login')
+      .send(userToSend)
+      .expect(302)
+      .end((err, res) => {
+        if (err) {
+          throw err;
+        }
+        const cookie = res.headers['set-cookie'][0];
+        const noEqual = cookie.split('=')[1];
+        const sendCookie = noEqual.split('; ')[0];
+        // Now we send the cookie and logout
+        request(that.app)
+          .get('/signout')
+          .set('Cookie', `connect.sid=${sendCookie}`)
+          .expect((res) => {
+            expect((res.header.location)).to.equal('/');
+          })
+          .expect(302)
+          .end((err) => {
+            if (err) {
+              throw err;
+            }
+            // Test login
+            // It should redirect to /
+            request(that.app)
+              .get('/')
+              .set('Cookie', `connect.sid=${sendCookie}`)
+              .expect((res) => {
+                expect((res.header.location)).to.equal('/login');
+              })
+              .expect(302, done);
+          });
+      });
   });
 });

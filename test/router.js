@@ -72,4 +72,14 @@ describe('Router tests', () => {
       .expect(302, done);
   });
 
+  it('should redirect to / when we signout', function (done) {
+    this.timeout(6000);
+    request(that.app)
+      .get('/signout')
+      .expect((res) => {
+        expect((res.header.location)).to.equal('/');
+      })
+      .expect(302, done);
+  });
+
 });
