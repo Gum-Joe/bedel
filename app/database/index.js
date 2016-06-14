@@ -10,17 +10,17 @@ const parser = require('../util/parser');
 const vars = require('../util/vars');
 
 /**
- * Vars
-*/
-const config = parser.loadConfig(vars.CONFIG_FILE);
-
-/**
  * Exported method
  * @param options {Object} Options
 */
 const connect = (options) => {
+  /**
+   * Vars
+  */
+  const config = options.config || parser.loadConfig(options.configFile || vars.CONFIG_FILE);
   const logger = new Logger(options);
   let retries = 0;
+  // Connect
   _connect(logger, config);
   // Handle errors
   // From: http://mongoosejs.com/docs/index.html

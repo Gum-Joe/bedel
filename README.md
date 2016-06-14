@@ -16,7 +16,7 @@ npm install
 ```bash
 bin/bedel
 ```
-***Note:*** *You may need to add a username and password manually to you mongodb in the 'bedel' database. Please use [bcryptjs](https://github.com/dcodeIO/bcrypt.js) to hash the password with a salt factor of 10*
+***Note:*** *You may need to add a username and password manually to you mongodb in the 'bedel' database. Please use [bcryptjs](https://github.com/dcodeIO/bcrypt.js) to hash the password with a salt factor of 10.*
 
 # Tests
 ```bash

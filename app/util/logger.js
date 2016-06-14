@@ -61,8 +61,12 @@ class Logger {
      */
      /* istanbul ignore err */
      throw(err) {
-       this.throw_noexit(err);
-       process.exit(1);
+       if (process.env.NODE_ENV !== 'test') {
+         this.throw_noexit(err);
+         process.exit(1);
+       } else {
+         throw err;
+       }
      }
 
      /**
