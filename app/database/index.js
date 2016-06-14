@@ -4,7 +4,6 @@
  * Module depedencies
 */
 const _connect = require('./connecter');
-const chalk = require('chalk');
 const Logger  = require('../util/logger');
 const mongoose = require('mongoose');
 const parser = require('../util/parser');
@@ -36,7 +35,7 @@ const connect = (options) => {
       logger.debug("");
       logger.debug(`Retrying connection to db (${retries} of ${config.db.max_retries})...`);
       retries++;
-      _connect(logger);
+      _connect(logger, config);
     }
   });
   db.once('open', function() {

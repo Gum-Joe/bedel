@@ -21,6 +21,8 @@ module.exports = (app) => {
     done(null, user.id);
   });
   passport.deserializeUser((id, done) => {
+    // Tested, but istanbul says it is not
+    /* istanbul ignore next */
     User.findOne({ _id: id }, function (err, user) {
       done(err, user);
     });

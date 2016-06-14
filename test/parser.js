@@ -1,13 +1,7 @@
 'use strict';
 // parser.js tests
-const chai = require('chai');
-const fs = require('fs');
-const request = require('request');
-const parser = require('../lib/parser');
-const expect = chai.expect;
-
-// Console.log patch
-let old = console.log;
+const { expect } = require('chai');
+const parser = require('../app/util/parser');
 
 // Tests
 describe('parser.js tests', () => {
@@ -16,7 +10,7 @@ describe('parser.js tests', () => {
     // Parse
     const data = parser.loadConfig('config/config.yml');
     // Check
-    expect(data).to.be.a('object');
+    expect((data)).to.be.a('object');
     done();
   });
 

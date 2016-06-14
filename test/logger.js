@@ -1,9 +1,8 @@
 'use strict';
 // logger.js tests
-const chai = require('chai');
-const expect = chai.expect;
+const { expect } = require('chai');
 const chalk = require('chalk');
-const Logger = require('../lib/logger');
+const Logger = require('../app/util/logger');
 // Init logger
 const logger = new Logger();
 
@@ -19,8 +18,6 @@ describe('logger.js tests', () => {
   });
 
   it('should check if logger.info() works', (done) => {
-    // Date to help with checking
-    const date = new Date();
     // Patch console.log
     const old = console.log;
     console.log = (txt) => {

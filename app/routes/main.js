@@ -29,6 +29,8 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
+      // Untestable
+      /* istanbul ignore next */
       return next(err); // will generate a 500 error
     }
     if (!user) {
@@ -40,9 +42,11 @@ app.post('/login', (req, res, next) => {
     // Login
     req.login(user, (loginErr) => {
       if (loginErr) {
+        // Untestable
+        /* istanbul ignore next */
         return next(loginErr);
       }
-      return res.redirect('/');
+      res.redirect('/');
     });
   })(req, res, next);
 });

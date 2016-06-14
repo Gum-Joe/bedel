@@ -17,6 +17,8 @@ module.exports = new Stratergy(
   (username, password, done) => {
     User.findOne({ username: username }, (err, user) => {
       if (err) {
+        // Untestable
+        /* istanbul ignore next */
         return done(err, false);
       }
       if (!user) {

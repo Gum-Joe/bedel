@@ -14,11 +14,15 @@ const chalk = require('chalk');
 const connect = (loggerOld, config) => {
   let logger = loggerOld;
   logger.prefix = chalk.magenta.bold('DBASE');
-  logger.debug(`Connecting to database...`);
-  const dbc = config.db;
-  const url = process.env.MONGODB_URL || `mongodb://${dbc.url}:${dbc.port}/${config.name}`;
-  logger.debug(`Url: ${chalk.green.bold(url)}`);
-  mongoose.connect(url);
+  logger.debug(`Connecting to the database...`);
+  if (!mongoose.connection.name) {
+    const dbc = config.db;
+    const url = process.env.MONGODB_URL || `mongodb://${dbc.url}:${dbc.port}/${config.name}`;
+    logger.debug(`Url: ${chalk.green.bold(url)}`);
+    mongoose.connect(url);
+  } else {
+    logger.info('Already connected to database.');
+  }
 };
 
 // Export

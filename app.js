@@ -153,4 +153,5 @@ module.exports = (options) => {
   // Use our error handler
   helpers.useErrorHandler(app, logger);
 
+  return app;
 };
