@@ -15,7 +15,8 @@ export const user = (state = intial, action) => {
       return {
         id: action.user._id,
         username: action.user.username,
-        name: action.user.name || action.user.username
+        name: action.user.name || action.user.username,
+        email: action.user.email
       };
     case LOG_OUT:
       return intial;

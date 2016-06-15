@@ -1,4 +1,4 @@
-// JSX file for navbar
+ // JSX file for navbar
 import React, { Component, PropTypes } from 'react';
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
@@ -6,6 +6,8 @@ import { isMobile } from '../util/mobile';
 import { Sidebar, SidebarItem } from './sidebar';
 import { Hamburger } from './hamburger';
 import { ItemIcon as NavItemIcon } from './navbar/item';
+import { Username } from './username';
+import Gravatar from 'react-gravatar';
 // import { Hero } from './sidebar/hero';
 // Css (sass)
 import '../../sass/navbar.scss';
@@ -76,7 +78,7 @@ export class Navigater extends Component {
         <Navbar.Collapse>
           <Nav pullRight>
             <NavItemIcon href="/notifications" icon="bell" />
-            <NavDropdown title={`Hello, ${this.props.user.name}`} className="navbar-dropdown">
+            <NavDropdown title={<Username prefix="Hello," user={this.props.user} suffix={<Gravatar email={this.props.user.email} />} />} className="navbar-dropdown">
               <MenuItem><NavItemIcon href="/settings/profile" icon="user" text="Profile" /></MenuItem>
             </NavDropdown>
             <NavItemIcon href="/signout" icon="sign-out" normal />

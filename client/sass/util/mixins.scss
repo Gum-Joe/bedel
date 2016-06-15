@@ -25,3 +25,9 @@
     color: $colour;
   }
 }
+
+// Square image with one side $width
+@mixin square-img($width) {
+  height: $width;
+  width: $width;
+}
