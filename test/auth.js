@@ -10,13 +10,15 @@ const { BCRYPT_SALT_FACTOR } = require('../app/util/vars');
 const userToSend = {
   name: 'John',
   username: 'mocha',
-  password: 'mocha'
+  password: 'mocha',
+  email: 'someone@example.com'
 };
 // User to add
 const userToAdd = {
   name: userToSend.name,
   username: userToSend.username,
-  password: bcrypt.hashSync(userToSend.password, BCRYPT_SALT_FACTOR)
+  password: bcrypt.hashSync(userToSend.password, BCRYPT_SALT_FACTOR),
+  email: userToSend.email
 };
 // Fake 'this'
 let that = {};
