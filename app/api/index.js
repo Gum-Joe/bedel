@@ -1,4 +1,5 @@
 // Index of api
+require('babel-polyfill');
 /**
  * Module depedencies
 */

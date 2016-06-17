@@ -14,7 +14,10 @@ let that = {};
 */
 class Logger {
   constructor(options) {
-    that.options = options;
+    that.options = Object.assign({
+      silent: false,
+      debug: false
+    }, options);
   }
 
   /**

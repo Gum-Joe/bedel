@@ -8,7 +8,7 @@ const io = require('socket.io');
 // IO method
 module.exports = {
   // Array of connections + methods
-  namespaces: [
+  events: [
     // Example:
     // { event: test, listener: (data, socket) => console.log('hi!') }
   ],
@@ -30,7 +30,7 @@ module.exports = {
     this.logger.debug('A client has connected to the socket.io server');
     // Add Listeners
     let listener;
-    for (listener of this.namespaces) {
+    for (listener of this.events) {
       socket.on(listener.event, listener.listener(socket, this.logger));
     }
   },
@@ -49,7 +49,7 @@ module.exports = {
    * @param listener {Function} - Listener
    */
   use(event, listener) {
-    this.namespaces.push({
+    this.events.push({
       event: event,
       listener: listener.bind(this)
     });
