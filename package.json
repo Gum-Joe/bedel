@@ -4,7 +4,7 @@
   "description": "Build, ship and manage apps, all from one dashboard.",
   "main": "app.js",
   "scripts": {
-    "start": "node bin/bedel --color",
+    "start": "node bin/bedel server --color",
     "compile": "gulp compile",
     "compile:sass": "gulp compile:sass",
     "install": "npm run mkdirs",
@@ -76,6 +76,7 @@
     "yamljs": "^0.2.7"
   },
   "devDependencies": {
+    "atom-ui-reporter": "0.0.1",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-polyfill": "^6.9.1",
