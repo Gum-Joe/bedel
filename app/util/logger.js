@@ -104,7 +104,7 @@ class Logger {
     */
     /* istanbul ignore debug */
     debug(txt) {
-      if (!that.options.silent && process.argv.includes('--debug')) {
+      if (!that.options.silent && that.options.debug) {
         const colour = "cyan";
         const str = this.prefix || chalk[colour].bold('DEBUG');
         console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${txt}`);

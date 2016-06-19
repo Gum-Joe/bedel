@@ -49,7 +49,7 @@ module.exports = (options) => {
     prefix:  '/css'
   };
   /* istanbul ignore if */
-  if (process.argv.includes('--debug')) {
+  if (options.debug) {
     sassOptions.debug = true;
   }
 
