@@ -1,2 +1,3 @@
 **/*{.,-}min.js
 build/**/*.js
+app/**/*.js

@@ -52,3 +52,6 @@ tmp
 
 # Cache
 .sass-cache
+
+# Compiled babel
+# app

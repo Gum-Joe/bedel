@@ -1,5 +1,3 @@
-'use strict';
-
 // Index of helpers
 // Exports
 /**

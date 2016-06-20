@@ -1,26 +1,38 @@
-// Passport middleware provider
-/**
- * Module depedencies
-*/
-const local = require('./passport/local');
-const models = require('../models');
-const passport = require('passport');
+'use strict';
+
+var _local = require('./passport/local');
+
+var _local2 = _interopRequireDefault(_local);
+
+var _models = require('../models');
+
+var _models2 = _interopRequireDefault(_models);
+
+var _passport = require('passport');
+
+var _passport2 = _interopRequireDefault(_passport);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Vars
 */
-const User =  models.User;
+var User = _models2.default.User;
 
 /**
  * Method
  * @param app {Object} Express app object
 */
-module.exports = (app) => {
+// Passport middleware provider
+/**
+ * Module depedencies
+*/
+module.exports = function (app) {
   // Serialize and deserialize our users
-  passport.serializeUser((user, done) => {
+  _passport2.default.serializeUser(function (user, done) {
     done(null, user.id);
   });
-  passport.deserializeUser((id, done) => {
+  _passport2.default.deserializeUser(function (id, done) {
     // Tested, but istanbul says it is not
     /* istanbul ignore next */
     User.findOne({ _id: id }, function (err, user) {
@@ -29,9 +41,9 @@ module.exports = (app) => {
   });
 
   // Add stratergies
-  passport.use(local);
+  _passport2.default.use(_local2.default);
 
   // Add to express
-  app.use(passport.initialize());
-  app.use(passport.session());
+  app.use(_passport2.default.initialize());
+  app.use(_passport2.default.session());
 };

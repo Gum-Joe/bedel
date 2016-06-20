@@ -3,10 +3,15 @@
 /**
  * Module depedencies
 */
-const mongoose = require('mongoose');
+
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Schema
-const User = new mongoose.Schema({
+var User = new _mongoose2.default.Schema({
   name: String,
   username: { type: String, required: true },
   password: { type: String, required: true },
@@ -14,4 +19,4 @@ const User = new mongoose.Schema({
 });
 
 // Compile & export
-module.exports = mongoose.model('users', User);
+module.exports = _mongoose2.default.model('users', User);
