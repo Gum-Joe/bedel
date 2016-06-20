@@ -12,7 +12,7 @@ const api = new API(server, {
 describe('API tests', () => {
 
   before((done) => {
-    server.listen(Math.round(Math.random() * 100), done);
+    server.listen(5675, done);
   });
 
   describe('Socket.io tests', () => {

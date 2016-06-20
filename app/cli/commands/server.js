@@ -9,16 +9,19 @@ const Cli = require('../');
 module.exports = (argv) => {
   const cli = new Cli(
     [
+      [ '-p, --port <port>', 'Specifies a port to open the server' ],
       [ '--color',  'Use colour' ],
       [ '--debug', 'Debug logging' ],
       [ '--no-color',  'Don\'t use colour' ]
     ],
     {
-      script: 'bedel-server'
+      script: 'bedel-server',
+      subCommand: true
     },
     argv
   );
   // Parse + run
-  const options = cli.parse();
-  app(options);
+  app(
+    cli.parse()
+  );
 };

@@ -59,7 +59,15 @@ class Cli {
     for (opt of options) {
       const returnOpt = {};
       // Slice up options
-      const shortLong = opt[0];
+      let shortLong = opt[0];
+      // Arg?
+      if (shortLong.includes('<') && shortLong.includes('>')) {
+        returnOpt.hasArg = true;
+        // Slice
+        shortLong = shortLong.split(' <')[0];
+      } else if (shortLong.includes('<') || shortLong.includes('>')) {
+        throw new SyntaxError(`Unmatched < or > in args config of options ${shortLong}!`);
+      }
       if (shortLong.includes(',')) {
         // Both a short + long options
         const split = shortLong.split(',');
@@ -104,7 +112,12 @@ class Cli {
       name = name.replace(/-/g, '_');
       // Check if it is in args
       if (argv.includes(opt.short) || argv.includes(opt.long)) {
-        returnOpts[name] = true;
+        // Check - does it have an argument?
+        if (opt.hasArg) {
+          returnOpts[name] = argv[(argv.indexOf(opt.short) || argv.indexOf(opt.long)) + 1];
+        } else {
+          returnOpts[name] = true;
+        }
       } else {
         returnOpts[name] = false;
       }
@@ -120,7 +133,7 @@ class Cli {
    */
   parse() {
     // Check for help
-    if (this.argv.includes('--help') || this.argv.length === 0) {
+    if (this.argv[0] === '--help' || this.argv.length === 0) {
       this.help();
     }
     // Command?
