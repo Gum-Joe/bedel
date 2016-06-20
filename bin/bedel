@@ -3,28 +3,24 @@
 /**
  * Module depedencies
 */
-const app = require('../app');
 const Cli = require('../app/cli');
+const commands = require('../app/cli/commands');
 
 // Command line options parser
 const cli = new Cli([
-  [ '-p, --port', 'Specifies a port to run on'],
   [ '--color',  'Use colour'],
   [ '--no-color',  'Don\'t use colour']
 ], {}, process.argv);
+
+// Usage
+cli.usage('<command> [options]');
+
 // Commands
 cli.command(
   'server',
-  [
-    [ '-p, --port', 'Specifies a port to run on'],
-    [ '-v, --debug', 'Debug logging' ]
-  ],
-  (options) => {
-    app(options);
-  }
-  // Modifyer
-  // (cli) => {
-  //   //cli.command();
-  // }
+  'Runs the server',
+  commands.server
 );
+
+// Parse
 cli.parse();

@@ -35,6 +35,8 @@ class Cli {
       this.script = this.script.split('/');
       this.script = this.script[ this.script.length - 1 ];
     }
+    // Default usage
+    this.usageString = '[options]';
     // Slice off the first two cli args if not sub-command
     if (!this.parserOptions.subCommand) {
       this.argv.shift();
@@ -57,7 +59,15 @@ class Cli {
     for (opt of options) {
       const returnOpt = {};
       // Slice up options
-      const shortLong = opt[0];
+      let shortLong = opt[0];
+      // Arg?
+      if (shortLong.includes('<') && shortLong.includes('>')) {
+        returnOpt.hasArg = true;
+        // Slice
+        shortLong = shortLong.split(' <')[0];
+      } else if (shortLong.includes('<') || shortLong.includes('>')) {
+        throw new SyntaxError(`Unmatched < or > in args config of options ${shortLong}!`);
+      }
       if (shortLong.includes(',')) {
         // Both a short + long options
         const split = shortLong.split(',');
@@ -102,7 +112,12 @@ class Cli {
       name = name.replace(/-/g, '_');
       // Check if it is in args
       if (argv.includes(opt.short) || argv.includes(opt.long)) {
-        returnOpts[name] = true;
+        // Check - does it have an argument?
+        if (opt.hasArg) {
+          returnOpts[name] = argv[(argv.indexOf(opt.short) || argv.indexOf(opt.long)) + 1];
+        } else {
+          returnOpts[name] = true;
+        }
       } else {
         returnOpts[name] = false;
       }
@@ -118,15 +133,13 @@ class Cli {
    */
   parse() {
     // Check for help
-    if (this.argv.includes('--help')) {
+    if (this.argv[0] === '--help' || this.argv.length === 0) {
       this.help();
     }
     // Command?
     if (this.commands.length < 1) {
       return this._parse(this.argv, this.options);
     } else {
-      // Intial options
-      // const inital = this._parse(this.argv, this.options);
       // New args array
       const newArgs = this.argv;
       // Get command
@@ -135,7 +148,7 @@ class Cli {
       for (var i = 0; i < cmd.index + 1; i++) {
         newArgs.shift();
       }
-      // Get command object for usage
+      // Get command object
       let co;
       let cmdObject;
       for (co of this.commands) {
@@ -143,24 +156,8 @@ class Cli {
           cmdObject = co;
         }
       }
-      //console.log(newArgs);
-      // Recreate this class
-      const cmdClass = new Cli(
-        cmdObject.opts,
-        {
-          script: `${this.script}-${cmd.cmd}`,
-          subCommand: true
-        },
-        newArgs
-      );
-      // Modify
-      if (cmdObject.modify) {
-        cmdObject.modify(cmdClass);
-      }
       // Handle
-      cmdObject.handle(
-        cmdClass.parse()
-      );
+      cmdObject.handle(newArgs);
     }
   }
 
@@ -188,27 +185,52 @@ class Cli {
    */
   help() {
     // Header
-    console.log(`\n ${this.script}`);
+    if (this.usageString) {
+      console.log(`\n ${this.script} ${this.usageString}`);
+    } else {
+      console.log(`\n ${this.script}`);
+    }
     // Get max length for spacing
     const tab_space = 5;
     const tab = this._maxOptLength() + tab_space;
-    // Go through
-    let h;
-    for (h of this.options) {
-      let stringToShow;
-      // What should be shown?
-      if (h.short) {
-        stringToShow = `${h.short}, ${h.long}`;
-      } else {
-        stringToShow = `${h.long}`;
+
+    // Go through commands
+    // FORMAT: <command>  <description>
+    if (this.commands.length > 0) {
+      console.log('\n   Commands:');
+      let c;
+      for (c of this.commands) {
+        // Generate tab
+        let tmpTab = '';
+        for (let i = c.name.length; i < tab; i++) {
+          tmpTab += ' ';
+        }
+        // Log
+        console.log(`       ${c.name}${tmpTab}${c.help}`);
       }
-      // Generate tab
-      let tmpTab = '';
-      for (let i = stringToShow.length; i < tab; i++) {
-        tmpTab += ' ';
+    }
+
+    // Go through options
+    // FORMAT: <option> <help>
+    if (this.options.length > 0) {
+      console.log('\n   Options:');
+      let h;
+      for (h of this.options) {
+        let stringToShow;
+        // What should be shown?
+        if (h.short) {
+          stringToShow = `${h.short}, ${h.long}`;
+        } else {
+          stringToShow = `${h.long}`;
+        }
+        // Generate tab
+        let tmpTab = '';
+        for (let i = stringToShow.length; i < tab; i++) {
+          tmpTab += ' ';
+        }
+        // Log
+        console.log(`       ${stringToShow}${tmpTab}${h.help}`);
       }
-      // Log
-      console.log(`   ${stringToShow}${tmpTab}${h.help}`);
     }
     // Exit
     process.exit(0);
@@ -239,18 +261,25 @@ class Cli {
    * Add a command
    *
    * @param cmd {String} - Command to look for
-   * @param opts {Array} - Array of options
+   * @param help {String} - Description of the command
    * @param handler {Function} - Handler with param {options {Object}}
-   * @param modifyler {Function} - Modify the cli class for the command with param {cli {Cli}}
    */
-   command(cmd, opts, handler, modifyer) {
+   command(cmd, help, handler) {
      this.commands.push({
        name: cmd,
-       opts: opts,
-       handle: handler,
-       modify: modifyer || null
+       help: help,
+       handle: handler
      });
    }
+
+   /**
+    * Add usage
+    *
+    * @param usage {String} - Usage string
+    */
+  usage(usage) {
+    this.usageString = usage;
+  }
 
 }
 
