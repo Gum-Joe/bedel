@@ -114,11 +114,16 @@ class Cli {
       if (argv.includes(opt.short) || argv.includes(opt.long)) {
         // Check - does it have an argument?
         if (opt.hasArg) {
-          returnOpts[name] = argv[(argv.indexOf(opt.short) || argv.indexOf(opt.long)) + 1];
+          if (argv.includes(opt.short)) {
+            returnOpts[name] = argv[ argv.indexOf(opt.short) + 1 ];
+          } else {
+            returnOpts[name] = argv[ argv.indexOf(opt.long) + 1 ];
+          }
         } else {
           returnOpts[name] = true;
         }
       } else {
+        // Not included
         returnOpts[name] = false;
       }
     }
