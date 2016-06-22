@@ -68,7 +68,7 @@ class Cli {
         // Slice
         shortLong = shortLong.split(' <')[0];
       } else if (shortLong.includes('<') || shortLong.includes('>')) {
-        throw new SyntaxError(`Unmatched < or > in args config of options ${shortLong}!`);
+        throw new SyntaxError(`Unmatched < or > in args config of option '${shortLong}'!`);
       }
       if (shortLong.includes(',')) {
         // Both a short + long options
@@ -79,7 +79,7 @@ class Cli {
         // Only long
         if (/^-[a-zA-Z]$/.test(shortLong)) {
           // Must have a long options with a short options
-          throw new SyntaxError(`Short options (-x) must have a long options (--x) to go with them (option: ${shortLong})!`);
+          throw new SyntaxError(`Short options (-x) must have a long option (--x) to go with them (option: '${shortLong}')!`);
         } else {
           returnOpt.short = null;
           returnOpt.long = shortLong;
