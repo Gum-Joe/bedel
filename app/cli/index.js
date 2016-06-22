@@ -26,9 +26,11 @@ class Cli {
       this.parserOptions = options;
     }
     this.commands = [];
+    // OS
+    this.platform = this.parserOptions.platform || os.platform();
     // script name
     this.script = this.parserOptions.script || this.argv[1];
-    if (os.platform() === 'win32') {
+    if (this.platform === 'win32') {
       this.script = this.script.split('\\');
       this.script = this.script[ this.script.length - 1 ];
     } else {
