@@ -10,7 +10,7 @@ const app = express();
 
 // GET /session/user
 app.get('/session/user', (req, res) => {
-  res.json(req.user);
+  res.json(req.user || { error: "You don't appear to be logged in." });
 });
 
 // Export
