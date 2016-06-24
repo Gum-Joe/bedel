@@ -1,0 +1,3 @@
+:: Script to run coverage without submitting to coveralls
+@ECHO Running coverage...
+istanbul cover -x lib/logger.js ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel-register -R spec

@@ -5,7 +5,8 @@ const Cli = require('../app/cli');
 // Default options
 const opts = {
   options: [
-    ['-t, --test', 'Test']
+    ['-t, --test', 'Test'],
+    ['r, --real', 'Real']
   ],
   parseropts: { script: 'cli.js' },
   argv: ['node', 'cli.js', '--test']
@@ -150,7 +151,7 @@ describe('Cli parser tests', () => {
   });
 
   describe('_maxOptLength()', () => {
-    it('should get the maximum options\' length', (done) => {
+    it('should get the maximum option\'s length when we give a long & short arg as cli.options', (done) => {
       const cli = new Cli(
         opts.options,
         opts.parseropts,
@@ -159,6 +160,103 @@ describe('Cli parser tests', () => {
       const result = cli._maxOptLength();
       expect(result).to.be.a('number');
       expect(result).to.equal(10);
+      done();
+    });
+    it('should get the maximum option\'s length when we give just a long arg as cli.options', (done) => {
+      const cli = new Cli(
+        [['--test', 'Test']],
+        opts.parseropts,
+        opts.argv
+      );
+      const result = cli._maxOptLength();
+      expect(result).to.be.a('number');
+      expect(result).to.equal(6);
+      done();
+    });
+  });
+
+  describe('_parse()', () => {
+    it('shoukd return the object { test: true, real: false }', (done) => {
+      const result = Cli.prototype._parse(
+        opts.argv,
+        Cli.prototype._genoptions(opts.options)
+      );
+      expect(result).to.be.a('object');
+      expect(result).to.eql({
+        test: true,
+        real: false
+      });
+      done();
+    });
+
+    it('should make sure [ --test <arg> ] comes out as { test: "<arg>" }', (done) => {
+      const arg = 'test';
+      const result = Cli.prototype._parse(
+        Array.concat(opts.argv, [ arg ]),
+        Cli.prototype._genoptions([
+          ['-t, --test <arg>', 'Test']
+        ])
+      );
+      expect(result).to.be.a('object');
+      expect(result).to.eql({
+        test: arg
+      });
+      done();
+    });
+
+    it('shoukd parse a small option (-t)', (done) => {
+      const result = Cli.prototype._parse(
+        ['node', 'cli.js', '-t'],
+        Cli.prototype._genoptions(opts.options)
+      );
+      expect(result).to.be.a('object');
+      expect(result).to.eql({
+        test: true,
+        real: false
+      });
+      done();
+    });
+
+    it('shoukd parse a long option (--test)', (done) => {
+      const result = Cli.prototype._parse(
+        ['node', 'cli.js', '--test'],
+        Cli.prototype._genoptions(opts.options)
+      );
+      expect(result).to.be.a('object');
+      expect(result).to.eql({
+        test: true,
+        real: false
+      });
+      done();
+    });
+
+    it('should parse a short option with a arg (-t <arg>)', (done) => {
+      const arg = 'test';
+      const result = Cli.prototype._parse(
+        ['node', 'cli.js', '-t', arg],
+        Cli.prototype._genoptions([
+          ['-t, --test <arg>', 'Test']
+        ])
+      );
+      expect(result).to.be.a('object');
+      expect(result).to.eql({
+        test: arg
+      });
+      done();
+    });
+
+    it('should parse a long option with a arg (--test <arg>)', (done) => {
+      const arg = 'test';
+      const result = Cli.prototype._parse(
+        ['node', 'cli.js', '--test', arg],
+        Cli.prototype._genoptions([
+          ['-t, --test <arg>', 'Test']
+        ])
+      );
+      expect(result).to.be.a('object');
+      expect(result).to.eql({
+        test: arg
+      });
       done();
     });
   });

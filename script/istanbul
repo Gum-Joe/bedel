@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+# Script to run coverage without submitting to coveralls
+echo Running coverage...
+istanbul cover -x lib/logger.js ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec
