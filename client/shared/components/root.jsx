@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import ajax from '@fdaciuk/ajax';
 import { SidebarNav } from './navbar';
 import { PageBody } from './body';
+import { LOG_IN } from '../util/constants';
 // CSS
 import '../../sass/dashboard.scss';
 import '../../sass/theme.dashboard.scss';
@@ -12,7 +13,8 @@ export const Dashboard = React.createClass({
   // Proptypes
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    user: PropTypes.object
   },
 
   componentDidMount() {
@@ -23,7 +25,7 @@ export const Dashboard = React.createClass({
       url: '/api/session/user'
     });
     userReq.then((res) => {
-      this.props.dispatch({ type: 'LOG_IN', user: res});
+      this.props.dispatch({ type: LOG_IN, user: res});
       console.log("Logged in.");
     }, (err) => {
       if (err) {

@@ -1,5 +1,5 @@
 // User reducer
-import { LOG_IN, LOG_OUT } from '../util/constants';
+import { LOG_IN, LOG_OUT } from '../util/constants/index';
 
 // Intial state for redux
 const intial = {
