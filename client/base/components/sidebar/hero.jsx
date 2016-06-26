@@ -1,6 +1,6 @@
 // Hero image (sidebar)
 import React, { Component } from 'react';
-import { SidebarItemHero } from '../sidebar';
+import { SidebarItemHero } from '../navbar/sidebar';
 import bedelb from '../../../assets/img/Bedel_Logo_2.png';
 
 // Export

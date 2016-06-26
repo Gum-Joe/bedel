@@ -1,4 +1,4 @@
-// User container
+// App container
 import { connect } from 'react-redux';
 import { Dashboard } from '../components/root';
 

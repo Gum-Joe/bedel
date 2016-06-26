@@ -1,8 +1,8 @@
 // JSX for sidebar
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 // CSS
-import '../../sass/sidebar.scss';
+import '../../../sass/sidebar.scss';
 
 // Sidebar item
 export class SidebarItem extends Component {
@@ -22,6 +22,13 @@ export class SidebarItem extends Component {
     }
   }
 }
+// Prop types
+SidebarItem.propTypes = {
+  appendClass: PropTypes.string,
+  children: PropTypes.object.isRequired,
+  normal: PropTypes.bool,
+  url: PropTypes.string.isRequired
+};
 
 // Sidebar item
 export class SidebarItemHero extends Component {
@@ -33,6 +40,11 @@ export class SidebarItemHero extends Component {
     );
   }
 }
+// Prop types
+SidebarItemHero.propTypes = {
+  children: PropTypes.object.isRequired,
+  url: PropTypes.string.isRequired
+};
 
 
 // Sidebar class
@@ -45,3 +57,7 @@ export class Sidebar extends Component {
     );
   }
 }
+// Prop types
+Sidebar.propTypes = {
+  children: PropTypes.object.isRequired
+};

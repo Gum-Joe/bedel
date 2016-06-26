@@ -26,6 +26,8 @@ rules:
   react/prefer-es6-class: 0
   react/prefer-stateless-function: 0
   react/prop-types: 1
+  # Custom
+  no-param-reassign: 0
   # Possible Errors
   comma-dangle: [2, never]
   no-cond-assign: 2

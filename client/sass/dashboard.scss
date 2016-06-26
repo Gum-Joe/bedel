@@ -7,6 +7,8 @@ body {
   color: $dash-text-color;
   height: 100%;
   font-family: Open-Sans-Light;
+  overflow-y: hidden;
+  // overflow-x: hidden;
 }
 
 // Main container
@@ -25,11 +27,11 @@ html {
 
 // Page body
 .page-body {
-  position: relative;
+  position: absolute;
   height: 100%;
+  width: 100%;
   background-color: $background-colour;
   margin-left: $sidebar-collapse-width;
-  //overflow-x: scroll;
 }
 
 // Base for headers
@@ -39,4 +41,11 @@ h1, h1, h3, h4, h5, h6 {
 // Inline
 .inline {
   display: inline;
+}
+// Off canvas
+.off-canvas {
+  float: right;
+  position: relative;
+  background: blue;
+  height: 100%;
 }

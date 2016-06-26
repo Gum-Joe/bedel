@@ -13,6 +13,6 @@ export class Username extends Component {
 // PropTypes
 Username.propTypes = {
   prefix: PropTypes.string,
-  suffix: PropTypes.string,
+  suffix: PropTypes.object,
   user: PropTypes.object.isRequired
 };

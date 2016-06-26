@@ -28,9 +28,8 @@ module.exports = (app, options) => {
         colors: true
       }
   }));
-
   app.use(webpackHotMiddleware(compiler, {
     // Use our logger
-    log: logger.make('info', { prefix: logger.prefix, silent: options.silent })
+    log: logger.make('info', { prefix: logger.prefix, silent: logger.options.silent })
   }));
 };

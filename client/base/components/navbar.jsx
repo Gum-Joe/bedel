@@ -3,12 +3,12 @@ import React, { Component, PropTypes } from 'react';
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import { isMobile } from '../util/mobile';
-import { Sidebar, SidebarItem } from './sidebar';
+import { Sidebar, SidebarItem } from './navbar/sidebar';
 import { Hamburger } from './hamburger';
 import { ItemIcon as NavItemIcon } from './navbar/item';
 import { Username } from './username';
 import Gravatar from 'react-gravatar';
-// import { Hero } from './sidebar/hero';
+// import { Hero } from './navbar/sidebar/hero';
 // Css (sass)
 import '../../sass/navbar.scss';
 

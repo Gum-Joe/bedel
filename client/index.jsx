@@ -5,7 +5,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { routes } from './routes';
-import configureStore from './shared/store/configureStore';
+import configureStore from './base/store/configureStore';
 
 const store = configureStore();
 render((

@@ -34,6 +34,7 @@ module.exports = {
     },
   // Plugins
   plugins: [
+    new webpack.optimize.DedupePlugin()
     // HTML
     /*
     new HtmlWebpackPlugin({

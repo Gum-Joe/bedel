@@ -1,9 +1,10 @@
 // JSX file for dashboard (root)
 import React, { PropTypes } from 'react';
 import ajax from '@fdaciuk/ajax';
-import { SidebarNav } from './navbar';
-import { PageBody } from './body';
 import { LOG_IN } from '../util/constants';
+import { Notifications } from '../containers/Notifications';
+import { PageBody } from './body';
+import { SidebarNav } from './navbar';
 // CSS
 import '../../sass/dashboard.scss';
 import '../../sass/theme.dashboard.scss';
@@ -41,6 +42,10 @@ export const Dashboard = React.createClass({
         <PageBody user={this.props.user}>
           {this.props.children}
         </PageBody>
+        <div className="off-canvas">
+          {/* Off convas */}
+          <Notifications />
+        </div>
       </main>
     );
   }

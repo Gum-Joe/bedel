@@ -5,7 +5,7 @@ import { ADD_NOTIFY, REMOVE_NOTIFY } from '../util/constants';
 let nextNotificationId = 0;
 
 // Reducer
-export const notify = (state = [], action) => {
+export const notifications = (state = [], action) => {
   switch (action.type) {
     case ADD_NOTIFY:
       return [

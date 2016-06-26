@@ -5,8 +5,6 @@ require('babel-polyfill');
  * Module depedencies
 */
 const chalk = require('chalk');
-// Vars
-let that = {};
 
 /**
  * Logger class
@@ -14,17 +12,19 @@ let that = {};
 */
 class Logger {
   constructor(options) {
-    that.options = Object.assign({
+    this.options = Object.assign({
       silent: false,
       debug: false
-    }, options);
+    }, options || {});
+    // Stdout
+    this.stdout = console.log;
   }
 
   /**
    * Get date
    * @private
    */
-  _getdate() {
+  static getdate() {
     const date = new Date();
     return chalk.grey(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
   }
@@ -36,10 +36,10 @@ class Logger {
    */
    /* istanbul ignore info */
    info(txt) {
-     if (!that.options.silent) {
+     if (!this.options.silent) {
        const colour = "green";
        const str = this.prefix || chalk[colour].bold('INFO');
-       console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${txt}`);
+       this.stdout(`[ ${Logger.getdate()} ${str} ] ${txt}`);
      }
    }
 
@@ -50,10 +50,10 @@ class Logger {
     */
     /* istanbul ignore info */
     err(txt) {
-      if (!that.options.silent) {
+      if (!this.options.silent) {
         const colour = "bgRed";
         const str = chalk[colour].bold('ERR!');
-        console.error(`[ ${Logger.prototype._getdate()} ${str} ] ${txt}`);
+        console.error(`[ ${Logger.getdate()} ${str} ] ${txt}`);
       }
     }
 
@@ -79,21 +79,21 @@ class Logger {
       */
       /* istanbul ignore err */
       throw_noexit(err) {
-        if (!that.options.silent) {
+        if (!this.options.silent) {
           const colour = "bgRed";
           const str = chalk[colour].bold('ERR!');
-          console.error(`[ ${Logger.prototype._getdate()} ${str} ]`);
-          console.error(`[ ${Logger.prototype._getdate()} ${str} ] ${err.stack.split('\n')[0]}`);
-          console.error(`[ ${Logger.prototype._getdate()} ${str} ]`);
-          if (that.options.debug || process.env.NODE_ENV !== 'production') {
-            console.error(`[ ${Logger.prototype._getdate()} ${str} ] Full error:`);
-            console.error(`[ ${Logger.prototype._getdate()} ${str} ]`);
+          console.error(`[ ${Logger.getdate()} ${str} ]`);
+          console.error(`[ ${Logger.getdate()} ${str} ] ${err.stack.split('\n')[0]}`);
+          console.error(`[ ${Logger.getdate()} ${str} ]`);
+          if (this.options.debug || process.env.NODE_ENV !== 'production') {
+            console.error(`[ ${Logger.getdate()} ${str} ] Full error:`);
+            console.error(`[ ${Logger.getdate()} ${str} ]`);
             let e = 0;
             for (e of err.stack.split('\n')) {
-              console.error(`[ ${Logger.prototype._getdate()} ${str} ] ${e}`);
+              console.error(`[ ${Logger.getdate()} ${str} ] ${e}`);
             }
           }
-          console.error(`[ ${Logger.prototype._getdate()} ${str} ]`);
+          console.error(`[ ${Logger.getdate()} ${str} ]`);
         }
       }
 
@@ -104,16 +104,18 @@ class Logger {
     */
     /* istanbul ignore debug */
     debug(txt) {
-      if (!that.options.silent && that.options.debug) {
+      if (!this.options.silent && this.options.debug) {
         const colour = "cyan";
         const str = this.prefix || chalk[colour].bold('DEBUG');
-        console.log(`[ ${Logger.prototype._getdate()} ${str} ] ${txt}`);
+        this.stdout(`[ ${Logger.getdate()} ${str} ] ${txt}`);
       }
     }
 
     // Make a method
     make(method, options) {
-      return this[method].bind(options);
+      return this[method].bind(
+        Object.assign(this, { options: options })
+      );
     }
 }
 
