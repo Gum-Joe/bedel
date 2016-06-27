@@ -142,7 +142,7 @@ module.exports = (options) => {
   db.connect(options);
 
   // Init the api
-  const api = new API(server, options);
+  const api = new API(server, app, options);
   // Add socket.io listenner
   /** Example
   api.sockets.use('event', (socket, logger) => {
@@ -150,6 +150,21 @@ module.exports = (options) => {
       logger.info('t');
     };
   }); */
+  api.addApiPlugin({
+    fireNotification: () => {
+      // TODO
+    }
+  });
+  api.addPlugin(
+    (bedel) => {
+      // TODO
+      // Here is function
+      // That is executed
+      // It should function like a normal server
+      // bedel = api object ('this')
+      bedel.fireNotification({});
+    }
+  );
   api.sockets.start();
   // Use our error handler
   helpers.useErrorHandler(app, logger);
