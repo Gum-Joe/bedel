@@ -16,3 +16,12 @@ env:
 install: npm install
 script: npm test
 after_script: npm run coveralls
+
+# Notifications
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/d9edfe2f0448dfc8a49b
+    on_success: always  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: always     # options: [always|never|change] default: always
