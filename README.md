@@ -1,7 +1,6 @@
 ![Logo](client/assets/img/Bedel_Logo_1.png)
-# Bedel [![Build Status](https://travis-ci.org/Gum-Joe/bedel.svg?branch=master)](https://travis-ci.org/Gum-Joe/bedel) [![Coverage Status](https://coveralls.io/repos/github/Gum-Joe/bedel/badge.svg?branch=master)](https://coveralls.io/github/Gum-Joe/bedel?branch=master) [![Code Climate](https://codeclimate.com/github/Gum-Joe/bedel/badges/gpa.svg)](https://codeclimate.com/github/Gum-Joe/bedel)
+# Bedel [![Build Status](https://travis-ci.org/Gum-Joe/bedel.svg?branch=master)](https://travis-ci.org/Gum-Joe/bedel) [![Coverage Status](https://coveralls.io/repos/github/Gum-Joe/bedel/badge.svg?branch=master)](https://coveralls.io/github/Gum-Joe/bedel?branch=master) [![Code Climate](https://codeclimate.com/github/Gum-Joe/bedel/badges/gpa.svg)](https://codeclimate.com/github/Gum-Joe/bedel) [![Join the chat at https://gitter.im/Gum-Joe/bedel](https://badges.gitter.im/Gum-Joe/bedel.svg)](https://gitter.im/Gum-Joe/bedel?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Join the chat at https://gitter.im/Gum-Joe/bedel](https://badges.gitter.im/Gum-Joe/bedel.svg)](https://gitter.im/Gum-Joe/bedel?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Build, ship and manage apps, all from one dashboard.
 
 # Getting started
