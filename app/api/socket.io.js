@@ -31,7 +31,11 @@ module.exports = {
     // Add Listeners
     let listener;
     for (listener of this.events) {
-      socket.on(listener.event, listener.listener(socket, this.logger));
+      if (listener.hasOwnProperty('event')) {
+        socket.on(listener.event, listener.listener(socket, this.logger));
+      } else {
+        listener.listener(socket, this.logger);
+      }
     }
   },
 
@@ -49,9 +53,15 @@ module.exports = {
    * @param listener {Function} - Listener
    */
   use(event, listener) {
-    this.events.push({
-      event: event,
-      listener: listener.bind(this)
-    });
+    if (typeof event === 'function') {
+      this.events.push({
+        listener: event.bind(this)
+      });
+    } else {
+      this.events.push({
+        event: event,
+        listener: listener.bind(this)
+      });
+    }
   }
 };

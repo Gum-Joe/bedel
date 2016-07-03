@@ -30,7 +30,7 @@ class Api {
    * Add a plugin to the api for other plugins
    * @param functions {Object} Funtions to add
    */
-  addApiPlugin(functions) {
+  addPlugin(functions) {
     for (let func in functions) {
       // Guard against unwanted properties
       if ({}.hasOwnProperty.call(functions, func)) {
@@ -43,7 +43,7 @@ class Api {
    * Run a plugin
    * @param plugin {Function} Plugin
    */
-  addPlugin(plugin) {
+  run(plugin) {
     plugin(this);
   }
 }
