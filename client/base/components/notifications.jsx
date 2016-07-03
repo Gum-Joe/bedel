@@ -12,7 +12,7 @@ export const Notifications = React.createClass({
     notifications: PropTypes.array.isRequired
   },
   componentDidMount() {
-    this.socket = io.connect('/');
+    this.socket = io('/');
     // Wacth for notification event
     this.socket.on('notification', (notification) => {
       this.props.dispatch({
