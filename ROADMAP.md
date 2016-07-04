@@ -14,6 +14,7 @@ This is a roadmap of all the features that we want to eventually add to bedel. I
 - [ ] :package: Add package manager to install apps
 - [ ] :computer: Dashboard:
   - [ ] :lipstick: Add stats badges
+  - [ ] :lipstick: :computer: Add build engine
   - [ ] :lipstick: Add table of build results
   - [ ] :lipstick: Add quick actions
 - [ ] :fireworks: Release first beta
