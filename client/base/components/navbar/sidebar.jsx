@@ -51,7 +51,7 @@ SidebarItemHero.propTypes = {
 export class Sidebar extends Component {
   render() {
     return (
-      <ul className="sidebar">
+      <ul className={`sidebar ${this.props.appendClass}`}>
         {this.props.children}
       </ul>
     );
@@ -59,5 +59,6 @@ export class Sidebar extends Component {
 }
 // Prop types
 Sidebar.propTypes = {
+  appendClass: PropTypes.string,
   children: PropTypes.object.isRequired
 };

@@ -4,4 +4,27 @@
 // Sidebar
 .notifications-bar {
   overflow-y: scroll;
+  @media screen and (min-width: 845px) {
+    width: 300px;
+  }
+  div {
+    a {
+      li {
+        padding-top: 6px;
+        padding-left: 13px;
+        $padding-text-align: 2px;
+        div {
+          padding-top: $padding-text-align;
+          h1, h2, h3, h4, h5, h6 {
+            display: inline;
+          }
+          img {
+            width: 40px;
+            padding-bottom: $padding-text-align;
+            padding-right: 5px;
+          }
+        }
+      }
+    }
+  }
 }

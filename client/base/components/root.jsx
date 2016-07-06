@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import ajax from '@fdaciuk/ajax';
 import { LOG_IN } from '../util/constants';
-import { Notifications } from '../containers/Notifications';
+import { Sidebar } from './sidebar';
 import { PageBody } from './body';
 import { SidebarNav } from './navbar';
 // CSS
@@ -44,7 +44,7 @@ export const Dashboard = React.createClass({
         </PageBody>
         <div className="off-canvas">
           {/* Off convas */}
-          <Notifications />
+          <Sidebar />
         </div>
       </main>
     );
