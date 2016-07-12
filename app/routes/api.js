@@ -4,7 +4,6 @@
  */
 const express = require('express');
 const pack = require('../../package');
-const path = require('path');
 
 // Init
 const app = express();
@@ -18,7 +17,12 @@ app.get('/info/version', function(req, res) {
 
 // GET /session/user
 app.get('/session/user', (req, res) => {
-  res.json(req.user || { error: "You don't appear to be logged in." });
+  if (req.user) {
+    res.json(req.user);
+  } else {
+    res.status(403);
+    res.json({ error: "You don't appear to be logged in. (403: Forbidden)" });
+  }
 });
 
 // Export

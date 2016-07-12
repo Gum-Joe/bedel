@@ -28,10 +28,22 @@ module.exports = (api) => {
     }
   });
 
+  // For testing
   api.fireNotification({
     app: 'Test',
     body: 'test',
     icon: '/img/home-icon.png'
+  });
+
+  // For testing. Remove for final copy
+  api.app.get('/api/testing/fire/notification', (req, res) => {
+    api.io.emit('notification', {
+      app: 'Test',
+      body: 'test',
+      icon: '/img/home-icon.png'
+    });
+    res.status(200);
+    res.send('done!').end();
   });
 
   api.sockets.start();

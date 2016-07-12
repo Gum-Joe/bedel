@@ -1,4 +1,5 @@
 // JSX for sidebar
+/* eslint react/prop-types: 0 */
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 // CSS
@@ -25,9 +26,8 @@ export class SidebarItem extends Component {
 // Prop types
 SidebarItem.propTypes = {
   appendClass: PropTypes.string,
-  children: PropTypes.object.isRequired,
   normal: PropTypes.bool,
-  url: PropTypes.string.isRequired
+  url: PropTypes.string
 };
 
 // Sidebar item
@@ -59,6 +59,5 @@ export class Sidebar extends Component {
 }
 // Prop types
 Sidebar.propTypes = {
-  appendClass: PropTypes.string,
-  children: PropTypes.object.isRequired
+  appendClass: PropTypes.string
 };

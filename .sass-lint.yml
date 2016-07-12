@@ -17,3 +17,4 @@ rules:
   quotes: 0
   no-url-protocols: 0
   no-vendor-prefixes: 0
+  leading-zero: 0

@@ -29,12 +29,19 @@ export const Notifications = React.createClass({
   render() {
     return (
       <div>
+        <div className="notify-header">
+          <h3>Notifications</h3>
+          <a id="clear-notify"><span>&times;</span> Clear all</a>
+        </div>
         {
           this.props.notifications.map((notific) => {
             return (
               <SidebarItem key={notific.id}>
                 {/* Helped by http://stackoverflow.com/questions/9201756/how-to-put-img-inline-with-text */}
-                <div><img src={notific.icon} alt="presentation" /> <h4>{notific.app}:</h4> <h6>{notific.body}</h6></div>
+                <div>
+                  <img src={notific.icon} alt="presentation" /> <h4>{notific.app}:</h4> <h6>{notific.body}</h6>
+                  <div className="dismiss-notify" onClick={() => this.props.dispatch({ type: REMOVE_NOTIFY, notification: notific })}><span>&times;</span></div>
+                </div>
               </SidebarItem>
             );
           })

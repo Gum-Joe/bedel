@@ -12,7 +12,7 @@ export default function configureStore(initalState) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
       /* eslint global-require: 0*/
-      const nextReducer = require('../reducers');
+      const nextReducer = require('../reducers').default;
       store.replaceReducer(nextReducer);
     });
   }

@@ -78,7 +78,7 @@ export class Navigater extends Component {
         <Navbar.Collapse>
           <Nav pullRight>
             <NavItemIcon href="/notifications" icon="bell" />
-            <NavDropdown title={<Username prefix="Hello," user={this.props.user} suffix={<Gravatar email={this.props.user.email} />} />} className="navbar-dropdown">
+            <NavDropdown id="#dropdown" title={<Username prefix="Hello," user={this.props.user} suffix={<Gravatar email={this.props.user.email} />} />} className="navbar-dropdown">
               <MenuItem><NavItemIcon href="/settings/profile" icon="user" text="Profile" /></MenuItem>
             </NavDropdown>
             <NavItemIcon href="/signout" icon="sign-out" normal />

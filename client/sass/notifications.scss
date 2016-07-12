@@ -28,3 +28,31 @@
     }
   }
 }
+
+.dismiss-notify {
+  float: right;
+  padding-top: 6px !important;
+}
+.dismiss-notify:hover {
+  opacity: 0.5;
+}
+
+// Header
+.notify-header {
+  padding-top: 5px;
+  padding-left: 10px;
+  h1, h2, h3, h4, h5, h6 {
+    display: inline;
+  }
+  #clear-notify {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    color: #0288d1;
+    font-size: 13px !important;
+  }
+  #clear-notify:hover {
+    color: #03a9f4;
+    text-decoration: underline;
+  }
+}

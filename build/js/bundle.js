@@ -36245,6 +36245,7 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // JSX for sidebar
+	/* eslint react/prop-types: 0 */
 
 	// CSS
 
@@ -36291,9 +36292,8 @@
 
 	SidebarItem.propTypes = {
 	  appendClass: _react.PropTypes.string,
-	  children: _react.PropTypes.object.isRequired,
 	  normal: _react.PropTypes.bool,
-	  url: _react.PropTypes.string.isRequired
+	  url: _react.PropTypes.string
 	};
 
 	// Sidebar item
@@ -36354,8 +36354,7 @@
 
 
 	Sidebar.propTypes = {
-	  appendClass: _react.PropTypes.string,
-	  children: _react.PropTypes.object.isRequired
+	  appendClass: _react.PropTypes.string
 	};
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("C:\\Users\\Kishan Sambhi\\Documents\\Projects\\bedel\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "sidebar.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -36792,9 +36791,30 @@
 	    });
 	  },
 	  render: function render() {
+	    var _this2 = this;
+
 	    return _react2.default.createElement(
 	      'div',
 	      null,
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'notify-header' },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Notifications'
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { id: 'clear-notify' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            '×'
+	          ),
+	          ' Clear all'
+	        )
+	      ),
 	      this.props.notifications.map(function (notific) {
 	        return _react2.default.createElement(
 	          _sidebar.SidebarItem,
@@ -36815,6 +36835,17 @@
 	              'h6',
 	              null,
 	              notific.body
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'dismiss-notify', onClick: function onClick() {
+	                  return _this2.props.dispatch({ type: _constants.REMOVE_NOTIFY, notification: notific });
+	                } },
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                '×'
+	              )
 	            )
 	          )
 	        );
@@ -44774,7 +44805,7 @@
 
 
 	// module
-	exports.push([module.id, "@font-face {\n  font-family: Open-Sans-Light;\n  src: url(\"/fonts/open-sans/OpenSans-Light.ttf\"); }\n\n.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {\n  background-color: white; }\n\n.hamburger-li li {\n  background-color: #c62828; }\n\n.hamburger-li li:hover {\n  background-color: #b71c1c; }\n\nbody {\n  color: white;\n  height: 100%;\n  font-family: Open-Sans-Light;\n  overflow-y: hidden; }\n\n#main {\n  height: 100%; }\n  #main main {\n    height: 100%; }\n\nhtml {\n  height: 100%; }\n\n.page-body {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  background-color: #212121;\n  margin-left: 60px; }\n\nh1, h1, h3, h4, h5, h6 {\n  margin-top: 0; }\n\n.inline {\n  display: inline; }\n\n.off-canvas {\n  float: right;\n  position: relative;\n  background: blue;\n  height: 100%; }\n\n.notifications-bar {\n  overflow-y: scroll; }\n  @media screen and (min-width: 845px) {\n    .notifications-bar {\n      width: 300px; } }\n  .notifications-bar div a li {\n    padding-top: 6px;\n    padding-left: 13px; }\n    .notifications-bar div a li div {\n      padding-top: 2px; }\n      .notifications-bar div a li div h1, .notifications-bar div a li div h2, .notifications-bar div a li div h3, .notifications-bar div a li div h4, .notifications-bar div a li div h5, .notifications-bar div a li div h6 {\n        display: inline; }\n      .notifications-bar div a li div img {\n        width: 40px;\n        padding-bottom: 2px;\n        padding-right: 5px; }\n", ""]);
+	exports.push([module.id, "@font-face {\n  font-family: Open-Sans-Light;\n  src: url(\"/fonts/open-sans/OpenSans-Light.ttf\"); }\n\n.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {\n  background-color: white; }\n\n.hamburger-li li {\n  background-color: #c62828; }\n\n.hamburger-li li:hover {\n  background-color: #b71c1c; }\n\nbody {\n  color: white;\n  height: 100%;\n  font-family: Open-Sans-Light;\n  overflow-y: hidden; }\n\n#main {\n  height: 100%; }\n  #main main {\n    height: 100%; }\n\nhtml {\n  height: 100%; }\n\n.page-body {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  background-color: #212121;\n  margin-left: 60px; }\n\nh1, h1, h3, h4, h5, h6 {\n  margin-top: 0; }\n\n.inline {\n  display: inline; }\n\n.off-canvas {\n  float: right;\n  position: relative;\n  background: blue;\n  height: 100%; }\n\n.notifications-bar {\n  overflow-y: scroll; }\n  @media screen and (min-width: 845px) {\n    .notifications-bar {\n      width: 300px; } }\n  .notifications-bar div a li {\n    padding-top: 6px;\n    padding-left: 13px; }\n    .notifications-bar div a li div {\n      padding-top: 2px; }\n      .notifications-bar div a li div h1, .notifications-bar div a li div h2, .notifications-bar div a li div h3, .notifications-bar div a li div h4, .notifications-bar div a li div h5, .notifications-bar div a li div h6 {\n        display: inline; }\n      .notifications-bar div a li div img {\n        width: 40px;\n        padding-bottom: 2px;\n        padding-right: 5px; }\n\n.dismiss-notify {\n  float: right;\n  padding-top: 6px !important; }\n\n.dismiss-notify:hover {\n  opacity: 0.5; }\n\n.notify-header {\n  padding-top: 5px;\n  padding-left: 10px; }\n  .notify-header h1, .notify-header h2, .notify-header h3, .notify-header h4, .notify-header h5, .notify-header h6 {\n    display: inline; }\n  .notify-header #clear-notify {\n    float: right;\n    margin-top: 5px;\n    margin-right: 10px;\n    color: #0288d1;\n    font-size: 13px !important; }\n  .notify-header #clear-notify:hover {\n    color: #03a9f4;\n    text-decoration: underline; }\n", ""]);
 
 	// exports
 
@@ -44988,7 +45019,7 @@
 	          _react2.default.createElement(_item.ItemIcon, { href: '/notifications', icon: 'bell' }),
 	          _react2.default.createElement(
 	            _reactBootstrap.NavDropdown,
-	            { title: _react2.default.createElement(_username.Username, { prefix: 'Hello,', user: this.props.user, suffix: _react2.default.createElement(_reactGravatar2.default, { email: this.props.user.email }) }), className: 'navbar-dropdown' },
+	            { id: '#dropdown', title: _react2.default.createElement(_username.Username, { prefix: 'Hello,', user: this.props.user, suffix: _react2.default.createElement(_reactGravatar2.default, { email: this.props.user.email }) }), className: 'navbar-dropdown' },
 	            _react2.default.createElement(
 	              _reactBootstrap.MenuItem,
 	              null,
@@ -65346,7 +65377,7 @@
 	    // Enable Webpack hot module replacement for reducers
 	    module.hot.accept('../reducers', function () {
 	      /* eslint global-require: 0*/
-	      var nextReducer = require('../reducers');
+	      var nextReducer = require('../reducers').default;
 	      store.replaceReducer(nextReducer);
 	    });
 	  }
@@ -65442,7 +65473,7 @@
 	var _constants = __webpack_require__(554);
 
 	// ID for next notification
-	var nextNotificationId = 0;
+	var nextNotificationId = 1;
 
 	// Reducer
 	// Notifications reducer
@@ -65454,12 +65485,8 @@
 	    case _constants.ADD_NOTIFY:
 	      return [].concat(state, [Object.assign({ id: nextNotificationId++ }, action.notification)]);
 	    case _constants.REMOVE_NOTIFY:
-	      return state.map(function (n) {
-	        if (n.id !== action.notification.id) {
-	          return Object.assign({}, n);
-	        } else {
-	          return null;
-	        }
+	      return state.filter(function (n) {
+	        return n.id !== action.notification.id;
 	      });
 	    default:
 	      return state;

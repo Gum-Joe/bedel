@@ -2,7 +2,7 @@
 import { ADD_NOTIFY, REMOVE_NOTIFY } from '../util/constants';
 
 // ID for next notification
-let nextNotificationId = 0;
+let nextNotificationId = 1;
 
 // Reducer
 export const notifications = (state = [], action) => {
@@ -13,12 +13,8 @@ export const notifications = (state = [], action) => {
         Object.assign({ id: nextNotificationId++ }, action.notification)
       ];
     case REMOVE_NOTIFY:
-      return state.map(n => {
-        if (n.id !== action.notification.id) {
-          return Object.assign({}, n);
-        } else {
-          return null;
-        }
+      return state.filter(n => {
+        return n.id !== action.notification.id;
       });
     default:
       return state;

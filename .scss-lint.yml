@@ -25,3 +25,5 @@ linters:
     enabled: false
   ImportantRule:
     enabled: false
+  LeadingZero:
+    enabled: false
