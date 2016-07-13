@@ -24,7 +24,7 @@ module.exports = (schema, candidate, callback) => {
           );
         } else {
           // Type check
-          if (typeof candidate[prop] !== typeof check.type) {
+          if (typeof candidate[prop] !== typeof check.type && check.type !== 'custom') {
             return callback(
               new TypeError(`Property '${prop}' was a '${typeof candidate[prop]}'. Expected a ${typeof check.type}.`)
             );
@@ -32,7 +32,7 @@ module.exports = (schema, candidate, callback) => {
         }
       } else {
         // Just the type
-        if (typeof candidate[prop] !== typeof check && typeof candidate[prop] !== 'undefined') {
+        if (typeof candidate[prop] !== typeof check && typeof candidate[prop] !== 'undefined' && check !== 'custom') {
           return callback(
             new TypeError(`Property '${prop}' was a '${typeof candidate[prop]}'. Expected a ${typeof check}.`)
           );

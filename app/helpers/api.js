@@ -14,7 +14,7 @@ module.exports = (api) => {
       // Validate
       schema({
         app: { required: true, type: 'string' },
-        body: { required: true, type: 'string' },
+        body: { required: true, type: 'custom' },
         icon: 'string' // base64
       }, notification, (err) => {
         if (err) {

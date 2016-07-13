@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Sidebar as SidebarBase } from './navbar/sidebar';
 import { Notifications } from '../containers/Notifications';
-
 // Export
 export class Sidebar extends Component {
   render() {

@@ -1,6 +1,8 @@
 // Notification Component
+/* eslint react/no-danger: 0 */
 import React, { PropTypes } from 'react';
 import Push from 'push.js';
+import createHTML from '../util/html';
 import { SidebarItem } from './navbar/sidebar';
 import { ADD_NOTIFY, REMOVE_NOTIFY, REMOVE_ALL_NOTIFY } from '../util/constants';
 import io from 'socket.io-client';
@@ -39,7 +41,7 @@ export const Notifications = React.createClass({
               <SidebarItem key={notific.id}>
                 {/* Helped by http://stackoverflow.com/questions/9201756/how-to-put-img-inline-with-text */}
                 <div>
-                  <img src={notific.icon} alt="presentation" /> <h4>{notific.app}:</h4> <h6>{notific.body}</h6>
+                  <img src={notific.icon} alt="presentation" /> <h4 dangerouslySetInnerHTML={createHTML(notific.app + ':')} /> <h6 dangerouslySetInnerHTML={createHTML(notific.body)} />
                   <div className="dismiss-notify" onClick={() => this.props.dispatch({ type: REMOVE_NOTIFY, notification: notific })}><span>&times;</span></div>
                 </div>
               </SidebarItem>
