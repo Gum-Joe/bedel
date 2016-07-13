@@ -39,7 +39,7 @@
 
 // Header
 .notify-header {
-  padding-top: 5px;
+  padding-top: 13px;
   padding-left: 10px;
   h1, h2, h3, h4, h5, h6 {
     display: inline;
@@ -50,6 +50,8 @@
     margin-right: 10px;
     color: #0288d1;
     font-size: 13px !important;
+    background: transparent;
+    border: 0;
   }
   #clear-notify:hover {
     color: #03a9f4;

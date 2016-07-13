@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import Push from 'push.js';
 import { SidebarItem } from './navbar/sidebar';
-import { ADD_NOTIFY, REMOVE_NOTIFY } from '../util/constants';
+import { ADD_NOTIFY, REMOVE_NOTIFY, REMOVE_ALL_NOTIFY } from '../util/constants';
 import io from 'socket.io-client';
 import '../../sass/notifications.scss';
 
@@ -31,7 +31,7 @@ export const Notifications = React.createClass({
       <div>
         <div className="notify-header">
           <h3>Notifications</h3>
-          <a id="clear-notify"><span>&times;</span> Clear all</a>
+          <button onClick={() => this.props.dispatch({ type: REMOVE_ALL_NOTIFY })} id="clear-notify"><span>&times;</span> Clear all</button>
         </div>
         {
           this.props.notifications.map((notific) => {

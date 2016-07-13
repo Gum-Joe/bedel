@@ -14,9 +14,11 @@
 
 // Nav text
 .nav-text, .navbar-dropdown {
+  height: 50px;
   font-size: 19px;
   a {
     color: $navbar-text !important;
+    height: 50px;
     img {
       @include square-img(25px);
       border-radius: 50px;
