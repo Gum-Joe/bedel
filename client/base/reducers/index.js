@@ -2,11 +2,13 @@
 import { combineReducers } from 'redux';
 import { user } from './User';
 import { notifications } from './Notifications';
+import { status } from './Status';
 
 // Object to export
 const reducers = combineReducers({
-  user,
-  notifications
+  notifications,
+  status,
+  user
 });
 
 // Export

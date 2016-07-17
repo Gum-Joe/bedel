@@ -1,4 +1,5 @@
  // JSX file for navbar
+ /* eslint react/jsx-no-bind: 0 */
 import React, { Component, PropTypes } from 'react';
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
@@ -72,12 +73,19 @@ export const SidebarNav = React.createClass({
 
 // Normal navbar
 export class Navigater extends Component {
+  onBellClick() {
+    this.props.updateStatus({
+      sidebar: {
+        open: !this.props.status.sidebar.open
+      }
+    });
+  }
   render() {
     return (
       <Navbar className="navigater">
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItemIcon href="/notifications" icon="bell" />
+            <NavItemIcon href="#" icon="bell" onClick={this.onBellClick.bind(this)} normal />
             <NavDropdown id="#dropdown" title={<Username prefix="Hello," user={this.props.user} suffix={<Gravatar email={this.props.user.email} />} />} className="navbar-dropdown">
               <MenuItem><NavItemIcon href="/settings/profile" icon="user" text="Profile" /></MenuItem>
             </NavDropdown>
@@ -89,6 +97,8 @@ export class Navigater extends Component {
   }
 }
 
-Navigater.PropTypes = {
+Navigater.propTypes = {
+  status: PropTypes.object.isRequired,
+  updateStatus: PropTypes.func,
   user: PropTypes.object.isRequired
 };

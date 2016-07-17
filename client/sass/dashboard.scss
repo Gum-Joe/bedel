@@ -8,7 +8,7 @@ body {
   height: 100%;
   font-family: Open-Sans-Light;
   overflow-y: hidden;
-  // overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 // Main container
@@ -48,4 +48,10 @@ h1, h1, h3, h4, h5, h6 {
   position: relative;
   background: blue;
   height: 100%;
+}
+
+// Not a button
+.not-a-button {
+  border: 0;
+  background: none;
 }

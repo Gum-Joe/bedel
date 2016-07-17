@@ -6,10 +6,10 @@ This is a roadmap of all the features that we want to eventually add to bedel. I
 - [ ] :lipstick: Add tasks sidebar
 - [ ] :shirt: Fix code climate complaints
 - [ ] :art: Fix router to redirect to default app, rather than use an `<IndexRoute />`
+- [ ] :white_check_mark: Add server side tests for socket.io api + untested stuff (aiming for >=90% coverage )
+- [ ] :white_check_mark: Add client side tests for react components and redux reducers
 - [ ] :lock: Add GitHub authentication + make config/secrets.yml hidden
 - [ ] :rocket: Add script to deploy to heroku with secrets
-- [ ] :white_check_mark: Add client side tests for react components and redux reducers
-- [ ] :white_check_mark: Add server side tests for socket.io api
 - [ ] :art: :rocket: Add an app api to register apps and allow launching from dashboard
 - [ ] :computer: Dashboard:
   - [ ] :lipstick: Add stats badges

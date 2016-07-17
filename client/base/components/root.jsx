@@ -1,8 +1,7 @@
 // JSX file for dashboard (root)
 import React, { PropTypes } from 'react';
 import ajax from '@fdaciuk/ajax';
-import { LOG_IN } from '../util/constants';
-import { Sidebar } from './sidebar';
+import { Sidebar } from '../containers/Sidebar';
 import { PageBody } from './body';
 import { SidebarNav } from './navbar';
 // CSS
@@ -13,9 +12,11 @@ import '../../sass/theme.dashboard.scss';
 export const Dashboard = React.createClass({
   // Proptypes
   propTypes: {
-    dispatch: PropTypes.func.isRequired,
     children: PropTypes.object.isRequired,
-    user: PropTypes.object
+    login: PropTypes.func.isRequired,
+    status: PropTypes.object.isRequired,
+    user: PropTypes.object,
+    updateStatus: PropTypes.func.isRequired
   },
 
   componentDidMount() {
@@ -26,7 +27,7 @@ export const Dashboard = React.createClass({
       url: '/api/session/user'
     });
     userReq.then((res) => {
-      this.props.dispatch({ type: LOG_IN, user: res});
+      this.props.login(res);
       console.log("Logged in.");
     }, (err) => {
       if (err) {
@@ -39,7 +40,7 @@ export const Dashboard = React.createClass({
     return (
       <main>
         <SidebarNav />
-        <PageBody user={this.props.user}>
+        <PageBody user={this.props.user} status={this.props.status} updateStatus={this.props.updateStatus}>
           {this.props.children}
         </PageBody>
         <div className="off-canvas">

@@ -11,7 +11,7 @@ export class ItemIcon extends Component {
     if (this.props.normal) {
       return (
         <li role="presentation" className="nav-text">
-          <a role="button" href={this.props.href}>
+          <a role="button" href={this.props.href} onClick={this.props.onClick}>
             <FontAwesome name={this.props.icon} /> {this.props.text}
           </a>
         </li>
@@ -19,7 +19,7 @@ export class ItemIcon extends Component {
     } else {
       return (
         <li role="presentation" className="nav-text">
-          <Link role="button" to={this.props.href}>
+          <Link role="button" to={this.props.href} onClick={this.props.onClick}>
             <FontAwesome name={this.props.icon} /> {this.props.text}
           </Link>
         </li>
@@ -32,5 +32,6 @@ ItemIcon.propTypes = {
   icon: PropTypes.string.isRequired,
   normal: PropTypes.bool,
   href: PropTypes.string.isRequired,
-  text: PropTypes.string
+  text: PropTypes.string,
+  onClick: PropTypes.func
 };

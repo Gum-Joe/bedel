@@ -31,3 +31,15 @@
   height: $width;
   width: $width;
 }
+
+// Create an animation property set
+@mixin create-animation($animation-name, $duration) {
+  animation: $animation-name;
+  -webkit-animation: $animation-name;
+  -moz-animation: $animation-name;
+  -o-animation: $animation-name;
+  animation-duration: $duration;
+  -webkit-animation-duration: $duration;
+  -moz-animation-duration: $duration;
+  -o-animation-duration: $duration;
+}

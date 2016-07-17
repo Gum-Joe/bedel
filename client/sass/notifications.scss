@@ -1,6 +1,12 @@
 // Notifications sass
 @import 'dashboard';
 
+.animate-out-notifications {
+  @include create-animation(animateNotificationsOut, 1s);
+  position: relative;
+  margin-right: 0;
+}
+
 // Sidebar
 .notifications-bar {
   overflow-y: scroll;
@@ -57,4 +63,13 @@
     color: #03a9f4;
     text-decoration: underline;
   }
+}
+
+// Close notifications panel
+.close-notify-bar:hover {
+  opacity: 0.5;
+}
+.close-notify-bar:focus {
+  opacity: 0.5;
+  border: 0;
 }

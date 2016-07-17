@@ -8,7 +8,7 @@ export class PageBody extends Component {
   render() {
     return (
       <div className="page-body">
-        <Navigater user={this.props.user} />
+        <Navigater user={this.props.user} status={this.props.status} updateStatus={this.props.updateStatus} />
         {this.props.children}
       </div>
     );
@@ -16,6 +16,8 @@ export class PageBody extends Component {
 }
 
 PageBody.propTypes = {
+  status: PropTypes.object.isRequired,
+  updateStatus: PropTypes.func,
   user: PropTypes.object.isRequired,
   children: PropTypes.object.isRequired
 };
