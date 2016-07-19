@@ -2,8 +2,8 @@
 This is a roadmap of all the features that we want to eventually add to bedel. It is on a version by version basis. It is in chronological order.
 
 #### v1.0.0:
-- [ ] :lipstick: Add notifications sidebar :construction: ([#12](https://github.com/Gum-Joe/bedel/issues/12))
-- [ ] :lipstick: Add tasks sidebar
+- [x] :lipstick: Add notifications sidebar
+- [ ] :lipstick: Add tasks sidebar ([#14](https://github.com/Gum-Joe/bedel/issues/14))
 - [ ] :lipstick: Make the current components more responsive
 - [ ] :shirt: Fix code climate complaints
 - [ ] :art: Fix router to redirect to default app, rather than use an `<IndexRoute />`
