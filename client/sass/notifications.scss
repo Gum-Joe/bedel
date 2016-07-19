@@ -1,10 +1,16 @@
 // Notifications sass
 @import 'dashboard';
 
-.animate-out-notifications {
+.animate-out-sidebar {
   @include create-animation(animateNotificationsOut, 1s);
   position: relative;
   margin-right: 0;
+}
+
+.animate-in-sidebar {
+  @include create-animation(animateNotificationsIn, 2s);
+  position: relative;
+  margin-right: -600px;
 }
 
 // Sidebar

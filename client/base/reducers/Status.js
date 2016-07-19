@@ -4,7 +4,8 @@ import { UPDATE_STATUS } from '../util/constants';
 // Initial status
 const initial = {
   sidebar: {
-    open: false
+    open: false,
+    alreadyOpened: false
   }
 };
 

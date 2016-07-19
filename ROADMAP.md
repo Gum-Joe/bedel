@@ -4,6 +4,7 @@ This is a roadmap of all the features that we want to eventually add to bedel. I
 #### v1.0.0:
 - [ ] :lipstick: Add notifications sidebar :construction: ([#12](https://github.com/Gum-Joe/bedel/issues/12))
 - [ ] :lipstick: Add tasks sidebar
+- [ ] :lipstick: Make the current components more responsive
 - [ ] :shirt: Fix code climate complaints
 - [ ] :art: Fix router to redirect to default app, rather than use an `<IndexRoute />`
 - [ ] :white_check_mark: Add server side tests for socket.io api + untested stuff (aiming for >=90% coverage )

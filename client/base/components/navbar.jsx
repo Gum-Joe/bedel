@@ -76,7 +76,8 @@ export class Navigater extends Component {
   onBellClick() {
     this.props.updateStatus({
       sidebar: {
-        open: !this.props.status.sidebar.open
+        open: !this.props.status.sidebar.open,
+        alreadyOpened: true
       }
     });
   }

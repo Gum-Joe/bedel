@@ -14,24 +14,31 @@ export class Sidebar extends Component {
   componentDidMount() {
     this.props.updateStatus({
       sidebar: {
-        open: false
+        open: false,
+        alreadyOpened: false
       }
     });
     setInterval(this.updateState.bind(this), 100);
   }
   updateState() {
+    //console.log(this.props.status.sidebar.alreadyOpened);
     this.setState({
-      open: this.props.status.sidebar.open
+      open: this.props.status.sidebar.open,
+      alreadyOpened: this.props.status.sidebar.alreadyOpened
     });
   }
   render() {
     return (
       <SidebarBase
         appendClass={
-          classnames('notifications-bar', { 'animate-out-notifications': this.state.open })
+          classnames(
+            'notifications-bar',
+            { 'animate-in-sidebar': !this.state.open && this.state.alreadyOpened },
+            { 'animate-out-sidebar': this.state.open }
+          )
         }
       >
-        <Notifications />
+        <Notifications updateStatus={this.props.updateStatus} />
       </SidebarBase>
     );
   }

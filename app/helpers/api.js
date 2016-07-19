@@ -36,7 +36,7 @@ module.exports = (api) => {
   });
 
   // For testing. Remove for final copy
-  api.app.get('/api/testing/fire/notification', (req, res) => {
+  api.app.get('/api/dev/fire/notification', (req, res) => {
     api.io.emit('notification', {
       app: 'Test',
       body: 'test',

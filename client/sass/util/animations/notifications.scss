@@ -4,7 +4,7 @@
   from {
     position: absolute;
   }
-  0.000001% {
+  1% {
     margin-right: -600px;
     position: relative;
   }
@@ -48,5 +48,45 @@
   }
   100% {
     margin-right: 0;
+  }
+}
+
+
+// Animate sidebar away
+@keyframes animateNotificationsIn {
+  from {
+    margin-right: 0;
+  }
+  100% {
+    margin-right: -600px !important;
+  }
+}
+
+@-webkit-keyframes animateNotificationsIn {
+  from {
+    margin-right: 0;
+  }
+  100% {
+    margin-right: -600px !important;
+  }
+}
+
+@-moz-keyframes animateNotificationsIn {
+  from {
+    position: relative;
+    margin-right: 0;
+  }
+  100% {
+    margin-right: -600px;
+  }
+}
+
+@-o-keyframes animateNotificationsIn {
+  from {
+    position: relative;
+    margin-right: 0;
+  }
+  100% {
+    margin-right: -600px;
   }
 }

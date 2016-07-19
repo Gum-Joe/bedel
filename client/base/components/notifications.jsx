@@ -13,7 +13,8 @@ export const Notifications = React.createClass({
     add: PropTypes.func.isRequired,
     notifications: PropTypes.array.isRequired,
     remove: PropTypes.func.isRequired,
-    removeAll: PropTypes.func.isRequired
+    removeAll: PropTypes.func.isRequired,
+    updateStatus: PropTypes.func.isRequired
   },
   componentDidMount() {
     this.socket = io.connect('/');
@@ -35,7 +36,7 @@ export const Notifications = React.createClass({
       <div>
         <div className="notify-header">
           <h3>
-            <button onClick={() => console.log('TODO')} className="not-a-button close-notify-bar">
+            <button onClick={() => this.props.updateStatus({ sidebar: { open: false, alreadyOpened: true } })} className="not-a-button close-notify-bar">
               <span>&times;</span>
             </button> Notifications
           </h3>
