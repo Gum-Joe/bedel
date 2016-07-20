@@ -41,12 +41,13 @@
   }
 }
 
+$dismiss-notify-pad-top: 6px;
 .dismiss-notify {
   float: right;
-  padding-top: 6px !important;
+  padding-top: $dismiss-notify-pad-top !important;
 }
 .dismiss-notify:hover {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 // Header
@@ -78,4 +79,15 @@
 .close-notify-bar:focus {
   opacity: 0.5;
   border: 0;
+}
+
+// Time sent
+.time-notify {
+  display: inline;
+  font-size: 13px;
+  text-align: right;
+  padding-right: 10px !important;
+  float: right;
+  padding-top: $dismiss-notify-pad-top + 2px !important;
+  opacity: 0.5;
 }

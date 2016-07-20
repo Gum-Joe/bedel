@@ -20,6 +20,7 @@ export const Notifications = React.createClass({
     this.socket = io.connect('/');
     // Wacth for notification event
     this.socket.on('notification', (notification) => {
+      const date = new Date();
       // From http://stackoverflow.com/questions/1760250/how-to-tell-if-browser-tab-is-active (document.hidden)
       console.log(document.visibilityState);
       if (document.hidden) {
@@ -28,7 +29,11 @@ export const Notifications = React.createClass({
           icon: notification.icon
         });
       }
-      this.props.add(notification);
+      // Notification + date
+      const notificationShown = Object.assign({
+        date: `${date.getHours()}:${date.getMinutes()}`
+      }, notification);
+      this.props.add(notificationShown);
     });
   },
   render() {
@@ -50,11 +55,19 @@ export const Notifications = React.createClass({
               <SidebarItem key={notific.id}>
                 {/* Helped by http://stackoverflow.com/questions/9201756/how-to-put-img-inline-with-text */}
                 <div>
-                  <img src={notific.icon} alt="presentation" /> <h4 dangerouslySetInnerHTML={createHTML(notific.app + ':')} /> <h6 dangerouslySetInnerHTML={createHTML(notific.body)} />
+                  <img
+                    src={notific.icon}
+                    alt="presentation"
+                  /> <h4 dangerouslySetInnerHTML={createHTML(notific.app + ':')} /> <h6 dangerouslySetInnerHTML={createHTML(notific.body)} />
                   <div
                     className="dismiss-notify" onClick={() => this.props.remove(notific)}
                   >
                     <span>&times;</span>
+                  </div>
+                  <div
+                    className="time-notify" onClick={() => this.props.remove(notific)}
+                  >
+                    <h6>{notific.date}</h6>
                   </div>
                 </div>
               </SidebarItem>

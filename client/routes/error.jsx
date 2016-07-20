@@ -26,7 +26,7 @@ export const ErrorPage = React.createClass({
         <h1>We couldn't find that page. Check the url is correct.</h1>
         <div style={{marginTop: '50px'}}>
           <h1>Note: This is an <strong>ALPHA</strong> copy.</h1>
-          <h1>Not all features may be avilable.</h1>
+          <h1>Not all features may be available.</h1>
           <h1>Version {pack.version}</h1>
         </div>
       </div>
