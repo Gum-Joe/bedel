@@ -12,6 +12,7 @@ This is a roadmap of all the features that we want to eventually add to bedel. I
 - [ ] :lock: Add GitHub authentication + make config/secrets.yml hidden
 - [ ] :rocket: Add script to deploy to heroku with secrets
 - [ ] :art: :rocket: Add an app api to register apps and allow launching from dashboard
+- [ ] :lock: Add HTTPS (important, but you will need to make your own certificates)
 - [ ] :computer: Dashboard:
   - [ ] :lipstick: Add stats badges
   - [ ] :lipstick: :computer: Add build engine
