@@ -22,7 +22,6 @@ export const Notifications = React.createClass({
     this.socket.on('notification', (notification) => {
       const date = new Date();
       // From http://stackoverflow.com/questions/1760250/how-to-tell-if-browser-tab-is-active (document.hidden)
-      console.log(document.visibilityState);
       if (document.hidden) {
         Push.create(notification.app, {
           body: notification.body,
@@ -30,8 +29,17 @@ export const Notifications = React.createClass({
         });
       }
       // Notification + date
+      let mins = date.getMinutes();
+      if (mins < 10) {
+        mins = `0${mins}`;
+      }
+      let hrs = date.getHours();
+      if (hrs < 10) {
+        hrs = `0${mins}`;
+      }
+      const dateString = `${hrs}:${mins}`;
       const notificationShown = Object.assign({
-        date: `${date.getHours()}:${date.getMinutes()}`
+        date: dateString
       }, notification);
       this.props.add(notificationShown);
     });
@@ -45,7 +53,13 @@ export const Notifications = React.createClass({
               <span>&times;</span>
             </button> Notifications
           </h3>
-          <button onClick={() => this.props.removeAll()} id="clear-notify">
+          <button
+            onClick={() => {
+              this.props.removeAll();
+              this.props.updateStatus({ sidebar: { open: false, alreadyOpened: true } });
+            }}
+            id="clear-notify"
+          >
             <span>&times;</span> Clear all
           </button>
         </div>
