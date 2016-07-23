@@ -30,6 +30,9 @@
     li:hover {
       background-color: $navbar-background-hover;
     }
+    .is-active-tab {
+      background-color: $navbar-background-hover;
+    }
   }
 }
 

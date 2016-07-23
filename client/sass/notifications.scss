@@ -21,8 +21,7 @@
   div {
     a {
       li {
-        padding-top: 6px;
-        padding-left: 13px;
+        @include align-to-centre;
         $padding-text-align: 2px;
         div {
           padding-top: $padding-text-align;

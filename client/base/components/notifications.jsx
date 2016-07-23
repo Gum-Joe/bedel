@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import Push from 'push.js';
 import createHTML from '../util/html';
 import { SidebarItem } from './navbar/sidebar';
+import { SidebarHeader as Header } from './sidebar/header';
 import io from 'socket.io-client';
 import '../../sass/notifications.scss';
 
@@ -53,12 +54,7 @@ export const Notifications = React.createClass({
   render() {
     return (
       <div className="notifications-bar-body">
-        <div className="notify-header">
-          <h3>
-            <button onClick={() => this.props.updateStatus({ sidebar: { open: false, alreadyOpened: true } })} className="not-a-button close-notify-bar">
-              <span>&times;</span>
-            </button> Notifications
-          </h3>
+        <Header header="Notifications" updateStatus={this.props.updateStatus}>
           <button
             onClick={() => {
               this.props.removeAll();
@@ -68,7 +64,7 @@ export const Notifications = React.createClass({
           >
             <span>&times;</span> Clear all
           </button>
-        </div>
+        </Header>
         {
           this.props.notifications.map((notific) => {
             return (

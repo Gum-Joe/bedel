@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import classnames from 'classnames';
 import { Sidebar as SidebarBase } from './navbar/sidebar';
 import { Notifications } from '../containers/Notifications';
+import { Tasks } from '../containers/Tasks';
 import { Tabs, Tab, TabsHeader as Header, TabsBody as Body } from './tabs';
 // Export
 export class Sidebar extends Component {
@@ -51,6 +52,9 @@ export class Sidebar extends Component {
           </Header>
           <Body id={0}>
             <Notifications updateStatus={this.props.updateStatus} />
+          </Body>
+          <Body id={1}>
+            <Tasks updateStatus={this.props.updateStatus} />
           </Body>
         </Tabs>
       </SidebarBase>

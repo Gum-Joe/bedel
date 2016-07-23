@@ -1,0 +1,47 @@
+// Styles for tasks
+@import 'dashboard';
+
+.task {
+  text-align: center;
+  li {
+    @include align-to-centre;
+    padding-top: 5px !important;
+    height: 60px;
+    div {
+      @include fill;
+      padding-top: 0 !important;
+      // Progress bar
+      .task-progress-bar {
+        width: 50px !important;
+        height: 50px !important;
+        padding-top: 0 !important;
+        margin-right: 0 !important;
+        .progressbar-text {
+          @include create-animation(fadeInTaskPercentageText, 2s);
+          color: $navbar-text !important;
+          padding-top: 14px !important;
+          font-size: 15px;
+        }
+      }
+      // Text
+      p {
+        position: absolute;
+        margin-top: -48px;
+        margin-left: 65px;
+      }
+      %silent-colour {
+        color: #bdbdbd;
+      }
+      #task-status {
+        @extend %silent-colour;
+        margin-top: -25px;
+      }
+      #task-app {
+        @extend %silent-colour;
+        margin-top: -37px;
+        text-align: right;
+        width: 70%;
+      }
+    }
+  }
+}

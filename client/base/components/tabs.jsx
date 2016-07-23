@@ -1,5 +1,6 @@
 // JSX for tabs
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 // Sass
 import '../../sass/tabs.scss';
 
@@ -25,7 +26,12 @@ export class Tab extends Component {
   render() {
     return (
       <li>
-        <button onClick={() => { current = this.props.id; }}>{this.props.children}</button>
+        <button
+          className={classnames({ 'is-active-tab': current === this.props.id })}
+          onClick={() => { current = this.props.id; }}
+        >
+          {this.props.children}
+        </button>
       </li>
     );
   }
