@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gum-Joe/retis-ci.git"
+    "url": "git+https://github.com/Gum-Joe/bedel.git"
   },
   "keywords": [
     "retis",
@@ -27,15 +27,15 @@
   "author": "Gum-Joe",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Gum-Joe/retis-ci/issues"
+    "url": "https://github.com/Gum-Joe/bedel/issues"
   },
-  "homepage": "https://github.com/Gum-Joe/retis-ci#readme",
+  "homepage": "https://github.com/Gum-Joe/bedel#readme",
   "engines": {
     "node": ">=6.2.0"
   },
   "dependencies": {
     "@fdaciuk/ajax": "^2.1.2",
-    "babel-cli": "^6.9.0",
+    "babel-polyfill": "^6.9.1",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.6",
@@ -84,9 +84,9 @@
   },
   "devDependencies": {
     "atom-ui-reporter": "0.0.1",
+    "babel-cli": "^6.9.0",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
-    "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-es2015-loose": "^7.0.0",
     "babel-preset-react": "^6.11.1",

@@ -1,8 +1,10 @@
 // Sidebar Component for notifications
 import React, { Component, PropTypes } from 'react';
+import FontAwesome from 'react-fontawesome';
 import classnames from 'classnames';
 import { Sidebar as SidebarBase } from './navbar/sidebar';
 import { Notifications } from '../containers/Notifications';
+import { Tabs, Tab, TabsHeader as Header, TabsBody as Body } from './tabs';
 // Export
 export class Sidebar extends Component {
   constructor() {
@@ -38,7 +40,19 @@ export class Sidebar extends Component {
           )
         }
       >
-        <Notifications updateStatus={this.props.updateStatus} />
+        <Tabs defaultTab={0}>
+          <Header count={2}>
+            <Tab id={0}>
+              <FontAwesome name="bell" />
+            </Tab>
+            <Tab id={1}>
+              <FontAwesome name="tasks" />
+            </Tab>
+          </Header>
+          <Body id={0}>
+            <Notifications updateStatus={this.props.updateStatus} />
+          </Body>
+        </Tabs>
       </SidebarBase>
     );
   }

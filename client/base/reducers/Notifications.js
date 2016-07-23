@@ -2,7 +2,7 @@
 import { ADD_NOTIFY, REMOVE_NOTIFY, REMOVE_ALL_NOTIFY } from '../util/constants';
 
 // ID for next notification
-let nextNotificationId = 1;
+let nextNotificationId = 0;
 
 // Reducer
 export const notifications = (state = [], action) => {
@@ -17,7 +17,8 @@ export const notifications = (state = [], action) => {
         return n.id !== action.notification.id;
       });
     case REMOVE_ALL_NOTIFY:
-    return [];
+      nextNotificationId = 0;
+      return [];
     default:
       return state;
 

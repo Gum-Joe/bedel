@@ -7,6 +7,9 @@ import { SidebarItem } from './navbar/sidebar';
 import io from 'socket.io-client';
 import '../../sass/notifications.scss';
 
+// Socket
+const socket = io.connect('/');
+
 // Component
 export const Notifications = React.createClass({
   propTypes: {
@@ -17,9 +20,8 @@ export const Notifications = React.createClass({
     updateStatus: PropTypes.func.isRequired
   },
   componentDidMount() {
-    this.socket = io.connect('/');
     // Wacth for notification event
-    this.socket.on('notification', (notification) => {
+    socket.on('notification', (notification) => {
       const date = new Date();
       // From http://stackoverflow.com/questions/1760250/how-to-tell-if-browser-tab-is-active (document.hidden)
       if (document.hidden) {
@@ -41,12 +43,16 @@ export const Notifications = React.createClass({
       const notificationShown = Object.assign({
         date: dateString
       }, notification);
-      this.props.add(notificationShown);
+      // Check if not in already
+      console.log(notification);
+      if (!this.props.notifications.includes(notificationShown)) {
+        this.props.add(notificationShown);
+      }
     });
   },
   render() {
     return (
-      <div>
+      <div className="notifications-bar-body">
         <div className="notify-header">
           <h3>
             <button onClick={() => this.props.updateStatus({ sidebar: { open: false, alreadyOpened: true } })} className="not-a-button close-notify-bar">

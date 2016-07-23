@@ -22,7 +22,10 @@ module.exports = (api) => {
         }
         // Fire along
         api.sockets.use((socket) => {
-          socket.emit('notification', notification);
+          socket.emit(
+            'notification',
+            notification
+          );
         });
       });
     }
@@ -31,7 +34,7 @@ module.exports = (api) => {
   // For testing
   api.fireNotification({
     app: 'Test',
-    body: 'test',
+    body: Math.round(Math.random() * 100).toString(),
     icon: '/img/home-icon.png'
   });
 
@@ -39,7 +42,7 @@ module.exports = (api) => {
   api.app.get('/api/dev/fire/notification', (req, res) => {
     api.io.emit('notification', {
       app: 'Test',
-      body: 'test',
+      body: Math.round(Math.random() * 100).toString(),
       icon: '/img/home-icon.png'
     });
     res.status(200);

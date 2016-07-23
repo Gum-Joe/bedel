@@ -15,7 +15,6 @@
 
 // Sidebar
 .notifications-bar {
-  overflow-y: scroll;
   @media screen and (min-width: 845px) {
     width: 300px;
   }
@@ -90,4 +89,10 @@ $dismiss-notify-pad-top: 6px;
   float: right;
   padding-top: $dismiss-notify-pad-top + 2px !important;
   opacity: 0.5;
+}
+
+// Notifications
+.notifications-bar-body {
+  overflow-y: scroll;
+  height: 100%;
 }
