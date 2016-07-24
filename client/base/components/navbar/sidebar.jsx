@@ -14,6 +14,12 @@ export class SidebarItem extends Component {
           <li>{this.props.children}</li>
         </a>
       );
+    } else if (this.props.button) {
+      return (
+        <div className={"sidebar-item sidebar-item-button "+this.props.appendClass}>
+          <li>{this.props.children}</li>
+        </div>
+      );
     } else {
       return (
         <Link to={this.props.url || '#'} className={"sidebar-item "+this.props.appendClass}>

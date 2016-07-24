@@ -1,6 +1,11 @@
 // Styles for tasks
 @import 'dashboard';
 
+.tasks {
+  overflow-y: scroll;
+  height: 100%;
+}
+
 .task {
   text-align: center;
   li {
@@ -25,7 +30,8 @@
       }
       // Text
       p {
-        position: absolute;
+        position: relative;
+        text-align: left;
         margin-top: -48px;
         margin-left: 65px;
       }
@@ -34,14 +40,21 @@
       }
       #task-status {
         @extend %silent-colour;
-        margin-top: -25px;
+        margin-top: -1px;
       }
       #task-app {
         @extend %silent-colour;
-        margin-top: -37px;
         text-align: right;
         width: 70%;
+        margin-top: -37px;
       }
     }
+  }
+}
+
+// Spacer to make sure the end does not get chopped off
+.task-spacer {
+  li:hover {
+    background: transparent !important;
   }
 }

@@ -43,6 +43,13 @@
   text-decoration: none;
 }
 
+// Button
+.sidebar-item-button {
+  @extend .sidebar-item;
+  background: transparent;
+  border: 0;
+}
+
 // Hero image
 .sidebar-hero {
   height: 150px;

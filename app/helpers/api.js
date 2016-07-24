@@ -53,6 +53,7 @@ module.exports = (api) => {
       schema({
         app: { required: true, type: 'string' },
         status: 'string',
+        name: 'string',
         percentage: 'number'
       }, task, (err) => {
         if (err) {
@@ -140,12 +141,10 @@ module.exports = (api) => {
   });
 
   const task = api.createTask({
-    app: 'Task',
-    status: 'Doing some stuff...',
-    percentage: '0'
-  });
-  task.update({
-    percentage: '0.6'
+    app: 'App',
+    status: '20 mb / 100 mb',
+    title: 'Task',
+    percentage: 0.2
   });
 
   // For testing. Remove for final copy
@@ -155,6 +154,26 @@ module.exports = (api) => {
       body: Math.round(Math.random() * 100).toString(),
       icon: '/img/home-icon.png'
     });
+    res.status(200);
+    res.send('done!').end();
+  });
+
+  api.app.get('/api/dev/fire/task', (req, res) => {
+    api.io.emit('task:new', {
+      app: 'App',
+      status: '20 mb / 100 mb',
+      title: 'Task',
+      percentage: Math.round(Math.random() * 10) / 10
+    });
+    res.status(200);
+    res.send('done!').end();
+  });
+
+  api.app.get('/api/dev/update/task', (req, res) => {
+    api.io.emit('task:update', Object.assign(task.task, {
+      percentage: 0.6,
+      status: '60 mb / 100 mb'
+    }));
     res.status(200);
     res.send('done!').end();
   });

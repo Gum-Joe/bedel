@@ -1,17 +1,20 @@
 // Tasks reducer
-import { ADD_TASK, CANCEL_TASK, PAUSE_TASK, REMOVE_TASK, RUN_TASK  } from '../util/constants';
-import { List } from 'immutable';
+import { ADD_TASK, CANCEL_TASK, PAUSE_TASK, REMOVE_TASK, RUN_TASK, UPDATE_TASK  } from '../util/constants';
 
 // Inita state
-const intial = new List();
+const intial = [];
 
 // reducer
 export const tasks = (state = intial, action) => {
-  switch (action.types) {
+  switch (action.type) {
     case ADD_TASK:
-      return state.push(action.task);
-    case CANCEL_TASK:
-      return state.map((task) => {
+      return [
+        ...state,
+        Object.assign({}, action.task)
+      ];
+    case CANCEL_TASK: {
+      const newState = Array.concat(state);
+      return newState.map((task) => {
         if (task.id === action.task.id) {
           return Object.assign(task, {
             cancelled: true
@@ -20,8 +23,10 @@ export const tasks = (state = intial, action) => {
           return task;
         }
       });
-    case PAUSE_TASK:
-      return state.map((task) => {
+    }
+    case PAUSE_TASK: {
+      const newState = Array.concat(state);
+      return newState.map((task) => {
         if (task.id === action.task.id) {
           return Object.assign(task, {
             paused: true
@@ -30,20 +35,35 @@ export const tasks = (state = intial, action) => {
           return task;
         }
       });
-    case REMOVE_TASK:
-      return state.filter(task => {
+    }
+    case REMOVE_TASK: {
+      const newState = Array.concat(state);
+      return newState.filter(task => {
         return task.id !== action.task.id;
       });
-    case RUN_TASK:
-    return state.map((task) => {
-      if (task.id === action.task.id) {
-        return Object.assign(task, {
-          paused: false
-        });
-      } else {
-        return task;
-      }
-    });
+    }
+    case RUN_TASK: {
+      const newState = Array.concat(state);
+      return newState.map((task) => {
+        if (task.id === action.task.id) {
+          return Object.assign(task, {
+            paused: false
+          });
+        } else {
+          return task;
+        }
+      });
+    }
+    case UPDATE_TASK: {
+      const newState = Array.concat(state);
+      return newState.map((task) => {
+        if (task.id === action.task.id) {
+          return Object.assign(task, action.task);
+        } else {
+          return task;
+        }
+      });
+    }
     default:
       return state;
 

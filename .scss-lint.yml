@@ -27,3 +27,5 @@ linters:
     enabled: false
   LeadingZero:
     enabled: false
+  PlaceholderInExtend:
+    enabled: false

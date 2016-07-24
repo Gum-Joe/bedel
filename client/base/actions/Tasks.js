@@ -1,5 +1,5 @@
 // Notification actions
-import { ADD_TASK, CANCEL_TASK, PAUSE_TASK, REMOVE_TASK, RUN_TASK  } from '../util/constants';
+import { ADD_TASK, CANCEL_TASK, PAUSE_TASK, REMOVE_TASK, RUN_TASK, UPDATE_TASK  } from '../util/constants';
 
 export const tasks = (dispatch) => {
   return {
@@ -25,6 +25,11 @@ export const tasks = (dispatch) => {
 
     run: (task) => dispatch({
       type: RUN_TASK,
+      task
+    }),
+
+    update: (task) => dispatch({
+      type: UPDATE_TASK,
       task
     })
   };

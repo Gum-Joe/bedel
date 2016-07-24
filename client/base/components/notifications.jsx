@@ -45,7 +45,6 @@ export const Notifications = React.createClass({
         date: dateString
       }, notification);
       // Check if not in already
-      console.log(notification);
       if (!this.props.notifications.includes(notificationShown)) {
         this.props.add(notificationShown);
       }
