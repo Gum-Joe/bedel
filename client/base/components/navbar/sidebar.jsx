@@ -14,7 +14,7 @@ export class SidebarItem extends Component {
           <li>{this.props.children}</li>
         </a>
       );
-    } else if (this.props.button) {
+    } else if (this.props.noLink) {
       return (
         <div className={"sidebar-item sidebar-item-button "+this.props.appendClass}>
           <li>{this.props.children}</li>

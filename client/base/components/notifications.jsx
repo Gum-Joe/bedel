@@ -67,7 +67,7 @@ export const Notifications = React.createClass({
         {
           this.props.notifications.map((notific) => {
             return (
-              <SidebarItem key={notific.id}>
+              <SidebarItem key={notific.id} noLink>
                 {/* Helped by http://stackoverflow.com/questions/9201756/how-to-put-img-inline-with-text */}
                 <div>
                   <img

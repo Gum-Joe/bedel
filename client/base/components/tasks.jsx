@@ -35,7 +35,7 @@ export class Tasks extends Component {
           {
             this.props.tasks.map((task) => {
               return (
-                <SidebarItem appendClass="task" button>
+                <SidebarItem appendClass="task" noLink>
                   <div>
                     <Circle
                       progress={task.percentage}
@@ -56,7 +56,7 @@ export class Tasks extends Component {
               );
             })
           }
-        <SidebarItem appendClass="task task-spacer" button>
+        <SidebarItem appendClass="task task-spacer" noLink>
           <div></div>
         </SidebarItem>
       </div>
