@@ -34,7 +34,10 @@
 // Sidebar
 .notifications-bar {
   @media screen and (min-width: 845px) {
-    width: 300px;
+    width: 310px;
+  }
+  @media screen and (max-width: 846px) {
+    width: 100%;
   }
   div {
     a {

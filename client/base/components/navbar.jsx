@@ -65,7 +65,6 @@ export const SidebarNav = React.createClass({
         {/*<Hero />*/}
         <SidebarItem href="/"><FontAwesome name="dashboard" /> Dashboard</SidebarItem>
         <SidebarItem href="/apps"><FontAwesome name="cube" /> Apps</SidebarItem>
-        <SidebarItem href="/signout" normal><FontAwesome name="sign-out" /> Sign Out</SidebarItem>
       </Sidebar>
     );
   }
@@ -84,13 +83,16 @@ export class Navigater extends Component {
   render() {
     return (
       <Navbar className="navigater">
+        <Navbar.Header>
+          <Navbar.Toggle />
+        </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItemIcon href="#" icon="bell" onClick={this.onBellClick.bind(this)} normal />
-            <NavDropdown id="#dropdown" title={<Username prefix="Hello," user={this.props.user} suffix={<Gravatar email={this.props.user.email} />} />} className="navbar-dropdown">
-              <MenuItem><NavItemIcon href="/settings/profile" icon="user" text="Profile" /></MenuItem>
+            <NavItemIcon eventKey={1} href="#" icon="bell" onClick={this.onBellClick.bind(this)} normal />
+            <NavDropdown eventKey={2} id="#dropdown" title={<Username prefix="Hello," user={this.props.user} suffix={<Gravatar email={this.props.user.email} />} />} className="navbar-dropdown">
+              <MenuItem eventKey={2.1}><NavItemIcon href="/settings/profile" icon="user" text="Profile" /></MenuItem>
             </NavDropdown>
-            <NavItemIcon href="/signout" icon="sign-out" normal />
+            <NavItemIcon eventKey={3} href="/signout" icon="sign-out" normal />
           </Nav>
         </Navbar.Collapse>
       </Navbar>

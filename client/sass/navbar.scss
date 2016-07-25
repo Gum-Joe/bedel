@@ -7,6 +7,7 @@
   border-radius: 0 !important;
   background-color: $navbar-background !important;
   border: 0;
+  padding-right: 60px;
   width: 100%;
   .container {
     width: 100%;
@@ -15,8 +16,8 @@
 
 // Nav text
 .nav-text, .navbar-dropdown {
-  height: 50px;
   font-size: 19px;
+  background-color: $navbar-background;
   a {
     color: $navbar-text !important;
     padding-top: 15px !important;
@@ -33,28 +34,20 @@
 }
 
 .navbar-dropdown {
+  font-size: 19px;
+  background-color: $navbar-background;
   ul {
-    padding: 0 !important;
+    padding: 0;
     li {
-      padding: 5px 0;
-      height: auto !important;
+      background-color: $navbar-background;
       a {
-        padding: 0 !important;
-        text-align: center;
-        height: inherit;
-        li {
-          height: inherit !important;
+        .nav-text {
+          background-color: inherit;
         }
       }
     }
-    li:hover {
-      background-color: $navbar-background;
-      a {
-        background-color: inherit !important;
-        li {
-          background-color: inherit !important;
-        }
-      }
+    .divider {
+      margin: 0 !important;
     }
   }
 }
