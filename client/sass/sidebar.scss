@@ -38,7 +38,7 @@
 }
 
 // Fix hover to not turn blue
-.sidebar-item:hover {
+.sidebar-item:hover, .sidebar-item:focus, .sidebar-item:active, .sidebar-item:visited {
   color: $dash-text-color;
   text-decoration: none;
 }

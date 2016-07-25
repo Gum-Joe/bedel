@@ -2,9 +2,10 @@
 @import 'dashboard';
 
 .navigater {
-  height: $nav-item-height;
-  border-radius: 0;
-  background-color: $navbar-background;
+  height: $nav-item-height !important;
+  min-height: $nav-item-height !important;
+  border-radius: 0 !important;
+  background-color: $navbar-background !important;
   border: 0;
   width: 100%;
   .container {
@@ -18,6 +19,7 @@
   font-size: 19px;
   a {
     color: $navbar-text !important;
+    padding-top: 15px !important;
     height: 50px;
     img {
       @include square-img(25px);
@@ -27,6 +29,33 @@
   }
   a:hover {
     color: $navbar-text-hover !important;
+  }
+}
+
+.navbar-dropdown {
+  ul {
+    padding: 0 !important;
+    li {
+      padding: 5px 0;
+      height: auto !important;
+      a {
+        padding: 0 !important;
+        text-align: center;
+        height: inherit;
+        li {
+          height: inherit !important;
+        }
+      }
+    }
+    li:hover {
+      background-color: $navbar-background;
+      a {
+        background-color: inherit !important;
+        li {
+          background-color: inherit !important;
+        }
+      }
+    }
   }
 }
 

@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import { Circle } from 'react-progressbar.js';
 import { SidebarItem } from './navbar/sidebar';
 import { SidebarHeader as Header } from './sidebar/header';
+import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 
 // Styles
 import '../../sass/tasks.scss';
@@ -20,6 +21,14 @@ const options = {
 
 // Component
 export class Tasks extends Component {
+  constructor() {
+    super();
+    this.intialState = {
+      open: false,
+      taskToRemove: {}
+    };
+    this.state = this.intialState;
+  }
   componentDidMount() {
     socket.on('task:new', (task) => {
       this.props.add(task);
@@ -28,14 +37,37 @@ export class Tasks extends Component {
       this.props.update(task);
     });
   }
+  handleModalClose () { this.setState(this.intialState); }
+  handleModalYes () {
+    this.setState(Object.assign(this.state, { open: false }));
+    if (this.state.taskToRemove.hasCancelEvent) {
+      this.props.cancel(this.state.taskToRemove);
+      socket.emit('task:cancel', this.state.taskToRemove);
+      socket.on('task:end', function (task) {
+        if (task.id === this.state.taskToRemove.id) {
+          this.props.remove(this.state.taskToRemove);
+          this.setState(this.intialState);
+        }
+      }.bind(this));
+    } else {
+      this.props.remove(this.state.taskToRemove);
+      this.setState(this.intialState);
+    }
+  }
   render() {
     return (
       <div className="tasks">
         <Header header="Tasks" updateStatus={this.props.updateStatus} />
           {
             this.props.tasks.map((task) => {
+              const randID = Math.round(Math.random() * 100000);
               return (
-                <SidebarItem appendClass="task" noLink>
+                <SidebarItem
+                  href={task.hasOwnProperty('link') ? task.link : null}
+                  appendClass={`task ${task.hasOwnProperty('link') ? 'task-link' : null}`}
+                  noLink={!task.hasOwnProperty('link')}
+                  normal={!task.react && task.hasOwnProperty('react')}
+                >
                   <div>
                     <Circle
                       progress={task.percentage}
@@ -48,7 +80,26 @@ export class Tasks extends Component {
                     <p id="task-status">
                       <h5>{task.status || `${task.percentage * 100}%`}</h5>
                     </p>
-                    <p id="task-app">
+                    <p
+                      onMouseEnter={
+                        () => {
+                          $(`.${randID}`).html(
+                            `<h6><button>&times</button></h6>`
+                          );
+                          $(`.${randID} h6 button`).click(() => {
+                            this.setState({
+                              open: true,
+                              taskToRemove: Object.assign({}, task)
+                            });
+                          });
+                        }
+                      }
+                      onMouseLeave={() => {
+                        $(`.${randID}`).html(`<h6>${task.app}</h6>`);
+                      }}
+                      id='task-app'
+                      className={randID}
+                    >
                       <h6>{task.app}</h6>
                     </p>
                   </div>
@@ -59,6 +110,33 @@ export class Tasks extends Component {
         <SidebarItem appendClass="task task-spacer" noLink>
           <div></div>
         </SidebarItem>
+        {/* Modal */}
+        {
+          this.state.open ? (
+            <ModalContainer onClose={this.handleClose}>
+              <ModalDialog
+                onClose={this.handleClose}
+                className="tasks-cancel-modal"
+              >
+                <h3 id="task-modal-header">Do you really want to cancel this task?</h3>
+                <button
+                  id="yes"
+                  onClick={this.handleModalYes.bind(this)}
+                  className="btn btn-success"
+                  autoFocus
+                >Yes</button>
+                <button
+                  onClick={
+                    () => {
+                      this.setState(this.intialState);
+                    }
+                  }
+                  className="btn btn-danger"
+                >No</button>
+              </ModalDialog>
+            </ModalContainer>
+          ) : <div></div>
+        }
       </div>
     );
   }
@@ -66,7 +144,9 @@ export class Tasks extends Component {
 
 Tasks.propTypes = {
   add: PropTypes.func.isRequired,
+  cancel: PropTypes.func.isRequired,
   tasks: PropTypes.array.isRequired,
+  remove: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
   updateStatus: PropTypes.func.isRequired
 };

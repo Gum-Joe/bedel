@@ -17,7 +17,9 @@ export const tasks = (state = intial, action) => {
       return newState.map((task) => {
         if (task.id === action.task.id) {
           return Object.assign(task, {
-            cancelled: true
+            cancelled: true,
+            status: 'Cancelling...',
+            percentage: 1
           });
         } else {
           return task;

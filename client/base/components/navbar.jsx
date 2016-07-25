@@ -57,15 +57,15 @@ export const SidebarNav = React.createClass({
   render() {
     return (
       <Sidebar>
-        <SidebarItem appendClass="hamburger-li">
+        <SidebarItem appendClass="hamburger-li" noLink>
           {/* Hamburger menu icon */}
           <Hamburger type="vortex" click={this.handleClick} />
           <h2 className="inline">Bedel</h2>
         </SidebarItem>
         {/*<Hero />*/}
-        <SidebarItem url="/"><FontAwesome name="dashboard" /> Dashboard</SidebarItem>
-        <SidebarItem url="/apps"><FontAwesome name="cube" /> Apps</SidebarItem>
-        <SidebarItem url="/signout" normal><FontAwesome name="sign-out" /> Sign Out</SidebarItem>
+        <SidebarItem href="/"><FontAwesome name="dashboard" /> Dashboard</SidebarItem>
+        <SidebarItem href="/apps"><FontAwesome name="cube" /> Apps</SidebarItem>
+        <SidebarItem href="/signout" normal><FontAwesome name="sign-out" /> Sign Out</SidebarItem>
       </Sidebar>
     );
   }

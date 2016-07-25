@@ -47,9 +47,12 @@ module.exports = (api) => {
       const taskToSend = Object.assign({
         id: nextTaskId,
         status: "0%",
-        percentage: 0
+        percentage: 0,
+        hasCancelEvent: false
       }, task);
-
+      if (taskToSend.hasOwnProperty('link') && !taskToSend.hasOwnProperty('react')) {
+        taskToSend.react = true;
+      }
       schema({
         app: { required: true, type: 'string' },
         status: 'string',
@@ -113,12 +116,21 @@ module.exports = (api) => {
          * @param cb {Function} what to do on canel
          */
         onCancel(cb) {
-          const taskTmp = this.task;
           api.sockets.use((socket) => {
+            // Tell client to wait for cancelation
+            this.update(
+              Object.assign(
+                this.task,
+                {
+                  hasCancelEvent: true
+                }
+              )
+            );
+            const taskTmp = this.task;
             socket.on(
               'task:cancel',
               (task) => {
-                if (task === taskTmp) {
+                if (task.id === taskTmp.id) {
                   return cb(() => {
                     // Tell it to end
                     socket.emit('task:end', taskTmp);
@@ -146,6 +158,9 @@ module.exports = (api) => {
     title: 'Task',
     percentage: 0.2
   });
+  task.onCancel((done) => {
+    done();
+  });
 
   // For testing. Remove for final copy
   api.app.get('/api/dev/fire/notification', (req, res) => {
@@ -160,11 +175,41 @@ module.exports = (api) => {
 
   api.app.get('/api/dev/fire/task', (req, res) => {
     api.io.emit('task:new', {
+      id: nextTaskId,
       app: 'App',
       status: '20 mb / 100 mb',
       title: 'Task',
       percentage: Math.round(Math.random() * 10) / 10
     });
+    nextTaskId++;
+    res.status(200);
+    res.send('done!').end();
+  });
+  api.app.get('/api/dev/fire/task/link', (req, res) => {
+    api.io.emit('task:new', {
+      id: nextTaskId,
+      app: 'App',
+      status: '20 mb / 100 mb',
+      title: 'Task',
+      percentage: Math.round(Math.random() * 10) / 10,
+      link: '/login',
+      react: true
+    });
+    nextTaskId++;
+    res.status(200);
+    res.send('done!').end();
+  });
+
+  api.app.get('/api/dev/fire/task/cancel', (req, res) => {
+    api.io.emit('task:new', {
+      id: nextTaskId,
+      app: 'App',
+      status: '20 mb / 100 mb',
+      title: 'Task',
+      percentage: Math.round(Math.random() * 10) / 10,
+      hasCancelEvent: true
+    });
+    nextTaskId++;
     res.status(200);
     res.send('done!').end();
   });
