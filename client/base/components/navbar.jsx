@@ -102,8 +102,8 @@ export class Navigater extends Component {
             <NavItemIcon eventKey={1} href="#" icon="tasks" onClick={this.onTasksClick.bind(this)} normal />
             <NavDropdown eventKey={2} id="#dropdown" title={<Username prefix="Hello," user={this.props.user} suffix={<Gravatar email={this.props.user.email} />} />} className="navbar-dropdown">
               <NavItemIcon eventKey={2.1} href="/settings/profile" icon="user" text="Profile" />
-              <NavItemIcon eventKey={2.2} href="/signout" icon="sign-out" text="Sign Out" normal />
             </NavDropdown>
+            <NavItemIcon eventKey={3} href="/signout" icon="sign-out" normal />
           </Nav>
         </Navbar.Collapse>
       </Navbar>
