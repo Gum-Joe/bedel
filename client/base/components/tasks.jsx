@@ -1,6 +1,7 @@
 // Tasks component
 import React, { Component, PropTypes } from 'react';
 import io from 'socket.io-client';
+import variables from '!!sass-variable-loader!../../sass/util/vars.scss'; // eslint-disable-line
 import { Circle } from 'react-progressbar.js';
 import { SidebarItem } from './navbar/sidebar';
 import { SidebarHeader as Header } from './sidebar/header';
@@ -15,7 +16,7 @@ const socket = io.connect('/');
 // Opts
 const options = {
   strokeWidth: 4,
-  color: '#0D47A1',
+  color: variables.accent,
   trailColor: '#616161'
 };
 
@@ -59,6 +60,7 @@ export class Tasks extends Component {
       <div className="tasks">
         <Header header="Tasks" status={this.props.status} updateStatus={this.props.updateStatus} />
           {
+            this.props.tasks.length > 0 ?
             this.props.tasks.map((task) => {
               const randID = Math.round(Math.random() * 100000);
               return (
@@ -105,7 +107,7 @@ export class Tasks extends Component {
                   </div>
                 </SidebarItem>
               );
-            })
+            }) : <div className="container no-notifications-tasks"><h4>No tasks are currently running.</h4></div>
           }
         <SidebarItem appendClass="task task-spacer" noLink>
           <div></div>

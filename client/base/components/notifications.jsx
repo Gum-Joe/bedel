@@ -66,6 +66,7 @@ export const Notifications = React.createClass({
           </button>
         </Header>
         {
+          this.props.notifications.length > 0 ?
           this.props.notifications.map((notific) => {
             return (
               <SidebarItem key={notific.id} noLink>
@@ -88,7 +89,7 @@ export const Notifications = React.createClass({
                 </div>
               </SidebarItem>
             );
-          })
+          }) : <div className="container no-notifications-tasks"><h4>No new notifications</h4></div>
         }
       </div>
     );

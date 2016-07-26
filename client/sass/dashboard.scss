@@ -58,3 +58,8 @@ h1, h1, h3, h4, h5, h6 {
   border: 0;
   background: none;
 }
+
+.no-notifications-tasks {
+  @include create-animation(fadeIn, 0.8s);
+  color: #9e9e9e;
+}

@@ -1,7 +1,7 @@
  // JSX file for navbar
  /* eslint react/jsx-no-bind: 0 */
 import React, { Component, PropTypes } from 'react';
-import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import { isMobile } from '../util/mobile';
 import { Sidebar, SidebarItem } from './navbar/sidebar';

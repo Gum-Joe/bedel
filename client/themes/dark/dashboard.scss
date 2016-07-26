@@ -1,6 +1,7 @@
 // Dashboard theme
 // BOOTSWATCH THEME
 @import url("https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/darkly/bootstrap.min.css");
+@import '../../sass/util/vars';
 $sidebar-background: #1d1d1d;
 $sidebar-background-hover: #262626;
 $background-colour: #212121;
@@ -15,9 +16,9 @@ $navbar-text-hover: #9e9e9e;
 
 .hamburger-li {
   li {
-    background-color: #c62828;
+    background-color: $accent;
   }
   li:hover {
-    background-color: #b71c1c;
+    background-color: $accent-2;
   }
 }
