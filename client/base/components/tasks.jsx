@@ -57,7 +57,7 @@ export class Tasks extends Component {
   render() {
     return (
       <div className="tasks">
-        <Header header="Tasks" updateStatus={this.props.updateStatus} />
+        <Header header="Tasks" status={this.props.status} updateStatus={this.props.updateStatus} />
           {
             this.props.tasks.map((task) => {
               const randID = Math.round(Math.random() * 100000);
@@ -147,6 +147,7 @@ Tasks.propTypes = {
   cancel: PropTypes.func.isRequired,
   tasks: PropTypes.array.isRequired,
   remove: PropTypes.func.isRequired,
+  status: PropTypes.object.isRequired,
   update: PropTypes.func.isRequired,
   updateStatus: PropTypes.func.isRequired
 };

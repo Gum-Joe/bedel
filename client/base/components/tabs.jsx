@@ -27,8 +27,8 @@ export class Tab extends Component {
     return (
       <li>
         <button
-          className={classnames({ 'is-active-tab': current === this.props.id })}
-          onClick={() => { current = this.props.id; }}
+          className={classnames({ 'is-active-tab': this.props.currentTab === this.props.id })}
+          onClick={() => { this.props.setTab(this.props.id); }}
         >
           {this.props.children}
         </button>
@@ -53,15 +53,15 @@ export class TabsBody extends Component {
   constructor() {
     super();
     this.state = {
-      current
+      current: 0
     };
     setInterval(this.updateState.bind(this), 100);
   }
   updateState() {
     // Update the state
-    if (current !== this.state.current) {
+    if (this.props.currentTab !== this.state.current) {
       this.setState({
-        current
+        current: this.props.currentTab
       });
     }
   }
@@ -83,12 +83,15 @@ export class TabsBody extends Component {
 
 Tabs.propTypes = {
   children: PropTypes.object,
-  defaultTab: PropTypes.number
+  defaultTab: PropTypes.number,
+  currentTab: PropTypes.number
 };
 
 Tab.propTypes = {
   children: PropTypes.object,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
+  setTab: PropTypes.func.isRequired,
+  currentTab: PropTypes.number
 };
 
 TabsHeader.propTypes = {
@@ -98,5 +101,6 @@ TabsHeader.propTypes = {
 
 TabsBody.propTypes = {
   children: PropTypes.object,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
+  currentTab: PropTypes.number
 };

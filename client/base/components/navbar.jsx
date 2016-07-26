@@ -74,10 +74,20 @@ export const SidebarNav = React.createClass({
 export class Navigater extends Component {
   onBellClick() {
     this.props.updateStatus({
-      sidebar: {
-        open: !this.props.status.sidebar.open,
-        alreadyOpened: true
-      }
+      sidebar: Object.assign(this.props.status.sidebar, {
+        open: true,
+        alreadyOpened: true,
+        tab: 0
+      })
+    });
+  }
+  onTasksClick() {
+    this.props.updateStatus({
+      sidebar: Object.assign(this.props.status.sidebar, {
+        open: true,
+        alreadyOpened: true,
+        tab: 1
+      })
     });
   }
   render() {
@@ -89,10 +99,11 @@ export class Navigater extends Component {
         <Navbar.Collapse>
           <Nav pullRight>
             <NavItemIcon eventKey={1} href="#" icon="bell" onClick={this.onBellClick.bind(this)} normal />
+            <NavItemIcon eventKey={1} href="#" icon="tasks" onClick={this.onTasksClick.bind(this)} normal />
             <NavDropdown eventKey={2} id="#dropdown" title={<Username prefix="Hello," user={this.props.user} suffix={<Gravatar email={this.props.user.email} />} />} className="navbar-dropdown">
-              <MenuItem eventKey={2.1}><NavItemIcon href="/settings/profile" icon="user" text="Profile" /></MenuItem>
+              <NavItemIcon eventKey={2.1} href="/settings/profile" icon="user" text="Profile" />
+              <NavItemIcon eventKey={2.2} href="/signout" icon="sign-out" text="Sign Out" normal />
             </NavDropdown>
-            <NavItemIcon eventKey={3} href="/signout" icon="sign-out" normal />
           </Nav>
         </Navbar.Collapse>
       </Navbar>

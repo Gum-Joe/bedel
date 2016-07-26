@@ -18,7 +18,8 @@ export const Notifications = React.createClass({
     notifications: PropTypes.array.isRequired,
     remove: PropTypes.func.isRequired,
     removeAll: PropTypes.func.isRequired,
-    updateStatus: PropTypes.func.isRequired
+    updateStatus: PropTypes.func.isRequired,
+    status: PropTypes.object.isRequired
   },
   componentDidMount() {
     // Wacth for notification event
@@ -53,7 +54,7 @@ export const Notifications = React.createClass({
   render() {
     return (
       <div className="notifications-bar-body">
-        <Header header="Notifications" updateStatus={this.props.updateStatus}>
+        <Header header="Notifications" status={this.props.status} updateStatus={this.props.updateStatus}>
           <button
             onClick={() => {
               this.props.removeAll();

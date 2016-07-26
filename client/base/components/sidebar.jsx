@@ -18,16 +18,22 @@ export class Sidebar extends Component {
     this.props.updateStatus({
       sidebar: {
         open: false,
-        alreadyOpened: false
+        alreadyOpened: false,
+        tab: 0
       }
     });
     setInterval(this.updateState.bind(this), 100);
   }
+  setTab(tab) {
+    this.props.updateStatus({
+      sidebar: Object.assign(this.props.status.sidebar, { tab })
+    });
+  }
   updateState() {
-    //console.log(this.props.status.sidebar.alreadyOpened);
     this.setState({
       open: this.props.status.sidebar.open,
-      alreadyOpened: this.props.status.sidebar.alreadyOpened
+      alreadyOpened: this.props.status.sidebar.alreadyOpened,
+      tab: this.props.status.sidebar.tab
     });
   }
   render() {
@@ -41,20 +47,20 @@ export class Sidebar extends Component {
           )
         }
       >
-        <Tabs defaultTab={0}>
+        <Tabs currentTab={this.state.tab} defaultTab={0}>
           <Header count={2}>
-            <Tab id={0}>
+            <Tab currentTab={this.state.tab} setTab={this.setTab.bind(this)} id={0}>
               <FontAwesome name="bell" />
             </Tab>
-            <Tab id={1}>
+            <Tab currentTab={this.state.tab} setTab={this.setTab.bind(this)} id={1}>
               <FontAwesome name="tasks" />
             </Tab>
           </Header>
-          <Body id={0}>
-            <Notifications updateStatus={this.props.updateStatus} />
+          <Body currentTab={this.state.tab} id={0}>
+            <Notifications status={this.props.status} updateStatus={this.props.updateStatus} />
           </Body>
-          <Body id={1}>
-            <Tasks updateStatus={this.props.updateStatus} />
+          <Body currentTab={this.state.tab} id={1}>
+            <Tasks status={this.props.status} updateStatus={this.props.updateStatus} />
           </Body>
         </Tabs>
       </SidebarBase>

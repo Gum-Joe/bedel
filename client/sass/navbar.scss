@@ -41,10 +41,19 @@
     li {
       background-color: $navbar-background;
       a {
+        background-color: $navbar-background !important;
+        padding-top: 12.5px !important;
         .nav-text {
           background-color: inherit;
         }
       }
+      a:hover {
+        background-color: $navbar-background-hover !important;
+        color: $navbar-text !important;
+      }
+    }
+    li:hover {
+      background-color: $navbar-background !important;
     }
     .divider {
       margin: 0 !important;
