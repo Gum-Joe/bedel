@@ -49,7 +49,11 @@
 $dismiss-notify-pad-top: 6px;
 .dismiss-notify {
   float: right;
-  padding-top: $dismiss-notify-pad-top !important;
+  padding-top: $dismiss-notify-pad-top - 1.5px !important;
+  padding-right: 6px;
+  button {
+    @include not-a-button;
+  }
 }
 .dismiss-notify:hover {
   opacity: 0.3;

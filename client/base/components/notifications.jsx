@@ -79,7 +79,7 @@ export const Notifications = React.createClass({
                   <div
                     className="dismiss-notify" onClick={() => this.props.remove(notific)}
                   >
-                    <span>&times;</span>
+                    <button>&times;</button>
                   </div>
                   <div
                     className="time-notify" onClick={() => this.props.remove(notific)}
