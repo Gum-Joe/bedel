@@ -13,7 +13,10 @@ export const Dashboard = React.createClass({
   // Proptypes
   propTypes: {
     children: PropTypes.object.isRequired,
+    counter: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
+    minus: PropTypes.func.isRequired,
+    plus: PropTypes.func.isRequired,
     status: PropTypes.object.isRequired,
     user: PropTypes.object,
     updateStatus: PropTypes.func.isRequired
@@ -40,7 +43,14 @@ export const Dashboard = React.createClass({
     return (
       <main>
         <SidebarNav />
-        <PageBody user={this.props.user} status={this.props.status} updateStatus={this.props.updateStatus}>
+        <PageBody
+          user={this.props.user}
+          status={this.props.status}
+          counter={this.props.counter}
+          updateStatus={this.props.updateStatus}
+          plus={this.props.plus}
+          minus={this.props.minus}
+        >
           {this.props.children}
         </PageBody>
         <div className="off-canvas">

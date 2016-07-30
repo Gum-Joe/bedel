@@ -10,7 +10,8 @@ export const Hamburger = React.createClass({
   // Prop types
   propTypes: {
     type: PropTypes.string.isRequired,
-    click: PropTypes.func
+    click: PropTypes.func,
+    className: PropTypes.string
   },
 
   getDefaultProps() {
@@ -24,7 +25,7 @@ export const Hamburger = React.createClass({
 
   render() {
     return (
-      <button className={`hamburger hamburger--${this.props.type}`} type="button" onClick={this.props.click}>
+      <button className={`hamburger hamburger--${this.props.type} ${this.props.className}`} type="button" onClick={this.props.click}>
         <span className="hamburger-box">
           <span className="hamburger-inner"></span>
         </span>

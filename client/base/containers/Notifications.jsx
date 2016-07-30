@@ -1,7 +1,7 @@
 // Notifications sidebar
 import { connect } from 'react-redux';
 import { Notifications as NotificationsBar } from '../components/notifications';
-import { notifications as mapDispatchToProps } from '../actions';
+import { notifications, counter } from '../actions';
 
 // Map state to props
 function mapStateToProps(state) {
@@ -12,5 +12,11 @@ function mapStateToProps(state) {
 
 export const Notifications = connect(
   mapStateToProps,
-  mapDispatchToProps
+  (dispatch) => {
+    return Object.assign(
+      {},
+      notifications(dispatch),
+      counter(dispatch)
+    );
+  }
 )(NotificationsBar);

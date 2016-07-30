@@ -19,7 +19,9 @@ export const Notifications = React.createClass({
     remove: PropTypes.func.isRequired,
     removeAll: PropTypes.func.isRequired,
     updateStatus: PropTypes.func.isRequired,
-    status: PropTypes.object.isRequired
+    status: PropTypes.object.isRequired,
+    plus: PropTypes.func.isRequired,
+    minus: PropTypes.func.isRequired
   },
   componentDidMount() {
     // Wacth for notification event
@@ -48,6 +50,7 @@ export const Notifications = React.createClass({
       // Check if not in already
       if (!this.props.notifications.includes(notificationShown)) {
         this.props.add(notificationShown);
+        this.props.plus('unreadNotifications');
       }
     });
   },
@@ -58,7 +61,9 @@ export const Notifications = React.createClass({
           <button
             onClick={() => {
               this.props.removeAll();
-              this.props.updateStatus({ sidebar: { open: false, alreadyOpened: true } });
+              this.props.updateStatus({
+                sidebar: Object.assign(this.props.status.sidebar, { open: false, alreadyOpened: true })
+              });
             }}
             id="clear-notify"
           >

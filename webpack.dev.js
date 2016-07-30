@@ -1,5 +1,4 @@
 // Webpack config
-const path = require('path');
 const webpack = require('webpack');
 //const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
@@ -26,13 +25,21 @@ module.exports = {
         { test: /\.json$/, exclude: /node_modules/, loaders: [ "json-loader" ] },
         { test: /\.jsx$/, exclude: /node_modules/, loaders: [ "react-hot", "babel-loader"] },
         { test: /\.js$/, exclude: /node_modules/, loaders: [ "react-hot", "babel-loader"] },
+        { test: /\.css$/, loaders: ["style", "css"] },
         { test: /\.scss$/, exclude: /node_modules/, loaders: ["style", "css", "sass"] },
-        { test: /\.css$/, exclude: /node_modules/, loaders: ["style", "css"] },
         {
           test: /\.(jpe?g|png|gif|svg)$/i,
           loaders: [ 'file?hash=sha512&digest=hex&name=[hash].[ext]',
           'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
           ]
+        },
+        {
+          test: /\.(ttf|eot|svg)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loaders: [ 'file?hash=sha512&digest=hex&name=[hash].[ext]' ]
+        },
+        {
+          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'url?limit=50000&mimetype=application/font-woff&name=./fonts/[hash].[ext]'
         }
       ]
     },

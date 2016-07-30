@@ -1,7 +1,7 @@
 // Tasks container
 import { connect } from 'react-redux';
 import { Tasks as TasksBar } from '../components/tasks';
-import { tasks as mapDispatchToProps } from '../actions';
+import { tasks, counter } from '../actions';
 
 // Map state to props
 function mapStateToProps(state) {
@@ -12,5 +12,11 @@ function mapStateToProps(state) {
 
 export const Tasks = connect(
   mapStateToProps,
-  mapDispatchToProps
+  (dispatch) => {
+    return Object.assign(
+      {},
+      tasks(dispatch),
+      counter(dispatch)
+    );
+  }
 )(TasksBar);

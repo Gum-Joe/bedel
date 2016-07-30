@@ -11,7 +11,7 @@
     "build": "gulp webpack",
     "lint": "eslint .",
     "mkdirs": "node script/mkdirs",
-    "nodemon": "nodemon --ignore client bin/bedel server --color --debug",
+    "nodemon": "nodemon --ignore client --ignore build bin/bedel server --color --debug",
     "test": "mocha",
     "coveralls": "istanbul cover -x app/util/logger.js ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
@@ -116,6 +116,7 @@
     "sass-variable-loader": "0.0.4",
     "style-loader": "^0.13.1",
     "supertest": "^1.2.0",
+    "url-loader": "^0.5.7",
     "webpack-stream": "^3.2.0"
   }
 }

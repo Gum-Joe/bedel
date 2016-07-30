@@ -30,7 +30,7 @@
     }
   }
   a:hover {
-    color: $navbar-text-hover !important;
+    opacity: 0.7;
   }
 }
 
@@ -70,4 +70,12 @@
     background-color: $navbar-background-hover !important;
     text-decoration: none;
   }
+}
+
+// Unread badge
+.unread-badge {
+  margin-bottom: 5px;
+  background-color: $accent !important;
+  color: $navbar-text !important;
+  margin-left: 8px;
 }

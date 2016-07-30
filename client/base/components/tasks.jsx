@@ -33,6 +33,7 @@ export class Tasks extends Component {
   componentDidMount() {
     socket.on('task:new', (task) => {
       this.props.add(task);
+      this.props.plus('unseenTasks');
     });
     socket.on('task:update', (task) => {
       this.props.update(task);
