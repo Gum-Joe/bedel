@@ -50,7 +50,9 @@ export const Notifications = React.createClass({
       // Check if not in already
       if (!this.props.notifications.includes(notificationShown)) {
         this.props.add(notificationShown);
-        this.props.plus('unreadNotifications');
+        if (!this.props.status.sidebar.open) {
+          this.props.plus('unseenTasks');
+        }
       }
     });
   },

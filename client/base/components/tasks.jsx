@@ -33,7 +33,9 @@ export class Tasks extends Component {
   componentDidMount() {
     socket.on('task:new', (task) => {
       this.props.add(task);
-      this.props.plus('unseenTasks');
+      if (!this.props.status.sidebar.open) {
+        this.props.plus('unseenTasks');
+      }
     });
     socket.on('task:update', (task) => {
       this.props.update(task);
@@ -148,6 +150,7 @@ export class Tasks extends Component {
 Tasks.propTypes = {
   add: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
+  plus: PropTypes.func.isRequired,
   tasks: PropTypes.array.isRequired,
   remove: PropTypes.func.isRequired,
   status: PropTypes.object.isRequired,
