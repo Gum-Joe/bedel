@@ -51,7 +51,7 @@ export const Notifications = React.createClass({
       if (!this.props.notifications.includes(notificationShown)) {
         this.props.add(notificationShown);
         if (!this.props.status.sidebar.open) {
-          this.props.plus('unseenTasks');
+          this.props.plus('unreadNotifications');
         }
       }
     });

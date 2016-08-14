@@ -37429,7 +37429,7 @@
 	      if (!_this.props.notifications.includes(notificationShown)) {
 	        _this.props.add(notificationShown);
 	        if (!_this.props.status.sidebar.open) {
-	          _this.props.plus('unseenTasks');
+	          _this.props.plus('unreadNotifications');
 	        }
 	      }
 	    });
