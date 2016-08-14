@@ -37428,7 +37428,9 @@
 	      // Check if not in already
 	      if (!_this.props.notifications.includes(notificationShown)) {
 	        _this.props.add(notificationShown);
-	        _this.props.plus('unreadNotifications');
+	        if (!_this.props.status.sidebar.open) {
+	          _this.props.plus('unseenTasks');
+	        }
 	      }
 	    });
 	  },
@@ -45953,7 +45955,9 @@
 
 	    socket.on('task:new', function (task) {
 	      _this2.props.add(task);
-	      _this2.props.plus('unseenTasks');
+	      if (!_this2.props.status.sidebar.open) {
+	        _this2.props.plus('unseenTasks');
+	      }
 	    });
 	    socket.on('task:update', function (task) {
 	      _this2.props.update(task);
@@ -46111,6 +46115,7 @@
 	Tasks.propTypes = {
 	  add: _react.PropTypes.func.isRequired,
 	  cancel: _react.PropTypes.func.isRequired,
+	  plus: _react.PropTypes.func.isRequired,
 	  tasks: _react.PropTypes.array.isRequired,
 	  remove: _react.PropTypes.func.isRequired,
 	  status: _react.PropTypes.object.isRequired,

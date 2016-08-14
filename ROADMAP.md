@@ -4,10 +4,9 @@ This is a roadmap of all the features that we want to eventually add to bedel. I
 #### v1.0.0:
 - [x] :lipstick: Add notifications sidebar
 - [ ] :lipstick: Add tasks sidebar :construction: ([#14](https://github.com/Gum-Joe/bedel/issues/14))
-- [ ] :lipstick: Make the current components more responsive ([#15](https://github.com/Gum-Joe/bedel/issues/15))
 - [ ] :shirt: Fix code climate complaints
-- [ ] :art: Fix router to redirect to default app, rather than use an `<IndexRoute />`
 - [ ] :white_check_mark: Add server side tests for socket.io api + untested stuff (aiming for >=90% coverage )
+- [ ] :lipstick: Redo base ui + react router + themes construction method, using AdminLTE ([https://almsaeedstudio.com/themes/AdminLTE/index2.html](https://almsaeedstudio.com/themes/AdminLTE/index2.html)) as inspiration
 - [ ] :white_check_mark: Add client side tests for react components and redux reducers
 - [ ] :lock: Add GitHub authentication + make config/secrets.yml hidden
 - [ ] :rocket: Add script to deploy to heroku with secrets
