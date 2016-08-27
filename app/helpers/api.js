@@ -2,39 +2,78 @@
 /**
  * Module depedencies
  */
+const chalk = require('chalk');
 const schema = require('../util/schema');
+const { Notification, Task } = require('../models');
 
-// ID for next task
+// ID for next task + notification
 let nextTaskId = 0;
+let nextNotificationID = 0;
 
 /**
  * Add api stuff
  * @param api {Api} Api class
  */
 module.exports = (api) => {
+  // Add plguins
   api.addPlugin({
 
     /**
      * Sends a notification to the client
      * @param notification {Object} notification to send
      */
-    fireNotification: function (notification) {
+    fireNotification: function (rawNotification, callback) {
+      // Add a id
+      const notification = Object.assign(rawNotification, {
+        id: nextNotificationID
+      });
+      nextNotificationID++;
       // Validate
       schema({
         app: { required: true, type: 'string' },
         body: { required: true, type: 'custom' },
-        icon: 'string' // base64
+        link: 'string',
+        reactLink: 'string',
+        icon: 'string' // url
       }, notification, (err) => {
         if (err) {
           this.logger.throw_noexit(err);
         }
+        // Store
+        const store = new Notification(notification);
+        store.save((err) => {
+          if (err) {
+            throw err;
+          }
+          this.logger.debug(`Stored notification from app ${chalk.cyan('\'' + notification.app + '\'')}.`);
+        });
         // Fire along
         api.sockets.use((socket) => {
           socket.emit(
             'notification',
             notification
           );
+          socket.on('dismiss-notification', (notificationToDismiss) => {
+            if (notification.id === notificationToDismiss.id) {
+              Notification.findOne({
+                id: notificationToDismiss.id
+              }, (err, docs) => {
+                if (err) {
+                  throw err;
+                }
+                if (docs) {
+                  docs.remove();
+                  this.logger.debug(`Removed notification from app ${chalk.cyan('\'' + notificationToDismiss.app + '\'')}.`);
+                } else {
+                  this.logger.debug(`Notification from app ${chalk.cyan('\'' + notificationToDismiss.app + '\'')} does not exist.`);
+                }
+
+              });
+            }
+          });
         });
+        // Exec callback
+        if (callback) { return callback(); }
       });
     },
 
@@ -148,7 +187,7 @@ module.exports = (api) => {
   // For testing
   api.fireNotification({
     app: 'Test',
-    body: Math.round(Math.random() * 100).toString(),
+    body: `A very long, test message, sent at startup. Test ID: ${Math.round(Math.random() * 100).toString()}`,
     icon: '/img/home-icon.png'
   });
 
@@ -164,10 +203,30 @@ module.exports = (api) => {
 
   // For testing. Remove for final copy
   api.app.get('/api/dev/fire/notification', (req, res) => {
-    api.io.emit('notification', {
-      app: 'Test',
-      body: Math.round(Math.random() * 100).toString(),
+    api.fireNotification({
+      app: 'API',
+      body: "From /api/dev/fire/notification",
       icon: '/img/home-icon.png'
+    }, () => {
+      res.status(200); res.send('done!').end();
+    });
+  });
+  api.app.get('/api/dev/fire/notification/link', (req, res) => {
+    api.fireNotification({
+      app: 'API',
+      body: "From /api/dev/fire/notification (+ link to /)",
+      icon: '/img/home-icon.png',
+      link: '/'
+    });
+    res.status(200);
+    res.send('done!').end();
+  });
+  api.app.get('/api/dev/fire/notification/reactLink', (req, res) => {
+    api.fireNotification({
+      app: 'API',
+      body: "From /api/dev/fire/notification (+ react-router link to /apps)",
+      icon: '/img/home-icon.png',
+      reactLink: '/apps'
     });
     res.status(200);
     res.send('done!').end();
@@ -221,6 +280,33 @@ module.exports = (api) => {
     }));
     res.status(200);
     res.send('done!').end();
+  });
+
+  // Add listenner
+  api.sockets.use(function (socket) {
+    socket.on('get-notifications', () => {
+      Notification.find({}, '-_id -__v', (err, notifications) => {
+        if (err) {
+          throw err;
+        }
+        socket.emit(
+          'db-notfications',
+          notifications
+        );
+      });
+    });
+    socket.on('remove-all-notifications', () => {
+      this.logger.debug('Removing all notifications...');
+      Notification.find({}, (err, notifications) => {
+        if (err) {
+          throw err;
+        }
+        for (let notification of notifications) {
+          notification.remove();
+          this.logger.debug(`Removed notification from app ${chalk.cyan('\'' + notification.app + '\'')}.`);
+        }
+      });
+    });
   });
 
   api.sockets.start();

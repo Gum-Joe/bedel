@@ -7,7 +7,7 @@ module.exports = {
   context: __dirname,
   // Entry file
   entry: [
-    'webpack/hot/only-dev-server?http://localhost:8080/js/', // "only" prevents reload on syntax errors (https://gaearon.github.io/react-hot-loader/getstarted/)
+    'webpack/hot/dev-server', // "only" prevents reload on syntax errors (https://gaearon.github.io/react-hot-loader/getstarted/)
     'webpack-hot-middleware/client',
     "./client/index.jsx"],
   // Resolve

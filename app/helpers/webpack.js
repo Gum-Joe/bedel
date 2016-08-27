@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const webpackConfig = require('../../webpack.dev.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackDashboardPlugin = require('webpack-dashboard/plugin');
 // Webpack compiler
 const compiler = webpack(webpackConfig);
 
@@ -20,6 +21,10 @@ module.exports = (app, options) => {
   const logger = new Logger(options);
   logger.prefix = chalk.bgBlue.white('WPACK');
   logger.debug('Using: webpack hot reload');
+  // Apply webpack-dashboard
+  logger.debug('Applying webpack-dashboard...');
+  compiler.apply(new webpackDashboardPlugin());
+  logger.debug('Loading dev middleware...');
   // Webpack server -  helped by (http://madole.github.io/blog/2015/08/26/setting-up-webpack-dev-middleware-in-your-express-application/)
   app.use(webpackDevMiddleware(compiler, {
       publicPath: webpackConfig.output.publicPath,
@@ -28,6 +33,7 @@ module.exports = (app, options) => {
         colors: true
       }
   }));
+  logger.debug('Applying hot reload middleware...');
   app.use(webpackHotMiddleware(compiler, {
     // Use our logger
     log: logger.make('info', { prefix: logger.prefix, silent: logger.options.silent })

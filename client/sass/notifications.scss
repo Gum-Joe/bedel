@@ -4,16 +4,28 @@
 %silent-notification-item {
   li {
     @include align-to-centre;
-    $padding-text-align: 2px;
+    height: auto !important;
+    padding: 10px;
+    $padding-text-align: 5px;
     div {
       padding-top: $padding-text-align;
       h1, h2, h3, h4, h5, h6 {
         display: inline;
+        p {
+          display: inline;
+          font-family: Open-Sans !important;
+        }
       }
+      $notification-img-width: 30px;
+      $notification-img-padding: 5px;
       img {
-        width: 40px;
+        width: $notification-img-width;
         padding-bottom: $padding-text-align;
-        padding-right: 5px;
+        padding-right: $notification-img-padding;
+      }
+      .notification-body {
+        margin-top: -2px;
+        padding-top: 0 !important;
       }
     }
   }
@@ -46,17 +58,37 @@
   }
 }
 
-$dismiss-notify-pad-top: 6px;
-.dismiss-notify {
+$dismiss-notify-pad-top: 1px;
+$extras-opacity: 0.5;
+$buttons-size: 13px;
+%silent-extras-icons {
   float: right;
-  padding-top: $dismiss-notify-pad-top - 1.5px !important;
+  padding-top: $dismiss-notify-pad-top !important;
   padding-right: 6px;
+  padding-left: 0;
+  opacity: $extras-opacity;
   button {
     @include not-a-button;
   }
 }
-.dismiss-notify:hover {
-  opacity: 0.3;
+.dismiss-notify {
+  @extend %silent-extras-icons;
+  button {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.dismiss-notify:hover, .notification-view-more:hover {
+  opacity: 1;
+}
+.notification-view-more {
+  @extend %silent-extras-icons;
+  padding-top: 2.5px !important;
+  a {
+    font-size: $buttons-size + 2px !important;
+    color: $navbar-text !important;
+    text-decoration: none !important;
+  }
 }
 
 // Header
@@ -94,12 +126,12 @@ $dismiss-notify-pad-top: 6px;
 // Time sent
 .time-notify {
   display: inline;
-  font-size: 13px;
+  font-size: $buttons-size;
   text-align: right;
   padding-right: 10px !important;
   float: right;
-  padding-top: $dismiss-notify-pad-top + 2px !important;
-  opacity: 0.5;
+  padding-top: $dismiss-notify-pad-top + 4px !important;
+  opacity: $extras-opacity;
 }
 
 // Notifications

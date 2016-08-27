@@ -6,7 +6,8 @@ import { notifications, counter } from '../actions';
 // Map state to props
 function mapStateToProps(state) {
   return {
-    notifications: state.notifications
+    notifications: state.notifications,
+    counter: state.counter
   };
 }
 

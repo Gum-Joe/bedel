@@ -11,7 +11,7 @@
     "build": "gulp webpack",
     "lint": "eslint .",
     "mkdirs": "node script/mkdirs",
-    "nodemon": "nodemon --ignore client --ignore build bin/bedel server --color --debug",
+    "nodemon": "webpack-dashboard -c cyan -- nodemon --ignore client --ignore build bin/bedel server --color --debug",
     "test": "mocha",
     "coveralls": "istanbul cover -x app/util/logger.js ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
@@ -79,6 +79,7 @@
     "socket.io": "^1.4.8",
     "socket.io-client": "^1.4.8",
     "webpack": "^1.13.1",
+    "webpack-dashboard": "^0.1.8",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.2",
     "which": "^1.2.10",
