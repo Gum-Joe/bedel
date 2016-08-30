@@ -4,17 +4,38 @@
  */
 const chalk = require('chalk');
 const schema = require('../util/schema');
-const { Notification, Task } = require('../models');
+const { Notification } = require('../models');
 
 // ID for next task + notification
 let nextTaskId = 0;
 let nextNotificationID = 0;
+
+// Check if we have sent notifications from db
+let sentDatabase = false;
 
 /**
  * Add api stuff
  * @param api {Api} Api class
  */
 module.exports = (api) => {
+  // STARTUP:
+  // Send all notifications in database
+  api.sockets.use(function (socket) {
+    if (!sentDatabase) {
+      sentDatabase = true;
+      Notification.find({}, '-_id -__v', (err, notifications) => {
+        if (err) {
+          throw err;
+        }
+        notifications.forEach(
+          (notification) => {
+            this.logger.debug(`Sending notification in the database from app ${notification.app}...`);
+            socket.emit('notification', notification);
+          }
+        );
+      });
+    }
+  });
   // Add plguins
   api.addPlugin({
 
@@ -284,17 +305,6 @@ module.exports = (api) => {
 
   // Add listenner
   api.sockets.use(function (socket) {
-    socket.on('get-notifications', () => {
-      Notification.find({}, '-_id -__v', (err, notifications) => {
-        if (err) {
-          throw err;
-        }
-        socket.emit(
-          'db-notfications',
-          notifications
-        );
-      });
-    });
     socket.on('remove-all-notifications', () => {
       this.logger.debug('Removing all notifications...');
       Notification.find({}, (err, notifications) => {

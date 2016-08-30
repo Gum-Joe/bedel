@@ -56,28 +56,32 @@ export const Notifications = React.createClass({
   },
   addNotification(notification, noPlus = false) {
     // Check if not in already
-    if (!this.notificationsIncludesID(notification)) {
-      this.props.add(notification);
-      // From http://stackoverflow.com/questions/1760250/how-to-tell-if-browser-tab-is-active (document.hidden)
-      if (document.hidden) {
-        Push.create(notification.app, {
-          body: notification.body,
-          icon: notification.icon
-        });
-      }
-      if (!this.props.status.sidebar.open && !noPlus) {
-        this.props.plus('unreadNotifications');
-      }
-    }
+    this.notificationsIncludesID(notification)
+      .then((result) => {
+        if (!result) {
+          this.props.add(notification);
+          // From http://stackoverflow.com/questions/1760250/how-to-tell-if-browser-tab-is-active (document.hidden)
+          if (document.hidden) {
+            Push.create(notification.app, {
+              body: notification.body,
+              icon: notification.icon
+            });
+          }
+          if (!this.props.status.sidebar.open && !noPlus) {
+            this.props.plus('unreadNotifications');
+          }
+        }
+      });
   },
   notificationsIncludesID(notification) {
-    for (let i of this.props.notifications) {
-      console.log(i);
-      if (i.id === notification.id) {
-        return true;
+    return new Promise((resolve) => {
+      for (let i of this.props.notifications) {
+        if (i.id === notification.id) {
+          resolve(true);
+        }
       }
-    }
-    return false;
+      resolve(false);
+    });
   },
   render() {
     return (
