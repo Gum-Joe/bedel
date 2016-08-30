@@ -43,3 +43,21 @@
   -moz-animation-duration: $duration;
   -o-animation-duration: $duration;
 }
+
+// Align to centre of sidebar item
+@mixin align-to-centre {
+  padding-top: 6px;
+  padding-left: 13px;
+}
+
+// Fill
+@mixin fill {
+  height: 100%;
+  width: 100%;
+}
+
+// Not a button
+@mixin not-a-button {
+  background: transparent;
+  border: 0;
+}

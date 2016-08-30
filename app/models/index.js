@@ -1,6 +1,9 @@
 // Index of models
 // Require & export
+const Notification = require('./Notifications');
 const User = require('./User');
+
 module.exports = {
-  User: User
+  Notification,
+  User
 };

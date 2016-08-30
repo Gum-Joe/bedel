@@ -6,9 +6,12 @@
 body {
   color: $dash-text-color;
   height: 100%;
-  font-family: Open-Sans-Light;
+  font-family: Open-Sans-Light !important;
   overflow-y: hidden;
   overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6, p, div {
+  font-family: Open-Sans-Light !important;
 }
 
 // Main container
@@ -46,7 +49,7 @@ h1, h1, h3, h4, h5, h6 {
 .off-canvas {
   float: right;
   position: relative;
-  background: blue;
+  background: transparent;
   height: 100%;
 }
 
@@ -54,4 +57,17 @@ h1, h1, h3, h4, h5, h6 {
 .not-a-button {
   border: 0;
   background: none;
+}
+
+.no-notifications-tasks {
+  @include create-animation(fadeIn, 0.8s);
+  color: #9e9e9e;
+}
+
+// Reduces a div to nothing
+.does-not-exist {
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
 }

@@ -1,0 +1,97 @@
+// Styles for tasks
+@import 'dashboard';
+
+.tasks {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.task {
+  text-align: center;
+  li {
+    @include align-to-centre;
+    padding-top: 5px !important;
+    height: 60px;
+    div {
+      @include fill;
+      padding-top: 0 !important;
+      // Progress bar
+      .task-progress-bar {
+        width: 50px !important;
+        height: 50px !important;
+        padding-top: 0 !important;
+        margin-right: 0 !important;
+        .progressbar-text {
+          @include create-animation(fadeInTaskPercentageText, 2s);
+          color: $navbar-text !important;
+          padding-top: 14px !important;
+          font-size: 15px;
+        }
+      }
+      // Text
+      p {
+        position: relative;
+        text-align: left;
+        margin-top: -60px;
+        margin-left: 65px;
+      }
+      %silent-colour {
+        color: #bdbdbd;
+      }
+      #task-status {
+        @extend %silent-colour;
+        margin-top: -1px;
+      }
+      #task-app {
+        @extend %silent-colour;
+        text-align: right;
+        width: 70%;
+        margin-top: -37px;
+        h6 {
+          button {
+            @include not-a-button;
+          }
+        }
+      }
+    }
+  }
+}
+
+// task with a link
+.task-link {
+  li {
+    div {
+      p {
+        margin-top: -50px;
+      }
+      #task-status {
+        margin-top: -10px;
+      }
+      #task-app {
+        margin-top: -45px;
+      }
+    }
+  }
+}
+
+// Spacer to make sure the end does not get chopped off
+.task-spacer {
+  li:hover {
+    background: transparent !important;
+  }
+}
+
+// Cancel modal
+.tasks-cancel-modal {
+  text-align: center;
+  #task-modal-header {
+    margin-top: 21px !important;
+    margin-bottom: 30px !important;
+  }
+  button {
+    width: 150px;
+  }
+  #yes {
+    margin-right: 10px;
+  }
+}

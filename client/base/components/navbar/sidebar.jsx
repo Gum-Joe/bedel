@@ -10,13 +10,19 @@ export class SidebarItem extends Component {
   render() {
     if (this.props.normal) {
       return (
-        <a href={this.props.url || '#'} className={"sidebar-item "+this.props.appendClass}>
+        <a href={this.props.href || '#'} className={"sidebar-item "+this.props.appendClass}>
           <li>{this.props.children}</li>
         </a>
       );
+    } else if (this.props.noLink) {
+      return (
+        <div className={"sidebar-item sidebar-item-button "+this.props.appendClass}>
+          <li>{this.props.children}</li>
+        </div>
+      );
     } else {
       return (
-        <Link to={this.props.url || '#'} className={"sidebar-item "+this.props.appendClass}>
+        <Link to={this.props.href || '#'} className={"sidebar-item "+this.props.appendClass}>
           <li>{this.props.children}</li>
         </Link>
       );
@@ -27,7 +33,7 @@ export class SidebarItem extends Component {
 SidebarItem.propTypes = {
   appendClass: PropTypes.string,
   normal: PropTypes.bool,
-  url: PropTypes.string
+  href: PropTypes.string
 };
 
 // Sidebar item

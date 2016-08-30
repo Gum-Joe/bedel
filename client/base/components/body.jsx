@@ -8,7 +8,14 @@ export class PageBody extends Component {
   render() {
     return (
       <div className="page-body">
-        <Navigater user={this.props.user} status={this.props.status} updateStatus={this.props.updateStatus} />
+        <Navigater
+          counter={this.props.counter}
+          user={this.props.user}
+          status={this.props.status}
+          updateStatus={this.props.updateStatus}
+          plus={this.props.plus}
+          minus={this.props.minus}
+        />
         {this.props.children}
       </div>
     );
@@ -16,8 +23,11 @@ export class PageBody extends Component {
 }
 
 PageBody.propTypes = {
+  counter: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
+  minus: PropTypes.func.isRequired,
+  plus: PropTypes.func.isRequired,
   status: PropTypes.object.isRequired,
   updateStatus: PropTypes.func,
-  user: PropTypes.object.isRequired,
-  children: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired
 };
