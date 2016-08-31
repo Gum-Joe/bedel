@@ -5,25 +5,39 @@ import { Link } from 'react-router';
 // CSS
 import '../../../sass/sidebar.scss';
 
+// Default link
+const DEFAULT_LINK = "#";
+const DEFAULT_CLASSES = "sidebar-item";
+
 // Sidebar item
 export class SidebarItem extends Component {
+  makeChildren(children) {
+    return (
+      <li>{children}</li>
+    );
+  }
+
+  makeClasses(classes) {
+    return `${DEFAULT_CLASSES} ${classes}`;
+  }
+
   render() {
     if (this.props.normal) {
       return (
-        <a href={this.props.href || '#'} className={"sidebar-item "+this.props.appendClass}>
-          <li>{this.props.children}</li>
+        <a href={this.props.href || DEFAULT_LINK} className={this.makeClasses(this.props.appendClass)}>
+          {this.makeChildren(this.props.children)}
         </a>
       );
     } else if (this.props.noLink) {
       return (
-        <div className={"sidebar-item sidebar-item-button "+this.props.appendClass}>
+        <div className={this.makeClasses(`sidebar-item-button ${this.props.appendClass}`)}>
           <li>{this.props.children}</li>
         </div>
       );
     } else {
       return (
-        <Link to={this.props.href || '#'} className={"sidebar-item "+this.props.appendClass}>
-          <li>{this.props.children}</li>
+        <Link to={this.props.href || DEFAULT_LINK} className={this.makeClasses(this.props.appendClass)}>
+          {this.makeChildren(this.props.children)}
         </Link>
       );
     }
