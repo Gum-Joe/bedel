@@ -1,6 +1,7 @@
 // Router tests
 const app = require('../app');
 const request = require('supertest');
+const pack = require('../package');
 const { connect } = require('../app/database');
 const { expect } = require('chai');
 // User to send for login tests
@@ -13,7 +14,7 @@ const userToSend = {
 // Fake 'this'
 let that = {};
 // Timeout
-const timeout = 6000;
+const timeout = 12000;
 // Port
 const port = 6809;
 
@@ -56,6 +57,28 @@ describe('Router tests', () => {
           })
           .expect(200, done);
       });
+  });
+
+  it('should return an error when we GET /api/session/user', (done) => {
+    request(that.app)
+      .get('/api/session/user')
+      .expect((res) => {
+        // Run assestions
+        const parsed = JSON.parse(res.text);
+        expect(parsed.error).to.equal("You don't appear to be logged in. (403: Forbidden)");
+      })
+      .expect(403, done);
+  });
+
+  it('should return the version number when we GET /api/info/version', (done) => {
+    request(that.app)
+      .get('/api/info/version')
+      .expect((res) => {
+        // Run assestions
+        const parsed = JSON.parse(res.text);
+        expect(parsed.version).to.equal(pack.version);
+      })
+      .expect(200, done);
   });
 
   it('should redirect to /login if not logged in (code: 302)', function (done) {
