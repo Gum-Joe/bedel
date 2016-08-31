@@ -1,6 +1,3 @@
-'use strict';
-// Polyfill
-require('babel-polyfill');
 /**
  * Module depedencies
 */
@@ -36,12 +33,22 @@ class Logger {
    */
    /* istanbul ignore info */
    info(txt) {
-     if (!this.options.silent) {
-       const colour = "green";
-       const str = this.prefix || chalk[colour].bold('INFO');
-       this.stdout(`[ ${Logger.getdate()} ${str} ] ${txt}`);
+     if (!this._isSilent()) {
+       this.log("green", "INFO", txt);
      }
    }
+
+   /**
+    * Debug method
+    * @colour cyan
+    * @param txt {String} txt
+    */
+    /* istanbul ignore debug */
+    debug(txt) {
+      if (!this._isSilent() && this.options.debug) {
+        this.log("cyan", "DEBUG", txt);
+      }
+    }
 
    /**
     * Error method
@@ -97,26 +104,41 @@ class Logger {
         }
       }
 
-   /**
-    * Debug method
-    * @colour cyan
-    * @param txt {String} txt
-    */
-    /* istanbul ignore debug */
-    debug(txt) {
-      if (!this.options.silent && this.options.debug) {
-        const colour = "cyan";
-        const str = this.prefix || chalk[colour].bold('DEBUG');
-        this.stdout(`[ ${Logger.getdate()} ${str} ] ${txt}`);
+      /**
+       * 'Make' a solo method, with different options
+       *
+       * @param method {String} method to make
+       * @param options {Object} options
+       * @return {Function} this[method]
+       */
+      make(method, options) {
+        return this[method].bind(
+          Object.assign(this, { options: options })
+        );
       }
-    }
 
-    // Make a method
-    make(method, options) {
-      return this[method].bind(
-        Object.assign(this, { options: options })
-      );
-    }
+      /**
+       * Log text in the format of [ hrs:mins:secs {type} ] {text}
+       * with type being the colour specified by colour
+       *
+       * @param colour {String} colour of type
+       * @param type {String} type of log level (debug, info, warn)
+       * @param text {String} text to log
+       */
+
+      log(colour, type, text) {
+        const str = this.prefix || chalk[colour].bold(type);
+        this.stdout(`[ ${Logger.getdate()} ${str} ] ${text}`);
+      }
+
+      /**
+       * Check if silent option is enabled
+       *
+       * @return {Boolean} this.options.silent
+       */
+      _isSilent() {
+        return this.options.silent;
+      }
 }
 
 // Export
