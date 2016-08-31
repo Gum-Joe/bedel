@@ -12,12 +12,18 @@ module.exports = Object.assign(config, {
   entry: [
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors (https://gaearon.github.io/react-hot-loader/getstarted/)
     'webpack-hot-middleware/client',
-    "./client/index.jsx"
+    ...config.entry
   ],
 
-  module: Object.assign(config.module, {
+  output: {
+    path: '/',
+    publicPath: 'http://localhost:8080/js/',
+    chunkFilename: '[name].chunk.js'
+  },
+
+  module: {
     loaders: loadersToArray(newLoaders)
-  }),
+  },
 
   plugins: Array.concat(config.plugins,
     [
