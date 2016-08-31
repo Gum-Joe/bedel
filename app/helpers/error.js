@@ -28,7 +28,7 @@ const makeE404 = () => {
 */
 const makeErrHandle = (oldLogger) => {
   const logger = oldLogger;
-  return (error, req, res, next) => {
+  return (error, req, res) => {
     // Reassign
     let err = error;
     if (!err.status) {

@@ -2,7 +2,6 @@
 
 // Parser of config
 const YAML = require('yamljs');
-const vars = require('./vars');
 
 /**
  * Config loader
