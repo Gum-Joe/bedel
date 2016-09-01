@@ -23,7 +23,7 @@ const userToAdd = {
 // Fake 'this'
 let that = {};
 // Timeout
-const timeout = 6000;
+const timeout = 12000;
 
 describe('Authentication tests', () => {
   before((done) => {

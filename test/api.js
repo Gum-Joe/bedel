@@ -15,6 +15,16 @@ describe('API tests', () => {
     server.listen(5675, done);
   });
 
+  it('should check that api.addPlugin() adds a plugin', (done) => {
+    api.addPlugin({
+      testPlugin() {
+        return;
+      }
+    });
+    expect(api.testPlugin).to.be.a('function');
+    done();
+  });
+
   describe('Socket.io tests', () => {
 
     before((done) => {
