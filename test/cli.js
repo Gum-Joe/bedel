@@ -277,6 +277,48 @@ describe('Cli parser tests', () => {
     });
   });
 
+  describe('parse()', () => {
+    it('should run cli.help() if --help is supplied', (done) => {
+      const cli = new Cli(
+        opts.options,
+        opts.parseropts,
+        ['node', 'cli.js', '--help']
+      );
+      cli.help = done;
+      cli.parse();
+    });
+
+    it('should run cli.help() if no options are supplied', (done) => {
+      const cli = new Cli(
+        opts.options,
+        opts.parseropts,
+        ['node', 'cli.js']
+      );
+      cli.help = done;
+      cli.parse();
+    });
+
+    it('should return cli._parse() when no command is passed', (done) => {
+      const cli = new Cli(
+        opts.options,
+        opts.parseropts,
+        opts.argv
+      );
+      expect(cli.parse()).to.deep.equal(cli._parse(cli.argv, cli.options));
+      done();
+    });
+
+    it('should run a command if it is passed in the args array', (done) => {
+      const cli = new Cli(
+        opts.options,
+        opts.parseropts,
+        ['node', 'cli.js', 'test', '--test']
+      );
+      cli.command('test', 'Test', () => done());
+      cli.parse();
+    });
+  });
+
   describe('usage()', () => {
     it('should set the usage when ran', (done) => {
       const cli = new Cli(

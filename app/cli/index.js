@@ -201,6 +201,7 @@ class Cli {
     /* istanbul ignore next */
     // Get max length for spacing
     const tab_space = 5;
+    /* istanbul ignore next */
     const tab = this._maxOptLength() + tab_space;
 
     // Go through commands
