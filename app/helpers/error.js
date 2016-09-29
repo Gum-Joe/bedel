@@ -40,14 +40,16 @@ const makeErrHandle = (oldLogger) => {
     if (!err.status) {
       err.status = 500;
     }
+    /* istanbul ignore if */
+    /* istanbul ignore else */
     if (err.status > 499) {
       logger.prefix = chalk.red.bold(`E${err.status}`);
-    } else if (err.status < 500 && err.status > 399) {
+    } else {
       logger.prefix = chalk.yellow.bold(`E${err.status}`);
     }
     logger.info(`Got a ${err.status || 500} for ${req.url}`);
     logger.prefix = null;
-    
+
     // Send
     res.status(err.status || 500);
     res.render('error.ejs', {

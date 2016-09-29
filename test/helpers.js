@@ -10,11 +10,13 @@ const app = {
   }
 };
 
+const loggerObj = {
+  info: () => { return; }
+};
+
 describe('Helper tests (app/helpers)', () => {
   before('initalize helpers', (done) => {
-    helpers.useErrorHandler(app, {
-      info: () => { return; }
-    });
+    helpers.useErrorHandler(app, loggerObj);
     done();
   });
 
