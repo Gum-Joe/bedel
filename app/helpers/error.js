@@ -11,11 +11,17 @@ const chalk = require('chalk');
  * @param res {Object} - Express response object
  * @param next {Function} - Express callback
 */
-const makeE404 = () => {
-  return (req, res, next) => {
+const makeE404 = (logger) => {
+  return function (req, res) {
     const err = new Error('404: Not Found');
     err.status = 404;
-    next(err);
+    logger.prefix = chalk.yellow.bold('E404');
+    logger.info(`Got a ${err.status || 500} for ${req.url}`);
+    res.status(err.status);
+    res.render('error.ejs', {
+      message: err.message,
+      err: err
+    });
   };
 };
 
@@ -28,7 +34,7 @@ const makeE404 = () => {
 */
 const makeErrHandle = (oldLogger) => {
   const logger = oldLogger;
-  return (error, req, res) => {
+  return function (error, req, res) {
     // Reassign
     let err = error;
     if (!err.status) {
@@ -41,15 +47,7 @@ const makeErrHandle = (oldLogger) => {
     }
     logger.info(`Got a ${err.status || 500} for ${req.url}`);
     logger.prefix = null;
-    // Fix error formatting
-    let a;
-    let split = err.stack.split('\n');
-    for (a = 0; a < split.length; a++) {
-      if (split[a].includes('at ')) {
-        split[a] = "\t" + split[a];
-      }
-    }
-    err.stack = split.join('\n');
+    
     // Send
     res.status(err.status || 500);
     res.render('error.ejs', {
@@ -65,6 +63,6 @@ const makeErrHandle = (oldLogger) => {
  * @param logger {Logger} Logger
 */
 module.exports = (app, logger) => {
-  app.use(makeE404());
+  app.use(makeE404(logger));
   app.use(makeErrHandle(logger));
 };
