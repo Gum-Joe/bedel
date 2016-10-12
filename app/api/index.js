@@ -39,13 +39,6 @@ class Api {
       }
     }
   }
-  /**
-   * Run a plugin
-   * @param plugin {Function} Plugin
-   */
-  run(plugin) {
-    plugin(this);
-  }
 }
 
 // Export

@@ -1,24 +1,43 @@
 // Api tests
 const http = require('http');
+const io = require('../app/api/socket.io.js');
+const client = require('socket.io-client');
 const { API } = require('../app/api');
 const { expect } = require('chai');
+
 // Server
 const server = http.createServer();
+
 // Our api
 const api = new API(server, {
   silent: true
 });
 
+// Port
+const PORT = 5675;
+
+// Tests
 describe('API tests', () => {
 
   before((done) => {
-    server.listen(5675, done);
+    server.listen(PORT, done);
+    io.init(server, api.logger);
+  });
+
+  it('should check that api.addPlugin() adds a plugin', (done) => {
+    api.addPlugin({
+      testPlugin() {
+        return;
+      }
+    });
+    expect(api.testPlugin).to.be.a('function');
+    done();
   });
 
   describe('Socket.io tests', () => {
 
     before((done) => {
-      api.sockets.start();
+      //api.sockets.start();
       done();
     });
 
@@ -41,6 +60,22 @@ describe('API tests', () => {
         };
       });
       done();
+    });
+
+    it('should check if a listener with no event is executed when the defaultListener is intialized', function (done) {
+      this.timeout(6000);
+      io.use(() => done());
+      io.defaultListener({
+        on: (event, cb) => cb()
+      });
+    });
+
+    it('should check a listener with an event is executed on event', function (done) {
+      this.timeout(6000);
+      io.events = [];
+      io.use('someEvent', () => done());
+      io.start();
+      client.connect(`http://localhost:${PORT}`);
     });
 
   });

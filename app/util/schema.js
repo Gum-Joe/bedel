@@ -16,11 +16,11 @@ module.exports = (schema, candidate, callback) => {
         // Basic check
         if (!check.hasOwnProperty('type')) {
           // No type prop
-          throw new Error('\'type\' property must be specified in schema property defintion!');
+          throw new Error('\'type\' property must be specified in schema property definition!');
         } else if (check.required && !candidate.hasOwnProperty(prop)) {
           // Here check
           return callback(
-            new TypeError(`Property '${prop}' was not spcified. Expected a ${typeof check.type}.`)
+            new TypeError(`Property '${prop}' was not specified. Expected a ${typeof check.type}.`)
           );
         } else {
           // Type check

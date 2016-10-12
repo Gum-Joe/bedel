@@ -191,18 +191,22 @@ class Cli {
    * Display help
    */
   help() {
+    /* istanbul ignore next */
     // Header
     if (this.usageString) {
       console.log(`\n ${this.script} ${this.usageString}`);
     } else {
       console.log(`\n ${this.script}`);
     }
+    /* istanbul ignore next */
     // Get max length for spacing
     const tab_space = 5;
+    /* istanbul ignore next */
     const tab = this._maxOptLength() + tab_space;
 
     // Go through commands
     // FORMAT: <command>  <description>
+    /* istanbul ignore next */
     if (this.commands.length > 0) {
       console.log('\n   Commands:');
       let c;
@@ -219,6 +223,7 @@ class Cli {
 
     // Go through options
     // FORMAT: <option> <help>
+    /* istanbul ignore next */
     if (this.options.length > 0) {
       console.log('\n   Options:');
       let h;
@@ -240,6 +245,7 @@ class Cli {
       }
     }
     // Exit
+    /* istanbul ignore next */
     process.exit(0);
   }
 

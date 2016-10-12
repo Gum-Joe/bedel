@@ -25,7 +25,7 @@ module.exports = Object.assign(config, {
     loaders: loadersToArray(newLoaders)
   },
 
-  plugins: Array.concat(config.plugins,
+  plugins: Array.prototype.concat(config.plugins,
     [
       // Hot reload
       new webpack.HotModuleReplacementPlugin()
