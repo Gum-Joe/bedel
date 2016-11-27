@@ -3,6 +3,7 @@
 /**
  * Module depedencies
 */
+require("nodejs-dashboard");
 const Cli = require('../app/cli');
 const commands = require('../app/cli/commands');
 
