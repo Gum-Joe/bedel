@@ -1,0 +1,102 @@
+// Main sass styles for <Body />
+@import 'fonts';
+@import 'colours';
+$sidebar-width: 50px;
+
+body {
+  font-family: Open-Sans !important;
+  width: 100%;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+}
+
+.body {
+  margin-left: $sidebar-width;
+  width: calc(100% - $sidebar-width);
+  background-color: #f6f6f6;
+  height: 100%;
+}
+
+.bedel-sidebar {
+  position: fixed !important;
+  height: 100%;
+  width: $sidebar-width;
+  margin-right: 0px !important;
+  background-color: $navy;
+  display: inline-block;
+  color: $text-color;
+  text-align: center;
+  position: absolute;
+  .bedel-item {
+    height: $sidebar-width;
+    display: block;
+    $item-split: 16.66px;
+    padding-top: $item-split;
+    padding-bottom: $item-split;
+    line-height: $item-split;
+  }
+  .bedel-item:hover {
+    background-color: $navy-dark;
+  }
+  #hamburger {
+    background-color: $accent-dark;
+    button {
+      background: 0;
+      border: 0;
+      height: 20px;
+      div {
+        height: 1px;
+        width: 20.5px;
+        background-color: $text-color;
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  #hamburger:hover {
+    background-color: $accent;
+  }
+  .active {
+    background-color: $navy-dark;
+  }
+}
+
+.bedel-navbar {
+  position: fixed !important;
+  width: calc(100% - 50px);
+  height: $sidebar-width;
+  background-color: $accent;
+  ul {
+    list-style: none;
+    height: inherit;
+    padding: 0;
+    padding-right: 10px;
+    width: 100%;
+    text-align: right;
+    li {
+      height: inherit;
+      display: inline-block;
+      text-align: center;
+      padding-right: 15px;
+      padding-left: 15px;
+      line-height: $sidebar-width;
+      a {
+        color: $text-color;
+        text-decoration: none;
+        .bedel-gravatar {
+          $image-size: 30px;
+          width: $image-size;
+          height: $image-size;
+          margin-right: 5px;
+          border-radius: 100px;
+        }
+      }
+    }
+    li:hover {
+      background-color: $accent-dark;
+    }
+  }
+}

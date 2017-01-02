@@ -39,7 +39,6 @@ const loadersToArray = (rawLoaders) => {
 // Config
 const config = {
 
-  context: __dirname,
   // Entry file
   entry: [ "./client/index.jsx"],
   // Resolve .js, .jsx and .json

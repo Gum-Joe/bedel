@@ -1,3 +1,10 @@
 /*******************************
      User Global Variables
 *******************************/
+@font-face {
+  font-family: Open-Sans;
+  src: url('/assets/fonts/open-sans/OpenSans-Regular.ttf');
+}
+@pageFont: Open-Sans;
+@blue: #3498db;
+@violet: #34495e;
