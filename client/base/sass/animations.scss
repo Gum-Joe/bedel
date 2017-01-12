@@ -1,0 +1,89 @@
+// Animations
+
+// Fade in
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Fade out
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// Sidebar animations
+@keyframes sidebar-body {
+  from {
+    width: calc(100% - 50px);
+  }
+  to {
+    width: calc(100% - 200px);
+  }
+}
+@keyframes sidebar {
+  from {
+    width: 50px;
+  }
+  to {
+    width: 200px;
+  }
+}
+
+@keyframes sidebar-body-close {
+  from {
+    width: calc(100% - 200px);
+  }
+  to {
+    width: calc(100% - 50px);
+  }
+}
+@keyframes sidebar-close {
+  from {
+    width: 200px;
+  }
+  to {
+    width: 50px;
+    p {
+      opacity: 0;
+    }
+  }
+}
+
+// Classes for sidebar animations
+.body-animate, .navbar-animate {
+  animation-name: sidebar-body;
+  animation-duration: 1s;
+  width: calc(100% - 200px) !important;
+}
+.sidebar-animate {
+  animation-name: sidebar;
+  animation-duration: 1s;
+  width: 200px !important;
+  .bedel-item p {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    opacity: 1;
+  }
+}
+// Close
+.body-animate-close, .navbar-animate-close {
+  animation-name: sidebar-body-close;
+  animation-duration: 1s;
+}
+.sidebar-animate-close {
+  animation-name: sidebar-close;
+  animation-duration: 1s;
+  .bedel-item p {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+  }
+}

@@ -1,5 +1,6 @@
 // Main sass styles for <Body />
 @import 'fonts';
+@import 'animations';
 @import 'colours';
 $sidebar-width: 50px;
 
@@ -14,10 +15,10 @@ body {
 }
 
 .body {
-  margin-left: $sidebar-width;
-  width: calc(100% - $sidebar-width);
+  width: calc(100% - 50px);
   background-color: #f6f6f6;
   height: 100%;
+  float: right;
 }
 
 .bedel-sidebar {
@@ -33,16 +34,29 @@ body {
   .bedel-item {
     height: $sidebar-width;
     display: block;
+  }
+  .bedel-inner-item {
+    height: $sidebar-width;
+    display: block;
     $item-split: 16.66px;
     padding-top: $item-split;
     padding-bottom: $item-split;
     line-height: $item-split;
+    width: 50px;
   }
   .bedel-item:hover {
     background-color: $navy-dark;
   }
-  #hamburger {
+  #hamburger-wrapper {
     background-color: $accent-dark;
+    #last-hamburger {
+      margin-bottom: 0;
+    }
+  }
+  #hamburger-wrapper:hover {
+    background-color: darken($accent-dark, 5%);
+  }
+  #hamburger {
     button {
       background: 0;
       border: 0;
@@ -56,11 +70,12 @@ body {
       }
     }
   }
-  #hamburger:hover {
-    background-color: $accent;
-  }
   .active {
     background-color: $navy-dark;
+  }
+  p {
+    margin-top: -35px;
+    opacity: 0;
   }
 }
 
