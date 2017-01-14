@@ -4,18 +4,19 @@
  * @export <Sidebar />: Sidebar for bedel
  */
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 import classnames from 'classnames';
 
 class Item extends Component {
   render() {
     return (
-      <div className={classnames("bedel-item", { active: this.props.active })}>
+      <Link to={this.props.to} className={classnames("bedel-item", { active: this.props.active })}>
         <div className="bedel-inner-item">
           <FontAwesome name={this.props.icon} />
         </div>
         <p>{this.props.text}</p>
-      </div>
+      </Link>
     )
   }
 }
@@ -23,7 +24,8 @@ class Item extends Component {
 Item.propTypes = {
   active: PropTypes.bool,
   icon: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired
 }
 
 export class Sidebar extends Component {
@@ -65,13 +67,13 @@ export class Sidebar extends Component {
             </button>
           </div>
         </div>
-        <Item icon="dashboard" text="Dashboard" />
-        <Item icon="cube" text="Apps" />
-        <Item icon="comments" text="Messages" />
-        <Item icon="line-chart" text="Stats" />
-        <Item icon="question" text="Help" />
-        <Item icon="comment" text="Feedback" />
-        <Item icon="cog" text="Settings" />
+        <Item icon="dashboard" text="Dashboard" to="/" />
+        <Item icon="cube" text="Apps" to="/apps" />
+        <Item icon="comments" text="Messages" to="/apps/messaging" />
+        <Item icon="line-chart" text="Stats" to="/apps/dashboard/stats" />
+        <Item icon="question" text="Help" to="/apps/help" />
+        <Item icon="comment" text="Feedback" to="/apps/help/feedback" />
+        <Item icon="cog" text="Settings" to="/apps/settings" />
       </div>
     );
   }

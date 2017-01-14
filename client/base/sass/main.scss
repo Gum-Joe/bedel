@@ -9,6 +9,10 @@ body {
   width: 100%;
 }
 
+.block {
+  display: block !important;
+}
+
 #main {
   width: 100%;
   height: 100%;
@@ -34,6 +38,7 @@ body {
   .bedel-item {
     height: $sidebar-width;
     display: block;
+    color: $text-color;
   }
   .bedel-inner-item {
     height: $sidebar-width;
@@ -46,6 +51,8 @@ body {
   }
   .bedel-item:hover {
     background-color: $navy-dark;
+    opacity: 0.6;
+    text-decoration: none;
   }
   #hamburger-wrapper {
     background-color: $accent-dark;
@@ -54,7 +61,7 @@ body {
     }
   }
   #hamburger-wrapper:hover {
-    background-color: darken($accent-dark, 5%);
+    background-color: darken($accent-dark, $dark-const);
   }
   #hamburger {
     button {
@@ -110,8 +117,82 @@ body {
         }
       }
     }
-    li:hover {
+    li:hover, .bedel-nav-dropdown a .text:hover {
       background-color: $accent-dark;
+      opacity: 0.6;
+    }
+    .bedel-nav-dropdown {
+      padding: 0;
+      a {
+        .text {
+          padding-left: 12px;
+        }
+        .menu {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-width: 1px;
+          border-color: $text-color;
+          width: 200%;
+          margin-left: -100%;
+          float: right;
+          .item {
+            color: $black !important;
+            width: 100%;
+            font-size: 14px;
+            padding: 0px !important;
+            .bedel-profile {
+              text-align: center;
+              .bedel-profile-gravatar {
+                border-radius: 100px;
+                border-style: solid;
+                border-color: lighten($accent, $light-const);
+                border-width: 9px;
+              }
+              h3 {
+                margin-top: 5px;
+              }
+              h6 {
+                margin-top: 3px;
+                color: darken($text-color, $dark-const + 3%);
+              }
+              button {
+                background-color: darken($accent, $dark-const + 15%);
+                color: $text-color;
+                font-size: 12px;
+                font-weight: lighter;
+              }
+              button:hover {
+                background-color: darken($accent, $dark-const + 15% + $dark-const);
+              }
+              #bedel-profile-button {
+                @if $accent != $green {
+                  background-color: darken($green, $dark-const + 10%);
+                } @else {
+                  background-color: darken($blue, $dark-const + 10%);
+                }
+              }
+              #bedel-profile-button:hover {
+                @if $accent != $green {
+                  background-color: darken($green, $dark-const + 10% + $dark-const);
+                } @else {
+                  background-color: darken($blue, $dark-const + 10% + $dark-const);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .bedel-nav-dropdown:hover {
+      background-color: $accent;
+      opacity: 1;
+    }
+    .bedel-nav-dropdown-isopen {
+      a {
+        .text {
+          background-color: $accent-dark;
+        }
+      }
     }
   }
 }
