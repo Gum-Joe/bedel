@@ -1,14 +1,23 @@
 /**
- * Application container
- * @export <AppContainer />: Container that contains the running application (i.e. The bedel dashboard)
+ * App container
+ * Runs the app to run
+ * @export AppContainer {Class} Container for apps
  */
-import React, { Component } from 'react';
-import Navbar from './navbar'
+import React, { Component, PropTypes } from 'react';
+import AppLoader from './app-loader';
 
-export class AppContainer extends Component {
+export default class AppContainer extends Component {
   render() {
-    return (
-      <Navbar />
-    );
+    if (this.props.location.pathname === "/apps") {
+      // Render app lancher
+    } else {
+      return (
+        <AppLoader app={this.props.location.pathname.split('/')[2]} />
+      );
+    }
   }
-}
+};
+
+AppContainer.propTypes = {
+  location: PropTypes.object.isRequired
+};

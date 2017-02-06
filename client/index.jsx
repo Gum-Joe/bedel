@@ -11,12 +11,12 @@ import 'hamburgers/dist/hamburgers.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 // Router
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, Redirect, browserHistory } from 'react-router';
 
 // The actual code
 import React from 'react';
-import { Body } from './base/components/main.jsx';
-import { AppContainer } from './base/components/app-container.jsx';
+import AppContainer from './base/components/app-container';
+import { Body } from './base/components/main';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './base/store/configureStore';
@@ -30,8 +30,12 @@ const store = configureStore();
 render((
   <Provider store={store}>
     <Router history={browserHistory}>
+      <Redirect from="/" to="/apps/dashboard" />
       <Route path="/" component={Body}>
-        <IndexRoute component={AppContainer} />
+        <Route path="apps" component={AppContainer}>
+          <Route path=":app" />
+          <Route path=":app/:approute" />
+        </Route>
       </Route>
     </Router>
   </Provider>

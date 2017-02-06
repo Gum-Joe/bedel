@@ -23,6 +23,7 @@ body {
   background-color: #f6f6f6;
   height: 100%;
   float: right;
+  padding-top: 50px;
 }
 
 .bedel-sidebar {
@@ -91,6 +92,7 @@ body {
   width: calc(100% - 50px);
   height: $sidebar-width;
   background-color: $accent;
+  margin-top: -50px;
   ul {
     list-style: none;
     height: inherit;
@@ -193,6 +195,41 @@ body {
           background-color: $accent-dark;
         }
       }
+    }
+  }
+}
+
+.err404 {
+  width: 100%;
+  height: 100%;
+  color: $text-color;
+  background-color: $black;
+  text-align: center;
+  font-family: Open-Sans-Light;
+  padding: 20px;
+  h1 {
+    font-size: 5em;
+  }
+  button {
+    font-size: 1.2em !important;
+    margin-top: 45px !important;
+    width: 172px;
+  }
+  .red {
+    margin-left: 30px;
+  }
+  #q-mark {
+    width: 182px;
+    height: 182px;
+    background-color: $navy-dark;
+    border-radius: 100px;
+    border: 10px solid $navy;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    p {
+      font-size: 8em;
+      font-family: Open-Sans;
     }
   }
 }

@@ -4,10 +4,12 @@
  */
 const Logger = require('../util/logger');
 const prompt = require('./prompt');
+const appLoader = require('./app-loader');
 
 // Loaders
 const loaders = [
-  prompt
+  prompt,
+  appLoader
 ];
 
 /**

@@ -4,6 +4,7 @@
  * Module depedencies
 */
 const { API } = require('./app/api');
+const appLoader = require('./app/apps/loader');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const compression = require('compression');
@@ -144,6 +145,9 @@ module.exports = (options) => {
   // Init the api
   const api = new API(server, app, options);
   helpers.addApiPlugins(api);
+
+  // Load apps
+  appLoader(api, logger);
   // Add socket.io listenner
   /** Example
   api.sockets.use('event', (socket, logger) => {

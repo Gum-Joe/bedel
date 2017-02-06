@@ -3,7 +3,7 @@
  * @export <Body />: component with navigation, header and footer
  */
 import React, { Component, PropTypes } from 'react';
-import { Navbar } from './navbar';
+import Navbar from './navbar';
 import { Sidebar } from './sidebar';
 
 // Css
@@ -15,6 +15,7 @@ export class Body extends Component {
       <div id="main">
         <Sidebar />
         <div className="body">
+          <Navbar />
           {this.props.children}
         </div>
       </div>
