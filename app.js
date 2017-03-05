@@ -1,4 +1,5 @@
 'use strict';
+
 // Main app file
 /**
  * Module depedencies
@@ -126,6 +127,7 @@ module.exports = (options) => {
   // Static files
   app.use(express.static(path.join(__dirname, 'node_modules')));
   app.use(express.static(path.join(__dirname, 'client')));
+  app.use(express.static(path.join(__dirname, 'client/assets')));
   app.use(express.static(path.join(__dirname, 'views')));
 
   // Routes

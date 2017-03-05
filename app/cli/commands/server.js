@@ -25,8 +25,7 @@ module.exports = (argv) => {
   // Parse + run
   const options = cli.parse();
   // Start server
-  boot(options).then(
-    () => app(options),
-    (err) => { throw err; }
-  );
+  boot(options, () => {
+    app(options);
+  });
 };

@@ -1,15 +1,14 @@
 // Application loader
 const { App } = require('../models');
-const chalk = require('chalk');
 const Logger  = require('../util/logger');
 const { join } = require('path');
 
 module.exports = (api, logger) => {
-  logger.debug("Loading apps...")
+  logger.debug("Loading apps...");
   App.find({}, (err, apps) => {
     if (err) {
       logger.throw(err);
-    } else if (!apps) {
+    } else if (!apps || apps.length === 0) {
       logger.err("No apps installed!");
     } else {
       apps.forEach(function(app) {
@@ -35,4 +34,4 @@ module.exports = (api, logger) => {
       });
     }
   });
-}
+};

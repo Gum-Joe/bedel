@@ -16,7 +16,8 @@ module.exports = Object.assign(config, {
   output: {
     path: '/',
     publicPath: 'http://localhost:8080/js/',
-    chunkFilename: '[name].chunk.js'
+    chunkFilename: '[name].chunk.js',
+    filename: "bundle.js"
   },
 
   module: {

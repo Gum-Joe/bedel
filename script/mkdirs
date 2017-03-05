@@ -4,7 +4,8 @@ const mkdirp = require('mkdirp');
 // Dirs
 const dirs = [
   'tmp',
-  'tmp/cache'
+  'tmp/cache',
+  'private'
 ];
 
 console.log(`==> Creating directories for bedel...`);

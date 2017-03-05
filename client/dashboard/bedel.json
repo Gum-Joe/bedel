@@ -1,4 +1,4 @@
 {
-  "client": "index.js",
+  "client": "index.jsx",
   "server": "server.js"
 }

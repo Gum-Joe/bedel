@@ -40,13 +40,14 @@ app.get('/apps/:app', (req, res) => {
       readFile(`${app.location}/${appjson.client}`, (err, data) => {
         if (err) {
           res.status(404);
-          res.json({ error: "Couldn't read app config" });
+          res.json({ error: "Couldn't read application", err });
         } else {
+          res.header("Content-Type", "text/javascript");
           res.send(data);
         }
-      })
-    };
+      });
+    }
   });
-})
+});
 // Export
 module.exports = app;

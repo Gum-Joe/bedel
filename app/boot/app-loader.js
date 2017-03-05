@@ -1,6 +1,7 @@
 // Apps loader
 // Loads apps into database
 
-module.exports = (args, reject, logger) => {
-  logger.debug("Checking apps...")
+module.exports = (args, logger, done) => {
+  logger.debug("Checking apps...");
+  done();
 };

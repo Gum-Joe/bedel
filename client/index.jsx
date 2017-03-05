@@ -15,11 +15,13 @@ import { Router, Route, Redirect, browserHistory } from 'react-router';
 
 // The actual code
 import React from 'react';
-import AppContainer from './base/components/app-container';
-import { Body } from './base/components/main';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import AppContainer from './base/components/app-container';
+import { Body } from './base/components/main';
 import configureStore from './base/store/configureStore';
+
+import "./api";
 
 const store = configureStore();
 /**
