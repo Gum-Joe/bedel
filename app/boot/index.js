@@ -6,11 +6,14 @@ const Logger = require('../util/logger');
 //const prompt = require('./prompt');
 const appLoader = require('./app-loader');
 const https = require('./https');
+const api = require('./bedel-api');
+const async = require('async');
 
 // Loaders
 const loaders = [
   //https,
   //prompt, For later
+  api,
   appLoader
 ];
 
@@ -20,18 +23,24 @@ const loaders = [
  * @private
  */
 
-function __boot(options) {
+function __boot(options, cb) {
   const logger = new Logger(options);
+  let asyncLoaders = [];
+  // Add callback as a loaders
+  loaders.push(function () {
+    cb();
+  });
   let i = 0;
-  while (i < loaders.length) {
-    const loader = loaders[i];
-    loader(options, logger, (err) => {
-      i++;
-      if (err) {
-        logger.err(`Loader ${loaders[i]} failed`);
-        logger.throw(err);
-      }
-    });
+  while (i <= loaders.length) {
+    if (i < loaders.length) {
+      const loader = loaders[i];
+      asyncLoaders.push(function (done) {
+        loader(options, logger, done);
+      });
+    } else {
+      async.series(asyncLoaders);
+    }
+    i++;
   }
 }
 
@@ -55,6 +64,5 @@ const _boot = (resolve, reject) => {
 };
 // Export method
 module.exports = (options, cb) => {
-  __boot(options);
-  cb();
+  __boot(options, cb);
 };

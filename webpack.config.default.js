@@ -12,7 +12,14 @@ const rawLoaders = {
   img: {
     test: /\.(jpe?g|png|gif|svg)$/i,
     loaders: [ 'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-    'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+    `image-webpack-loader?${JSON.stringify({
+      bypassOnDebug: true,
+      gifsicle: {
+        interlaced: false
+      },
+      optipng: {
+        optimizationLevel: 7
+      }})}`
     ]
   },
   font: {

@@ -4,6 +4,8 @@ const Logger  = require('../util/logger');
 const { join } = require('path');
 
 module.exports = (api, logger) => {
+  // Fix logger prefix clashes
+  delete logger.prefix;
   logger.debug("Loading apps...");
   App.find({}, (err, apps) => {
     if (err) {

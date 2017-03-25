@@ -4,7 +4,7 @@
 /**
  * Module depedencies
 */
-const { API } = require('./app/api');
+const { ServerAPI } = require('bedel-api/api/server');
 const appLoader = require('./app/apps/loader');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
@@ -134,19 +134,19 @@ module.exports = (options) => {
   app.use('/', routes.index);
   app.use('/api', routes.api);
 
+  // Connect to db
+  db.connect(options);
+
   // Create server and listen
   logger.debug('Creating server...');
   const server = http.createServer(app);
   server.listen(PORT, () => {
     logger.info(`Listenning on port ${PORT}.`);
   });
-
-  // Connect to db
-  db.connect(options);
-
   // Init the api
-  const api = new API(server, app, options);
-  helpers.addApiPlugins(api);
+  // TODO: New API migrations
+  const api = new ServerAPI(logger, server, app /*, options*/);
+  //helpers.addApiPlugins(api);
 
   // Load apps
   appLoader(api, logger);
