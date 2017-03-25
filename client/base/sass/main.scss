@@ -1,0 +1,235 @@
+// Main sass styles for <Body />
+@import 'fonts';
+@import 'animations';
+@import 'colours';
+$sidebar-width: 50px;
+
+body {
+  font-family: Open-Sans !important;
+  width: 100%;
+}
+
+.block {
+  display: block !important;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+}
+
+.body {
+  width: calc(100% - 50px);
+  background-color: #f6f6f6;
+  height: 100%;
+  float: right;
+  padding-top: 50px;
+}
+
+.bedel-sidebar {
+  position: fixed !important;
+  height: 100%;
+  width: $sidebar-width;
+  margin-right: 0px !important;
+  background-color: $navy;
+  display: inline-block;
+  color: $text-color;
+  text-align: center;
+  position: absolute;
+  .bedel-item {
+    height: $sidebar-width;
+    display: block;
+    color: $text-color;
+  }
+  .bedel-inner-item {
+    height: $sidebar-width;
+    display: block;
+    $item-split: 16.66px;
+    padding-top: $item-split;
+    padding-bottom: $item-split;
+    line-height: $item-split;
+    width: 50px;
+  }
+  .bedel-item:hover {
+    background-color: $navy-dark;
+    opacity: 0.6;
+    text-decoration: none;
+  }
+  #hamburger-wrapper {
+    background-color: $accent-dark;
+    #last-hamburger {
+      margin-bottom: 0;
+    }
+  }
+  #hamburger-wrapper:hover {
+    background-color: darken($accent-dark, $dark-const);
+  }
+  #hamburger {
+    button {
+      background: 0;
+      border: 0;
+      height: 20px;
+      div {
+        height: 1px;
+        width: 20.5px;
+        background-color: $text-color;
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  .active {
+    background-color: $navy-dark;
+  }
+  p {
+    margin-top: -35px;
+    opacity: 0;
+  }
+}
+
+.bedel-navbar {
+  position: fixed !important;
+  width: calc(100% - 50px);
+  height: $sidebar-width;
+  background-color: $accent;
+  margin-top: -50px;
+  ul {
+    list-style: none;
+    height: inherit;
+    padding: 0;
+    padding-right: 10px;
+    width: 100%;
+    text-align: right;
+    li {
+      height: inherit;
+      display: inline-block;
+      text-align: center;
+      padding-right: 15px;
+      padding-left: 15px;
+      line-height: $sidebar-width;
+      a {
+        color: $text-color;
+        text-decoration: none;
+        .bedel-gravatar {
+          $image-size: 30px;
+          width: $image-size;
+          height: $image-size;
+          margin-right: 5px;
+          border-radius: 100px;
+        }
+      }
+    }
+    li:hover, .bedel-nav-dropdown a .text:hover {
+      background-color: $accent-dark;
+      opacity: 0.6;
+    }
+    .bedel-nav-dropdown {
+      padding: 0;
+      a {
+        .text {
+          padding-left: 12px;
+        }
+        .menu {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-width: 1px;
+          border-color: $text-color;
+          width: 200%;
+          margin-left: -100%;
+          float: right;
+          .item {
+            color: $black !important;
+            width: 100%;
+            font-size: 14px;
+            padding: 0px !important;
+            .bedel-profile {
+              text-align: center;
+              .bedel-profile-gravatar {
+                border-radius: 100px;
+                border-style: solid;
+                border-color: lighten($accent, $light-const);
+                border-width: 9px;
+              }
+              h3 {
+                margin-top: 5px;
+              }
+              h6 {
+                margin-top: 3px;
+                color: darken($text-color, $dark-const + 3%);
+              }
+              button {
+                background-color: darken($accent, $dark-const + 15%);
+                color: $text-color;
+                font-size: 12px;
+                font-weight: lighter;
+              }
+              button:hover {
+                background-color: darken($accent, $dark-const + 15% + $dark-const);
+              }
+              #bedel-profile-button {
+                @if $accent != $green {
+                  background-color: darken($green, $dark-const + 10%);
+                } @else {
+                  background-color: darken($blue, $dark-const + 10%);
+                }
+              }
+              #bedel-profile-button:hover {
+                @if $accent != $green {
+                  background-color: darken($green, $dark-const + 10% + $dark-const);
+                } @else {
+                  background-color: darken($blue, $dark-const + 10% + $dark-const);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .bedel-nav-dropdown:hover {
+      background-color: $accent;
+      opacity: 1;
+    }
+    .bedel-nav-dropdown-isopen {
+      a {
+        .text {
+          background-color: $accent-dark;
+        }
+      }
+    }
+  }
+}
+
+.err404 {
+  width: 100%;
+  height: 100%;
+  color: $text-color;
+  background-color: $black;
+  text-align: center;
+  font-family: Open-Sans-Light;
+  padding: 20px;
+  h1 {
+    font-size: 5em;
+  }
+  button {
+    font-size: 1.2em !important;
+    margin-top: 45px !important;
+    width: 172px;
+  }
+  .red {
+    margin-left: 30px;
+  }
+  #q-mark {
+    width: 182px;
+    height: 182px;
+    background-color: $navy-dark;
+    border-radius: 100px;
+    border: 10px solid $navy;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    p {
+      font-size: 8em;
+      font-family: Open-Sans;
+    }
+  }
+}

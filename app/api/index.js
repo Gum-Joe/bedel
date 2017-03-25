@@ -18,7 +18,7 @@ class Api {
     this.server = server;
     this.app = app;
     this.logger = new Logger(options);
-    this.logger.prefix = chalk.yellow.bold('API');
+    this.logger.prefix = chalk.yellow('API');
     // Create a socket.io instance
     this.logger.debug('Starting socket.io server...');
     this.sockets = io;

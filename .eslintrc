@@ -27,8 +27,15 @@ rules:
   react/prefer-es6-class: 0
   react/prefer-stateless-function: 0
   react/prop-types: 1
+  react/no-did-mount-set-state: 0
   # Custom
+  no-prototype-builtins: 0
   no-param-reassign: 0
+  import/newline-after-import: 0
+  import/extensions: 0
+  import/no-dynamic-require: 0
+  lines-after-directive: 0
+  no-catch-shadow: 0
   # Possible Errors
   comma-dangle: [2, never]
   no-cond-assign: 2
@@ -121,7 +128,6 @@ rules:
 
   # Variables
   init-declarations: 0
-  no-catch-shadow: 2
   no-delete-var: 2
   no-label-var: 2
   no-shadow-restricted-names: 2
@@ -134,7 +140,7 @@ rules:
 
   # Node.js and CommonJS
   callback-return: 2
-  global-require: 1
+  global-require: 0
   handle-callback-err: 2
   no-mixed-requires: 0
   no-new-require: 0

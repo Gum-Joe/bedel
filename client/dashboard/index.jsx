@@ -1,11 +1,3 @@
-// Dashboard application
-import React, { Component } from 'react';
-
-// Export it
-export class DashboardApp extends Component {
-  render() {
-    return (
-      <h1>TODO</h1>
-    );
-  }
-}
+// Test file
+import React, { Component } from "react";
+bedel.installApp("dashboard", (<h1>Hi</h1>));

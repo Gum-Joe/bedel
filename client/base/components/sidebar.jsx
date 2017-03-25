@@ -1,74 +1,80 @@
-// Sidebar Component for notifications
+/**
+ * Sidebar component
+ * Container links to different parts of bedel
+ * @export <Sidebar />: Sidebar for bedel
+ */
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 import classnames from 'classnames';
-import { Sidebar as SidebarBase } from './navbar/sidebar';
-import { Notifications } from '../containers/Notifications';
-import { Tasks } from '../containers/Tasks';
-import { Tabs, Tab, TabsHeader as Header, TabsBody as Body } from './tabs';
-// Export
+
+class Item extends Component {
+  render() {
+    return (
+      <Link to={this.props.to} className={classnames("bedel-item", { active: this.props.active })}>
+        <div className="bedel-inner-item">
+          <FontAwesome name={this.props.icon} />
+        </div>
+        <p>{this.props.text}</p>
+      </Link>
+    )
+  }
+}
+
+Item.propTypes = {
+  active: PropTypes.bool,
+  icon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired
+}
+
 export class Sidebar extends Component {
   constructor() {
     super();
     this.state = {
       open: false
-    };
+    }
   }
-  componentDidMount() {
-    this.props.updateStatus({
-      sidebar: {
-        open: false,
-        alreadyOpened: false,
-        tab: 0
-      }
-    });
-    setInterval(this.updateState.bind(this), 100);
-  }
-  setTab(tab) {
-    this.props.updateStatus({
-      sidebar: Object.assign(this.props.status.sidebar, { tab })
-    });
-  }
-  updateState() {
+  animateSidebar() {
+    if (!this.state.open) {
+      $('.bedel-sidebar').addClass('sidebar-animate');
+      $('.bedel-sidebar').removeClass('sidebar-animate-close');
+      $('.body').addClass('body-animate');
+      $('.body').removeClass('body-animate-close');
+      $('.bedel-navbar').addClass('navbar-animate');
+      $('.bedel-navbar').removeClass('navbar-animate-close');
+    } else {
+      $('.bedel-sidebar').addClass('sidebar-animate-close');
+      $('.bedel-sidebar').removeClass('sidebar-animate');
+      $('.body').addClass('body-animate-close');
+      $('.body').removeClass('body-animate');
+      $('.bedel-navbar').addClass('navbar-animate-close');
+      $('.bedel-navbar').removeClass('navbar-animate');
+    }
     this.setState({
-      open: this.props.status.sidebar.open,
-      alreadyOpened: this.props.status.sidebar.alreadyOpened,
-      tab: this.props.status.sidebar.tab
-    });
+      open: !this.state.open
+    })
   }
   render() {
     return (
-      <SidebarBase
-        appendClass={
-          classnames(
-            'notifications-bar',
-            { 'animate-in-sidebar': !this.state.open && this.state.alreadyOpened },
-            { 'animate-out-sidebar': this.state.open }
-          )
-        }
-      >
-        <Tabs currentTab={this.state.tab} defaultTab={0}>
-          <Header count={2}>
-            <Tab currentTab={this.state.tab} setTab={this.setTab.bind(this)} id={0}>
-              <FontAwesome name="bell" />
-            </Tab>
-            <Tab currentTab={this.state.tab} setTab={this.setTab.bind(this)} id={1}>
-              <FontAwesome name="tasks" />
-            </Tab>
-          </Header>
-          <Body currentTab={this.state.tab} id={0}>
-            <Notifications status={this.props.status} updateStatus={this.props.updateStatus} />
-          </Body>
-          <Body currentTab={this.state.tab} id={1}>
-            <Tasks status={this.props.status} updateStatus={this.props.updateStatus} />
-          </Body>
-        </Tabs>
-      </SidebarBase>
+      <div className="bedel-sidebar">
+        <div className="bedel-item" id="hamburger-wrapper">
+          <div className="bedel-inner-item" id="hamburger">
+            <button onClick={this.animateSidebar.bind(this)}>
+              <div></div>
+              <div></div>
+              <div id="last-hamburger"></div>
+            </button>
+          </div>
+        </div>
+        <Item icon="dashboard" text="Dashboard" to="/" />
+        <Item icon="cube" text="Apps" to="/apps" />
+        <Item icon="comments" text="Messages" to="/apps/messaging" />
+        <Item icon="line-chart" text="Stats" to="/apps/dashboard/stats" />
+        <Item icon="question" text="Help" to="/apps/help" />
+        <Item icon="comment" text="Feedback" to="/apps/help/feedback" />
+        <Item icon="cog" text="Settings" to="/apps/settings" />
+      </div>
     );
   }
 }
-
-Sidebar.propTypes = {
-  status: PropTypes.object.isRequired,
-  updateStatus: PropTypes.func.isRequired
-};

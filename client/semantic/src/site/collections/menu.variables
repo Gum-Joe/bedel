@@ -1,0 +1,5 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+@minHeight: 43px;
+@borderRadius: 0;

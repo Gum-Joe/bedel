@@ -52,3 +52,6 @@ tmp
 
 # Cache
 .sass-cache
+
+# Semantic UI
+client/semantic/dist

@@ -50,6 +50,18 @@ class Logger {
       }
     }
 
+    /**
+     * Warn method
+     * @colour yellow
+     * @param txt {String} txt
+     */
+     /* istanbul ignore warn */
+    warn(txt) {
+      if (!this._isSilent()) {
+        this.log("yellow", "WARN", txt);
+      }
+    }
+
    /**
     * Error method
     * @colour red

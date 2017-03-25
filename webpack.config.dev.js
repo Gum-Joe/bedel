@@ -3,8 +3,6 @@ const webpack = require('webpack');
 const { config, rawLoaders, loadersToArray } = require('./webpack.config.default.js');
 // Apply our changes
 const newLoaders = Object.assign({}, rawLoaders);
-newLoaders.js.loaders.unshift('react-hot');
-newLoaders.jsx.loaders.unshift('react-hot');
 
 // Export
 module.exports = Object.assign(config, {
@@ -18,7 +16,8 @@ module.exports = Object.assign(config, {
   output: {
     path: '/',
     publicPath: 'http://localhost:8080/js/',
-    chunkFilename: '[name].chunk.js'
+    chunkFilename: '[name].chunk.js',
+    filename: "bundle.js"
   },
 
   module: {

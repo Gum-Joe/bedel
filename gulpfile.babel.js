@@ -6,6 +6,7 @@ import sass from 'gulp-ruby-sass';
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config';
 import { join } from 'path';
+import './client/semantic/gulpfile.js';
 
 // Vars
 const sass_src = join(__dirname, 'client/sass');
@@ -15,6 +16,8 @@ gulp.task('compile:sass', () =>
         .on('error', sass.logError)
         .pipe(gulp.dest('views/css'))
 );
+
+gulp.task('compile:semantic', ['build']);
 
 // Compile task
 gulp.task('compile', [ 'compile:sass' ]);

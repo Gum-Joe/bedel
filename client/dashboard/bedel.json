@@ -1,0 +1,4 @@
+{
+  "client": "index.jsx",
+  "server": "server.js"
+}

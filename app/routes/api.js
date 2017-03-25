@@ -4,6 +4,9 @@
  */
 const express = require('express');
 const pack = require('../../package');
+const { App } = require('../models');
+const { readFile } = require('fs');
+const BEDEL_APP_JSON_NAME = "bedel.json";
 
 // Init
 const app = express();
@@ -25,5 +28,26 @@ app.get('/session/user', (req, res) => {
   }
 });
 
+// GET /apps/:app
+app.get('/apps/:app', (req, res) => {
+  // Find app
+  App.findOne({name: req.params.app}, (err, app) => {
+    if (err || !app) {
+      res.status(404);
+      res.json({ error: "Couldn't find app or other error." });
+    } else {
+      const appjson = require(`${app.location}/${BEDEL_APP_JSON_NAME}`);
+      readFile(`${app.location}/${appjson.client}`, (err, data) => {
+        if (err) {
+          res.status(404);
+          res.json({ error: "Couldn't read application", err });
+        } else {
+          res.header("Content-Type", "text/javascript");
+          res.send(data);
+        }
+      });
+    }
+  });
+});
 // Export
 module.exports = app;
